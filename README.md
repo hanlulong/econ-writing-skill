@@ -11,43 +11,98 @@
 
 ## What Is This?
 
-Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that gives AI coding assistants deep knowledge of how to write economics papers. It distills actionable advice from over 50 guides by John Cochrane, Deirdre McCloskey, Jesse Shapiro, Keith Head, Marc Bellemare, Claudia Goldin, Michael Kremer, and many others into a single structured skill file. Compatible with the Agent Skills open standard, it works with Claude Code and OpenAI Codex out of the box.
+Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that gives AI coding assistants deep knowledge of how to write economics papers. It distills actionable advice from over 50 guides by John Cochrane, Deirdre McCloskey, Jesse Shapiro, Keith Head, Marc Bellemare, Claudia Goldin, Edward Glaeser, Michael Kremer, and many others into a single structured skill file. Compatible with the Agent Skills open standard, it works with Claude Code and OpenAI Codex out of the box.
 
 ---
 
 ## Key Features
 
+- **Works for all paper types** -- Applied empirical, pure theory, mixed theory-empirical, structural, and descriptive papers each get tailored structure and guidance
 - **Dedicated formulas for every major section** -- Abstract (4-part formula), Introduction (Head's Hook-Question-Results-Antecedents-Roadmap formula), Literature Review (story-driven, embedded in the intro), and Conclusion (Bellemare's 4-part formula: Summary, Limitations, Policy, Future Research)
+- **Identification strategy guidance** -- Specific writing advice for RCT, DiD, IV, RDD, Synthetic Control, and structural estimation papers
+- **Theory paper support** -- Model presentation, proposition writing, and Glaeser's "start with an example" approach
 - **Style rules from McCloskey and Cochrane** -- active voice, concrete language, triangular structure, reader-first writing
-- **Empirical work and identification guidance** -- Cochrane's "three most important things: Identification, Identification, Identification"
-- **Tables and figures best practices** -- self-contained captions, sensible units, data visualization principles from Schwabish (JEP)
+- **Modern empirical practices** -- pre-registration, multiple testing, specification robustness, transparency and reproducibility
+- **Tables and figures best practices** -- self-contained captions, figure vs. table trade-offs, data visualization from Schwabish (JEP)
 - **Before/after examples** -- see how vague, passive, throat-clearing prose transforms into clear, concrete economics writing
-- **Revision checklist** -- a pre-submission checklist covering every common mistake
+- **Expanded revision checklist** -- 22-item pre-submission checklist covering content, style, and modern standards
 
 ---
 
 ## Installation
 
-### For Claude Code
+### One-Line Install (Recommended)
+
+Install globally for all projects with a single command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
+```
+
+This installs the skill to `~/.claude/skills/econ-write/` (Claude Code) and `~/.codex/skills/econ-write/` (Codex). The skill is immediately available in all your projects.
+
+### Install from Claude Code
+
+You can install without leaving your AI assistant. Tell Claude Code:
+
+```
+Run this command to install the econ-writing skill globally:
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
+```
+
+After installation, restart your session. Then use `/econ-write` followed by your task.
+
+### Install from Codex
+
+Tell Codex:
+
+```
+Run this command to install the econ-writing skill globally:
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
+```
+
+### Install via npx
+
+```bash
+npx skills add hanlulong/econ-writing-skill
+```
+
+### Git Clone
+
+```bash
+git clone https://github.com/hanlulong/econ-writing-skill.git
+cd econ-writing-skill
+./install.sh              # Global install (default)
+./install.sh --local .    # Install to current project only
+```
+
+### Manual Installation
+
+#### Global (all projects)
+
+```bash
+mkdir -p ~/.claude/skills/econ-write
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/SKILL.md -o ~/.claude/skills/econ-write/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/identification-strategies.md -o ~/.claude/skills/econ-write/identification-strategies.md
+```
+
+#### Project-specific
 
 ```bash
 git clone https://github.com/hanlulong/econ-writing-skill.git
 cp -r econ-writing-skill/.claude/skills/econ-write/ /path/to/your/project/.claude/skills/econ-write/
 ```
 
-### For OpenAI Codex
+### Install Options
 
-```bash
-git clone https://github.com/hanlulong/econ-writing-skill.git
-cp -r econ-writing-skill/.agents/skills/econ-write/ /path/to/your/project/.agents/skills/econ-write/
-```
+| Flag | Behavior |
+|------|----------|
+| (default) | Install globally for all projects |
+| `--local` | Install to current project only |
+| `--claude` | Install for Claude Code only |
+| `--codex` | Install for Codex only |
 
-### Manual Installation
-
-You can also copy the single `SKILL.md` file directly into the appropriate directory:
-
-- Claude Code: `.claude/skills/econ-write/SKILL.md`
-- OpenAI Codex: `.agents/skills/econ-write/SKILL.md`
+Example: `./install.sh --local --claude /path/to/project`
 
 ---
 
@@ -71,10 +126,15 @@ Once installed, invoke the skill from your AI assistant:
 /econ-write review this paragraph for style violations
 ```
 
-The skill works in two modes:
+```
+/econ-write help me structure the model section for my theory paper
+```
+
+The skill works in three modes:
 
 - **Drafting**: generates new text following the formulas and rules, marking areas that need your specific results with `[AUTHOR: ...]` placeholders.
 - **Rewriting**: identifies violations of the rules (passive voice, vague language, buried leads, throat-clearing) and fixes them while preserving your meaning and contribution.
+- **Reviewing**: checks existing text against all rules and provides a detailed report of issues with suggested fixes.
 
 ---
 
@@ -85,22 +145,31 @@ The skill works in two modes:
 - **Writing an introduction from scratch** -- Follow Head's formula exactly: Hook, Research Question, Main Results, Antecedents and Value Added, Literature Review, Roadmap.
 - **Conducting and writing a literature review** -- Build a story-driven review of the 5-10 closest papers, embedded in the introduction, that establishes your paper's niche.
 - **Writing up existing empirical results** -- Present results in the correct order (main result first, most parsimonious to least parsimonious) with proper emphasis on economic significance.
+- **Writing a theory paper** -- Structure model presentation, write propositions with intuition before proofs, generate testable predictions.
+- **Structuring a mixed theory-empirical paper** -- Map empirical tests back to specific model predictions.
 - **Preparing a presentation** -- Get advice on slide structure, pacing, and delivery following Shapiro, Cochrane, and others ("Gene Fama usually starts with 'Look at table 1.' That's a good model.").
 
 ---
 
 ## What's Inside
 
-The skill file (`SKILL.md`) contains:
+The skill includes two files:
+
+### `SKILL.md` (main skill file)
 
 1. **Core Principles** -- Seven foundational rules (Reader First, Triangular Style, One Central Contribution, Concrete Not Abstract, Every Word Counts, Active Voice, Simple over Complex)
 2. **Section Formulas** -- Step-by-step formulas for the Abstract, Introduction (with Head's formula), Literature Review, Conclusion (Bellemare's formula), Results, and Title
 3. **Style Rules** -- Detailed guidance on sentence structure, word choice, voice, pronouns, footnotes, numbers, notation, and paragraphs
-4. **Tables and Figures** -- Best practices for captions, formatting, and data visualization
-5. **Empirical Work Rules** -- Identification strategy, results presentation, and common mistakes to avoid
-6. **Paper Structure Overview** -- The standard 10-section applied economics paper template
-7. **Use Case Instructions** -- Specific instructions for drafting, rewriting, introductions, literature reviews, abstracts, conclusions, results, and presentations
-8. **Revision Checklist** -- A pre-submission checklist covering 15 critical items
+4. **Tables and Figures** -- Best practices for captions, formatting, figure vs. table trade-offs, and data visualization
+5. **Empirical Work Rules** -- Identification, results presentation, heterogeneity analysis, mechanisms, and common mistakes
+6. **Modern Empirical Practices** -- Pre-registration, multiple testing, specification robustness, transparency
+7. **Paper Structure Templates** -- Templates for applied, theory, mixed theory-empirical, and structural papers
+8. **Use Case Instructions** -- Specific instructions for drafting, rewriting, introductions, literature reviews, abstracts, conclusions, results, theory papers, and presentations
+9. **Revision Checklist** -- A 22-item pre-submission checklist covering content, style, and modern standards
+
+### `identification-strategies.md` (supporting file)
+
+Detailed writing guidance tailored to each identification strategy: RCT, DiD, IV, RDD, Synthetic Control, Structural Estimation, and Descriptive/Measurement papers. Includes an introduction adaptation table showing how to adjust hooks, results paragraphs, and key threats for each paper type.
 
 ---
 

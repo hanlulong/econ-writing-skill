@@ -1,7 +1,7 @@
 ---
 name: econ-write
 description: Expert economics paper writing assistant synthesizing advice from 50+ top guides by Cochrane, McCloskey, Shapiro, Head, Bellemare, Goldin, Kremer, and other leading economists. Covers drafting, rewriting, introductions, abstracts, conclusions, literature reviews, and full paper writing.
-argument-hint: "<task> e.g. 'write introduction for my RDD paper on minimum wage' or 'rewrite this paragraph for clarity' or 'draft abstract for my IV paper on education returns'"
+argument-hint: "<task> e.g. 'write introduction for my DiD paper on minimum wage' or 'rewrite this paragraph for clarity' or 'review my results section for style violations' or 'draft conclusion for my RCT paper on cash transfers'"
 user-invocable: true
 ---
 
@@ -69,7 +69,7 @@ The introduction determines 75% of whether a paper is accepted or rejected. (Bel
 
 ## The Introduction Formula (Head / Evans / Bellemare)
 
-### Paragraph 1-2: THE HOOK (1-2 paragraphs)
+### Paragraphs 1-2: THE HOOK (1-2 paragraphs)
 Attract reader interest by connecting to something important. Four strategies:
 - **Y matters**: when Y rises/falls, people are hurt or helped
 - **Y is puzzling**: defies easy explanation
@@ -84,19 +84,19 @@ Start with a striking fact, a puzzle, or a bold claim grounded in data. Do NOT s
 
 All of these are "clearing your throat" (Cochrane). Start with your contribution.
 
-### Paragraph 2-3: THE RESEARCH QUESTION (1 paragraph)
+### Paragraph 3: THE RESEARCH QUESTION (1 paragraph)
 State clearly what the paper does. Include a sentence like:
 > "This paper examines whether [X causes Y] using [method] and [data]."
 
 The reader must understand what question will be answered by the end. Give the main result here -- the actual coefficient, the actual finding, not a vague preview.
 
-### Paragraph 3-4: MAIN RESULTS (2-4 paragraphs)
+### Paragraphs 4-6: MAIN RESULTS (2-3 paragraphs)
 State your key findings concretely. Top journals devote 25-30% of the introduction to results (Evans). Include:
 - The central finding with magnitude and significance
 - Key robustness results
 - Economic significance (not just statistical significance)
 
-### Paragraph 5-7: ANTECEDENTS & VALUE ADDED (2-3 paragraphs)
+### Paragraphs 7-9: ANTECEDENTS & VALUE ADDED (2-3 paragraphs)
 Discuss the 5-10 closest prior studies (closer to 5 is better). Tell a STORY about the intellectual development, not a bland enumeration ("Smith found X. Jones found Y. Wang found Z."). Then describe approximately 3 contributions:
 - Contribution to internal validity (better identification)
 - Contribution to external validity (new context, population)
@@ -114,6 +114,12 @@ The literature review belongs in the introduction, NOT as a separate section (Co
 - Give proper credit. Be generous
 - The main purpose: establish that your paper adds genuine value relative to existing work
 - Spell out authors' full names. Never abbreviate ("FF" for Fama and French)
+
+**Proportion and depth:**
+- The literature review should occupy 20-30% of the introduction length
+- For each cited paper, explain what they did AND what limitation remains -- do not just state their finding
+- Working papers are acceptable to cite but note if key results are forthcoming or have changed
+- When citing published papers, prefer the journal version over the working paper version
 
 ### Final Paragraph: ROADMAP (1 short paragraph)
 Outline the paper's organization. CUSTOMIZE it to your specific paper -- do not write something generic ("Section 2 presents the model, Section 3 discusses data..."). Mention specific landmarks: problems, solutions, key results. Keep it brief -- readers are eager to get to the heart of the paper.
@@ -189,6 +195,7 @@ Identify 1-2 promising directions:
 - Use "we" to mean "you the reader and I"
 - Tables and figures can be subjects: "Table 5 presents..."
 - Never write "one can see that..."
+- Passive voice exceptions: passive is acceptable in methods descriptions where the agent is irrelevant ("Wages were measured using administrative tax records") and in table/figure captions ("Standard errors are clustered at the state level"). In all other prose, use active voice
 
 ## Pronouns and References
 - "Where" refers to a place. "In which" refers to a model
@@ -205,7 +212,7 @@ Identify 1-2 promising directions:
 - Use 2-3 significant digits, not whatever the software outputs
 - Use sensible units (percentages, not 0.0000023)
 - Define Greek letters clearly. Give them names, not just symbols
-- Remind readers of definitions: "the elasticity of substitution theta equals 3"
+- Remind readers of definitions: "the elasticity of substitution, θ, equals 3"
 - Use Latin letters for variables, Greek letters for coefficients
 - Include subscripts on all variables (i, j, k) from smallest to largest unit
 
@@ -213,7 +220,7 @@ Identify 1-2 promising directions:
 - One idea per paragraph
 - Topic sentence first
 - Paragraphs should flow logically from one to the next
-- Avoid "previews" and "recalls" -- these signal poor organization ("As we will see in Table 6" means you put things in the wrong order)
+- Avoid forward references ("As we will see in Table 6") and backward references ("Recall from Section 2 that...") -- these signal that material is in the wrong order. If a reader needs information now, present it now
 
 ---
 
@@ -235,6 +242,14 @@ Identify 1-2 promising directions:
 - Label axes clearly with sensible units
 - Avoid dotted lines that disappear when reproduced
 - Do not use dashes for volatile series
+
+## When to Use Figures vs. Tables
+- Use **figures** for: trends over time, distributions, non-linear relationships, RD/event-study plots, and any result where the visual pattern is the point
+- Use **tables** for: regression coefficients with standard errors, precise numerical comparisons across specifications, summary statistics
+- A figure showing 20 regression coefficients (coefficient plot) is usually better than a table with 20 rows
+- Rule of thumb: if you say "as Table 3 shows, there is an inverted-U relationship," replace the table with a figure
+- Every key result should appear in EITHER a figure or a table, not both (save space)
+- Place the most important figure/table near the beginning of the results section
 
 ## Data Visualization (Schwabish, JEP)
 - Show the data, not the analyst's cleverness
@@ -265,12 +280,26 @@ The three most important things: Identification, Identification, Identification.
 - Present results from most parsimonious to least parsimonious specification
 
 ## Common Empirical Mistakes
-- High R-squared is usually bad -- it means you included "right shoes" to predict "left shoes"
+- R-squared interpretation depends on context: in cross-sectional micro regressions (wages, health), 0.1-0.3 is typical; high R-squared (> 0.8) usually signals mechanical relationships -- you included "right shoes" to predict "left shoes" (Cochrane). In time-series or macro, high R-squared may be appropriate. Never judge a paper by R-squared; the coefficient on X and its standard error are what matter
 - Do not include all determinants of Y as controls. Education's effect works partly through industry
 - Do not confuse instruments with controls
-- Do not claim causality without explaining identification
+- Do not claim causality without clearly explaining your identification strategy
 - Do not ignore reverse causality
 - Always address: (i) reverse causality, (ii) unobserved heterogeneity, (iii) measurement error
+
+## Heterogeneity Analysis
+- Present heterogeneity results AFTER the main result, not before
+- Pre-specify subgroups based on theory, not data mining
+- Report the number of subgroups tested (multiple testing problem)
+- Interpret magnitudes: "The effect is 3x larger for women" is more informative than "The interaction term is significant"
+- Use visual presentation (forest plots or coefficient plots) when showing many subgroups
+
+## Mechanisms
+- Mechanisms sections should test specific channels, not speculate
+- Structure as: (1) theory predicts mechanism M, (2) if M operates, we should observe X, (3) we test for X
+- Distinguish between mediation analysis and suggestive evidence
+- Be honest about what your data can and cannot identify mechanistically
+- Do NOT list every possible mechanism without testing any of them
 
 ---
 
@@ -284,9 +313,34 @@ The three most important things: Identification, Identification, Identification.
 
 ---
 
+# MODERN EMPIRICAL PRACTICES
+
+## Pre-Registration and Pre-Analysis Plans
+- If your study is pre-registered, state this in the introduction (it is a credibility asset)
+- Clearly distinguish pre-specified analyses from exploratory analyses
+- Reference the pre-analysis plan (e.g., AEA RCT Registry number)
+
+## Multiple Testing
+- When testing multiple outcomes or subgroups, acknowledge the multiple testing problem
+- Report family-wise error rate corrections (Bonferroni, Holm) or false discovery rate (Benjamini-Hochberg)
+- At minimum, flag which results survive multiple testing correction
+
+## Specification Robustness
+- Do NOT present only the specification that "works"
+- Consider a specification curve or multiverse analysis for key results
+- Report the distribution of estimates across reasonable specifications
+
+## Transparency and Reproducibility
+- State data availability clearly: public, restricted access, or proprietary
+- Provide or reference replication code
+- Describe any data cleaning decisions that materially affect results
+- If using restricted data, describe the application process so others can replicate
+
+---
+
 # PAPER STRUCTURE OVERVIEW
 
-Standard applied economics paper:
+## Standard Applied Economics Paper
 1. **Title** (short, informative)
 2. **Abstract** (100-150 words, concrete findings)
 3. **Introduction** (3-5 pages, includes literature review)
@@ -297,6 +351,51 @@ Standard applied economics paper:
 8. **Conclusion** (summary, limitations, policy implications, future research)
 9. **References**
 10. **Appendix / Online Supplement** (robustness checks, proofs, extra tables)
+
+## Theory Paper Structure
+1. **Title** (short, informative)
+2. **Abstract** (100-150 words, state the main result/insight)
+3. **Introduction** (motivate the puzzle, state the main insight, describe the mechanism, relate to literature)
+4. **Model Setup** (primitives, assumptions, timing -- keep it as simple as possible)
+5. **Analysis / Main Results** (propositions with intuition before proofs)
+6. **Extensions** (relax key assumptions, add heterogeneity)
+7. **Discussion / Empirical Implications** (testable predictions, relation to data)
+8. **Conclusion**
+9. **References**
+10. **Appendix** (proofs, technical details)
+
+## Mixed Theory-Empirical Paper Structure
+1. **Title** (short, informative)
+2. **Abstract** (100-150 words, state both the theoretical insight and empirical finding)
+3. **Introduction** (motivate the puzzle, state the theoretical contribution AND the empirical result)
+4. **Model** (develop the theory, derive testable predictions)
+5. **Data and Institutional Background**
+6. **Empirical Strategy** (how you test the model's predictions)
+7. **Results** (map results explicitly back to the model's predictions)
+8. **Conclusion**
+9. **References**
+10. **Appendix** (proofs, robustness checks, additional tables)
+
+## Structural Paper Structure
+1. **Title** (short, informative)
+2. **Abstract** (100-150 words, state the key counterfactual finding)
+3. **Introduction** (motivate the question, describe the approach, state key counterfactual results)
+4. **Model** (develop the structural model with clear economic assumptions)
+5. **Data and Institutional Background**
+6. **Estimation** (identification, estimation method, computational details)
+7. **Model Fit and Validation** (in-sample fit, out-of-sample validation)
+8. **Counterfactual Analysis** (the payoff -- policy simulations, welfare calculations)
+9. **Conclusion**
+10. **Appendix** (estimation details, additional counterfactuals)
+
+## Appendix and Online Supplement Organization
+- The main paper should stand alone -- a reader should not need the appendix to understand your argument
+- Appendix content: robustness checks, additional specifications, variable definitions, data cleaning details, proofs, and extended tables
+- Number appendix tables and figures separately (Table A1, Figure A1) to avoid confusion
+- Reference every appendix item from the main text ("see Table A3 in the online appendix")
+- Place the most important robustness checks in the main paper, not the appendix
+- Organize the appendix in the same order as the main paper
+- Online supplements can be longer than the main paper, but each item should still be referenced in the main text
 
 ---
 
@@ -349,6 +448,17 @@ Standard applied economics paper:
 4. Include robustness checks, mechanisms, and limitations subsections
 5. Use visuals before tables for preliminary results
 
+## When asked to write a THEORY PAPER:
+1. The introduction must state the main insight/mechanism in plain English within the first two paragraphs
+2. Motivate with a puzzle, stylized fact, or policy question -- not with "the literature lacks a model of..."
+3. Model section: state assumptions clearly, explain their economic content, and note which are essential vs. simplifying
+4. Present propositions with economic intuition BEFORE the formal proof. Readers should understand the result before seeing the math
+5. Use the simplest model that generates the key insight. "Start with an example. A good example is worth a thousand theorems." (Glaeser)
+6. Discuss comparative statics verbally: "When X increases, Y falls because..."
+7. Generate testable predictions -- even if you do not test them, state what data would be needed
+8. Proofs belong in the appendix unless they illuminate the economic mechanism
+9. For mixed theory-empirical papers: the empirical section should explicitly test the model's predictions. Map each regression to a specific proposition
+
 ## When asked about PRESENTATIONS:
 1. Get to the main result immediately -- no literature review, no motivation, no preview
 2. "Gene Fama usually starts with 'Look at table 1.' That's a good model." (Cochrane)
@@ -361,22 +471,31 @@ Standard applied economics paper:
 # REVISION CHECKLIST
 
 Before submitting, verify:
-- [ ] Central contribution is stated concretely in paragraph 1-2 of introduction
+- [ ] Central contribution is stated concretely in paragraphs 1-3 of introduction
 - [ ] Main results appear in the introduction with magnitudes
-- [ ] No passive voice (search for "is" and "are")
+- [ ] No passive voice in prose (search for "is" and "are"; passive acceptable in table captions and methods)
 - [ ] No throat-clearing before the main point
 - [ ] Literature review tells a story, not a list
 - [ ] Every table has a self-contained caption
 - [ ] Every number in tables is discussed in text
 - [ ] Standard errors reported for every important number
-- [ ] Identification strategy is clearly explained
+- [ ] Identification strategy is clearly explained in economic terms
 - [ ] Conclusion is under one page
 - [ ] Abstract is under 150 words and concrete
 - [ ] Paper is under 40 pages
 - [ ] All Greek letters are defined with names
 - [ ] No "illustrative" empirical work
 - [ ] No abbreviations of author names
+- [ ] Pre-trends shown visually for DiD designs; RD plot shown for RDD designs
+- [ ] Heterogeneity results are pre-specified and multiple-testing-aware
+- [ ] Mechanisms section tests channels rather than speculates
+- [ ] Data availability and replication information are clearly stated
+- [ ] Appendix items are all referenced from the main text
+- [ ] Title is under 15 words and contains the treatment and outcome
+- [ ] For theory papers: main propositions have clear economic intuition before formal proofs
 
 ---
 
-*This skill synthesizes advice from 50+ sources. Top sources: Cochrane (Chicago/Hoover), McCloskey (Chicago/UIC), Shapiro (Harvard), Head (UBC), Bellemare (Minnesota), Goldin & Katz (Harvard), Kremer (Harvard/Chicago), Nikolov (Binghamton/Harvard), Schwabish (JEP), Evans (CGDev), Dudenhefer (Duke). Full source list: github.com/hanlulong/econ-writing-skill*
+*For identification-strategy-specific writing guidance (RCT, DiD, IV, RDD, Synthetic Control), see [identification-strategies.md](identification-strategies.md).*
+
+*This skill synthesizes advice from 50+ sources. Top sources: Cochrane (Chicago/Hoover), McCloskey (Chicago/UIC), Shapiro (Harvard), Head (UBC), Bellemare (Minnesota), Goldin & Katz (Harvard), Glaeser (Harvard), Kremer (Harvard/Chicago), Nikolov (Binghamton/Harvard), Schwabish (JEP), Evans (CGDev), Dudenhefer (Duke). Full source list: github.com/hanlulong/econ-writing-skill*
