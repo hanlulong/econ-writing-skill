@@ -162,4 +162,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-*Built by [Han Lu Long](https://github.com/hanlulong). Synthesizes the collective wisdom of the economics profession on how to write well.*
+*Built by [Lu Han](https://luhan.io). Synthesizes the collective wisdom of the economics profession on how to write well.*
