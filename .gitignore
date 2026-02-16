@@ -1,0 +1,16 @@
+# PDFs (copyrighted source materials - not for distribution)
+pdfs/
+converted_md/
+
+# Download scripts (contain hardcoded paths)
+download_pdfs.sh
+download_pdfs_batch2.sh
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Python
+__pycache__/
+*.pyc
