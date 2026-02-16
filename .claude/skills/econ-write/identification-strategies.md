@@ -72,6 +72,46 @@ Different identification strategies and paper types require different narrative 
 - Discuss what causal questions the new facts enable future researchers to answer
 - Relate your descriptive findings to existing theoretical predictions
 
+## Bunching Estimation (Saez, Kleven)
+- Lead with the policy kink or notch that generates the bunching
+- Show the bunching visually -- the bunching plot is your central figure
+- Describe the counterfactual distribution and how it is estimated
+- Report the elasticity implied by the amount of bunching
+- Discuss optimization frictions: bunching estimates are lower bounds if adjustment costs exist
+- Address manipulation vs. real responses (for tax bunching: evasion vs. real labor supply)
+- Present robustness to bandwidth and polynomial order of the counterfactual
+- For notch designs: discuss the dominated region and the implications for rationality
+
+## Shift-Share / Bartik Instruments
+- Name the shift-share instrument explicitly in the introduction
+- Describe both components clearly: the "shares" (exposure weights) and the "shifts" (national/sectoral shocks)
+- State which source of variation you rely on for identification:
+  - If relying on exogeneity of shares: argue why pre-period industry composition is exogenous (Goldsmith-Pinkham, Sorkin, and Swift 2020)
+  - If relying on exogeneity of shifts: argue why the shocks are as-good-as-random (Borusyak, Hull, and Jaravel 2022)
+- Report the effective F-statistic for the shift-share instrument
+- Discuss the granularity of shares and the number of shocks driving variation
+- Present "leave-one-out" estimates to show results are not driven by a single shock or sector
+- Address pre-trends using the shift-share structure
+
+## Event Studies
+- Lead with the event and its economic significance
+- Present the event study plot as the central figure
+- Include pre-event coefficients to assess pre-trends (at least 3-4 pre-periods)
+- Normalize one pre-period coefficient to zero (typically t = -1)
+- Discuss the interpretation of post-event dynamics: is the effect immediate, gradual, or temporary?
+- For staggered events: use appropriate estimators (Sun and Abraham, Callaway and Sant'Anna) and discuss treatment effect heterogeneity
+- Report point estimates and confidence intervals for key post-event periods
+- Address anticipation effects if the event was foreseeable
+
+## Machine Learning for Causal Inference
+- Clearly state whether ML is used for prediction, heterogeneity, or causal estimation
+- For heterogeneous treatment effects (Causal Forests, Athey and Imbens 2016): describe the sample splitting procedure and how overfitting is avoided
+- For double/debiased ML (Chernozhukov et al. 2018): explain the cross-fitting procedure and why it is necessary
+- Report traditional standard errors and confidence intervals -- ML does not change inference requirements
+- Discuss the interpretability trade-off: more flexible models may sacrifice economic intuition
+- Compare ML estimates to simpler parametric estimates for credibility
+- For LASSO-based variable selection: justify why data-driven selection is appropriate and report sensitivity to penalization
+
 ---
 
 ## Adapting the Introduction by Paper Type
@@ -86,3 +126,7 @@ Different identification strategies and paper types require different narrative 
 | Structural | The economic question that requires a model | Key counterfactual results | Model assumptions, external validity |
 | Theory | The puzzle or paradox the model resolves | Main proposition and intuition | Robustness of mechanism to assumptions |
 | Descriptive | Why the fact/measurement matters | Key patterns with magnitudes | Measurement validity, sample selection |
+| Bunching | The policy kink/notch and who is affected | Elasticity estimate + bunching plot | Optimization frictions, manipulation |
+| Shift-Share | The shock and local exposure | Main estimate + leave-one-out | Share exogeneity, shock exogeneity |
+| Event Study | The event and its stakes | Event study plot + key coefficients | Pre-trends, anticipation |
+| ML/Causal | The prediction or heterogeneity question | ML vs. parametric comparison | Overfitting, interpretability |

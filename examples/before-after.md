@@ -175,6 +175,62 @@ The rules referenced in each "What changed" note correspond to the principles do
 - **Every word counts (Rule 5):** Cut from 148 words to 97 words while adding more information (the small-bank heterogeneity, the regional amplification mechanism).
 - **Subject-verb-object structure (Rule: Use normal sentence structure):** Short, direct sentences replace nested subordinate clauses.
 
+
+## 7. Theory Paper Introduction
+
+**Topic:** Moral hazard in insurance markets
+
+### BEFORE
+
+> The literature on moral hazard is vast and has been studied extensively by many researchers over the past several decades. In this paper, we develop a theoretical model to analyze moral hazard in insurance markets. Our model incorporates several important features that have not been considered in the existing literature. We derive several interesting results regarding the optimal insurance contract under moral hazard. The model yields testable implications that could potentially be examined using data from insurance markets. We believe that our model contributes to the growing body of literature on moral hazard in insurance.
+
+**(89 words -- no insight, no mechanism, pure throat-clearing)**
+
+### AFTER
+
+> When drivers buy more comprehensive auto insurance, they drive 10-15% more miles per year (Bolduc, Boucher, and Denuit 2008). This behavioral response -- moral hazard -- erodes 20-30% of the welfare gains from insurance coverage. Yet optimal contract theory typically assumes the insurer can fully observe the change in behavior, or cannot observe it at all. In practice, insurers observe noisy signals: claims frequency, telematics data, credit scores. This paper asks: how should an insurer design contracts when monitoring is imperfect and costly? I develop a principal-agent model in which the insurer chooses both coverage and monitoring intensity. The key insight is that monitoring and coverage are complements: the optimal contract offers more generous coverage than the unmonitored benchmark precisely because monitoring reduces moral hazard, and the marginal value of monitoring increases with coverage. The model predicts that the recent adoption of telematics devices should lead to higher average coverage levels and lower premiums -- a prediction I test in Section 5 using data from a large US auto insurer.
+
+**(168 words -- the reader knows the puzzle, the mechanism, and the key prediction)**
+
+### What changed
+
+- **Hook with a fact, not literature (Rule 1, Rule 2):** Replaced "The literature on moral hazard is vast" with a specific empirical fact (10-15% more miles) and its consequence (20-30% welfare erosion).
+- **Main insight stated early (Rule 2, Triangular style):** The complementarity between monitoring and coverage -- the paper's key contribution -- appears in paragraph 1, not buried in a proposition.
+- **Concrete, not abstract (Rule 4):** Instead of "several interesting results," the revision states the specific mechanism (monitoring and coverage are complements) and a testable prediction (telematics → higher coverage, lower premiums).
+- **No "contributes to the literature" (Phrases to Delete):** The old version ends with self-congratulation. The new version ends with a testable prediction.
+- **Theory paper formula:** Opens with a puzzle (noisy monitoring), states the model's approach, gives the key insight, then previews the empirical test.
+
+---
+
+## 8. Heterogeneity and Mechanisms
+
+**Topic:** The effect of class size reduction on student achievement
+
+### BEFORE
+
+> We also examine heterogeneous treatment effects. We interact the treatment variable with various student characteristics. The interaction with gender is not statistically significant. The interaction with free lunch status is statistically significant at the 5% level. The interaction with race is statistically significant at the 10% level. We also interact the treatment with teacher experience. The results suggest that the effects may be heterogeneous across different subgroups of students. We also explore several possible mechanisms through which class size reductions might affect student outcomes. These mechanisms include increased teacher attention, improved classroom management, reduced disruptions, and increased individualized instruction. Future research could examine these mechanisms in more detail.
+
+**(114 words -- no magnitudes, no story, mechanisms listed but not tested)**
+
+### AFTER
+
+> The achievement gains from smaller classes are concentrated among students from low-income families. Among students eligible for free lunch, a one-student reduction in class size raises math scores by 0.08 SD (SE = 0.02), triple the effect for non-eligible students (0.025 SD, SE = 0.01; p-value of difference = 0.003). I find no significant heterogeneity by gender or race after adjusting for multiple comparisons across the four subgroups tested (Holm-corrected p-values reported in Table 5).
+>
+> Two pieces of evidence point to individualized attention as the primary mechanism. First, classroom observation data show that teachers in smaller classes spend 40% more time in one-on-one interactions per student (Table 6). Second, the effect of class size reduction is twice as large for students who entered below grade level -- precisely the students who benefit most from individualized instruction (column 3). By contrast, I find no evidence that smaller classes reduce disciplinary incidents or increase homework completion rates (Table 7), suggesting that classroom management is not the operative channel.
+
+**(170 words -- magnitudes for all subgroups, multiple testing addressed, mechanisms tested not listed)**
+
+### What changed
+
+- **Magnitudes, not just significance (Rule 4):** Replaced "statistically significant at the 5% level" with actual effect sizes (0.08 SD vs. 0.025 SD) and a p-value for the difference.
+- **Multiple testing acknowledged (Modern Practices):** Explicitly states the number of subgroups tested (four) and reports Holm-corrected p-values.
+- **Mechanisms tested, not listed (Mechanisms Rule):** Instead of listing four possible mechanisms, the revision tests two specific channels with evidence (one-on-one time, below-grade-level students) and rules out two others (disciplinary incidents, homework).
+- **Structure follows the rule:** (1) Theory predicts individualized attention matters most, (2) if so, we should see more one-on-one time and larger effects for struggling students, (3) we observe both.
+- **No "future research could examine" (Conclusion Rules):** The old version punts on mechanisms. The new version tests them.
+- **Active voice (Rule 6):** "I find" instead of "We also examine." Tables as subjects: "Table 6 shows."
+
+---
+
 ---
 
 ## Summary of Principles Demonstrated
@@ -193,7 +249,12 @@ The rules referenced in each "What changed" note correspond to the principles do
 | Cost-benefit in conclusion | 5 |
 | Honest limitations | 5 |
 | Simple words | 6 |
+| Theory paper introduction formula | 7 |
+| Heterogeneity with magnitudes | 8 |
+| Multiple testing acknowledgment | 8 |
+| Mechanisms tested, not listed | 8 |
+| Phrases to delete ("contributes to literature") | 7 |
 
 ---
 
-*These examples are generated by the econ-write skill, which synthesizes advice from 50+ economics writing guides. See the full skill definition for the complete set of rules and formulas.*
+*These examples are generated by the econ-write skill, which synthesizes advice from 50+ economics writing guides. Examples 7 and 8 illustrate principles specific to theory papers (stating the key insight early, previewing testable predictions) and empirical mechanisms sections (testing channels with evidence rather than listing possibilities, acknowledging multiple testing). See the full skill definition for the complete set of rules and formulas.*
