@@ -17,33 +17,46 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 
 ## Key Features
 
+### Writing & Structure
+
 - **Works for all paper types** -- Applied empirical, pure theory, mixed theory-empirical, structural, and descriptive papers each get tailored structure and guidance
-- **Dedicated formulas for every major section** -- Abstract (4-part formula), Introduction (Head's Hook-Question-Results-Literature Review & Value Added-Roadmap formula), Model Section (Glaeser/Varian), Data Section, Conclusion (3-part formula: Summary, Implications, Future Research)
-- **Identification strategy guidance** -- Specific writing advice for RCT, DiD (including staggered DiD), IV, RDD, Synthetic Control, Synthetic DiD, Bunching, Shift-Share/Bartik, Event Studies, ML for Causal Inference, Structural Estimation, Descriptive papers, and guidance for papers using multiple strategies
+- **Dedicated formulas for every major section** -- Abstract (4-part formula), Introduction (Head's formula), Model Section (Glaeser/Varian), Data Section, Conclusion (3-part formula), Title (with evaluation criteria)
+- **Identification strategy guidance** -- Specific writing advice for 13 strategies: RCT, DiD (including staggered), IV, RDD, Synthetic Control, Synthetic DiD, Bunching, Shift-Share/Bartik, Event Studies, ML for Causal Inference, Structural Estimation, Descriptive, plus guidance for papers using multiple strategies
 - **Theory paper support** -- Model presentation, proposition writing, and Glaeser's "start with an example" approach
-- **Style rules from McCloskey and Cochrane** -- active voice, concrete language, triangular structure, reader-first writing
-- **Anti-AI writing patterns** -- Eliminate telltale AI-generated writing (banned words, uniform sentence length, generic phrasing) and write like a real economist
-- **Paper review and audit mode** -- Simulated 3-reviewer feedback (Methodologist, Field Expert, Writing Critic) with a 100-point scoring rubric
-- **Title evaluation framework** -- Score titles on clarity, specificity, length, and memorability with good/bad examples
-- **LaTeX formatting guide** -- Practical LaTeX tips for tables (booktabs, threeparttable), figures, bibliography (natbib), and journal submission requirements for AER/QJE/Econometrica/REStud/JPE
-- **Modern empirical practices** -- pre-registration, multiple testing, specification robustness, transparency and reproducibility
-- **Tables and figures best practices** -- self-contained captions, figure vs. table trade-offs, data visualization from Schwabish (JEP)
-- **Before/after examples** -- see how vague, passive, throat-clearing prose transforms into clear, concrete economics writing
-- **Referee response guidance** -- Point-by-point response structure for revise-and-resubmit
-- **Citation integrity** -- Anti-hallucination guidance for verifying references, distinguishing working paper vs. published versions, and avoiding misattributed citations
-- **Job market paper (JMP) guidance** -- Tailored advice for the most important paper of your career: title, abstract, introduction polish, length, signaling breadth
-- **Coauthorship conventions** -- Voice consistency, designated "voice editor", signaling individual contributions
-- **Grant proposal writing** -- NSF, NBER, ERC proposal guidance: feasibility demonstration, budget justification, timeline structure, and the key difference between selling a plan vs. presenting findings
-- **Policy brief and op-ed writing** -- Translate findings for non-academic audiences: plain language, everyday magnitudes, concrete recommendations
-- **Economic significance framework** -- How to translate coefficients into meaningful units, policy benchmarks, and back-of-envelope calculations
-- **Evaluation test suite** -- 11 test cases with expected criteria for benchmarking skill output quality
-- **Pre-submission checklist** -- 24-item checklist covering content, style, and modern standards
-- **AEA replication package standards** -- Data Editor requirements: README template, data citation, directory structure, code reproducibility, license declaration
-- **AI use disclosure guidance** -- Journal-specific policies (AEA, Econometric Society) for disclosing AI assistance in manuscript preparation
 - **Field-specific conventions** -- Macro (calibration tables, IRFs, DSGE), trade (gravity, PPML), development (CONSORT, cost-effectiveness), finance (Fama-MacBeth, winsorization)
-- **Dissertation structure** -- Three-essays format: introduction chapter, standalone papers, conclusion chapter, authorship rules
-- **Survey and review paper writing** -- JEL, JEP, Handbook chapter conventions: organizing by theme, citation density, accessibility
+
+### Style & Quality
+
+- **Style rules from McCloskey and Cochrane** -- Active voice, concrete language, triangular structure, reader-first writing
+- **Anti-AI writing patterns** -- Eliminate telltale AI-generated writing (banned words, uniform sentence length, generic phrasing) and write like a real economist
+- **Title evaluation framework** -- Score titles on clarity, specificity, length, and memorability with good/bad examples
+- **Citation integrity** -- Anti-hallucination guidance for verifying references, distinguishing working paper vs. published versions
+- **Economic significance framework** -- Translate coefficients into meaningful units, policy benchmarks, and back-of-envelope calculations
+- **Tables and figures best practices** -- Self-contained captions, figure vs. table trade-offs, data visualization from Schwabish (JEP)
+
+### Review & Assessment
+
+- **Paper review and audit mode** -- Simulated 3-reviewer feedback (Methodologist, Field Expert, Writing Critic) with a 100-point scoring rubric
+- **Pre-submission checklist** -- 24-item checklist covering content, style, and modern standards
+- **Evaluation test suite** -- 13 test cases for benchmarking skill output quality
+
+### Academic Workflow
+
+- **Job market paper (JMP) guidance** -- Title, abstract, introduction polish, length, signaling breadth
+- **Grant proposal writing** -- NSF, ERC proposal guidance: feasibility, budget justification, timeline, selling a plan vs. presenting findings
+- **Referee response guidance** -- Point-by-point response structure for revise-and-resubmit
+- **Policy brief and op-ed writing** -- Translate findings for non-academic audiences with plain language and concrete recommendations
 - **Working paper to journal conversion** -- Cutting strategy, journal-specific length norms (AER, AER Insights, REStat), appendix organization
+- **Dissertation structure** -- Three-essays format, chapter structure, authorship rules
+- **Survey and review paper writing** -- JEL, JEP, Handbook chapter conventions
+- **Coauthorship conventions** -- Voice consistency, designated "voice editor", signaling individual contributions
+
+### Modern Standards
+
+- **Modern empirical practices** -- Pre-registration, multiple testing, specification robustness, transparency and reproducibility
+- **AEA replication package standards** -- Data Editor requirements: README template, data citation, directory structure, code reproducibility
+- **AI use disclosure guidance** -- Journal-specific policies (AEA, Econometric Society) for disclosing AI assistance
+- **LaTeX formatting guide** -- Tables (booktabs, threeparttable), figures, bibliography (natbib), journal submission requirements for AER/QJE/Econometrica/REStud/JPE
 
 ---
 
