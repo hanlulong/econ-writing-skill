@@ -239,15 +239,15 @@ The full ranked list of all 50+ sources with links, tiers, and notes is availabl
 
 See [`examples/before-after.md`](examples/before-after.md) for full before-and-after transformations. Here is a brief preview:
 
-**Before (vague, passive, throat-clearing):**
+**Bad** (Cochrane's illustration of what NOT to write):
 
 > "I analyze data on executive compensation and find many interesting results."
 
-**After (concrete, active, direct):**
+**Good** (Fama and French 1992 -- a real abstract that says something):
 
-> "CEOs at S&P 500 firms whose compensation exceeded $10 million received 40% of their pay from stock options, yet a one-standard-deviation increase in option grants predicts no significant improvement in firm ROA over the following three years (coeff. = 0.002, SE = 0.003)."
+> "Two easily measured variables, size and book-to-market equity, combine to capture the cross-sectional variation in average stock returns associated with market beta, size, leverage, book-to-market equity, and earnings-price ratios."
 
-The first version tells the reader nothing. The second gives a concrete finding with a magnitude, a context, and a standard error -- exactly what Cochrane, Shapiro, and Goldin and Katz demand.
+The first tells the reader nothing. The second states the finding concretely in one sentence -- exactly what Cochrane, Shapiro, and Goldin and Katz demand.
 
 ---
 
