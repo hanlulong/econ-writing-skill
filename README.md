@@ -267,10 +267,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## Examples
-
-See [`examples/before-after.md`](examples/before-after.md) for 12 full before-and-after transformations covering abstracts, introductions, literature reviews, results, conclusions, data sections, titles, referee responses, theory papers, heterogeneity analysis, and macro papers.
-
----
-
 *Built by [Lu Han](https://luhan.io). Synthesizes the collective wisdom of the economics profession on how to write well.*
