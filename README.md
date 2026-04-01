@@ -33,10 +33,17 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 - **Citation integrity** -- Anti-hallucination guidance for verifying references, distinguishing working paper vs. published versions, and avoiding misattributed citations
 - **Job market paper (JMP) guidance** -- Tailored advice for the most important paper of your career: title, abstract, introduction polish, length, signaling breadth
 - **Coauthorship conventions** -- Voice consistency, designated "voice editor", signaling individual contributions
+- **Grant proposal writing** -- NSF, NBER, ERC proposal guidance: feasibility demonstration, budget justification, timeline structure, and the key difference between selling a plan vs. presenting findings
 - **Policy brief and op-ed writing** -- Translate findings for non-academic audiences: plain language, everyday magnitudes, concrete recommendations
 - **Economic significance framework** -- How to translate coefficients into meaningful units, policy benchmarks, and back-of-envelope calculations
-- **Evaluation test suite** -- 10 test cases with expected criteria for benchmarking skill output quality
+- **Evaluation test suite** -- 11 test cases with expected criteria for benchmarking skill output quality
 - **Pre-submission checklist** -- 24-item checklist covering content, style, and modern standards
+- **AEA replication package standards** -- Data Editor requirements: README template, data citation, directory structure, code reproducibility, license declaration
+- **AI use disclosure guidance** -- Journal-specific policies (AEA, Econometric Society) for disclosing AI assistance in manuscript preparation
+- **Field-specific conventions** -- Macro (calibration tables, IRFs, DSGE), trade (gravity, PPML), development (CONSORT, cost-effectiveness), finance (Fama-MacBeth, winsorization)
+- **Dissertation structure** -- Three-essays format: introduction chapter, standalone papers, conclusion chapter, authorship rules
+- **Survey and review paper writing** -- JEL, JEP, Handbook chapter conventions: organizing by theme, citation density, accessibility
+- **Working paper to journal conversion** -- Cutting strategy, journal-specific length norms (AER, AER Insights, REStat), appendix organization
 
 ---
 
@@ -164,6 +171,11 @@ The skill works in four modes:
 - **Writing a theory paper** -- Structure model presentation, write propositions with intuition before proofs, generate testable predictions.
 - **Structuring a mixed theory-empirical paper** -- Map empirical tests back to specific model predictions.
 - **Preparing a presentation** -- Get advice on slide structure, pacing, and delivery following Shapiro, Cochrane, and others ("Gene Fama usually starts with 'Look at table 1.' That's a good model.").
+- **Reviewing a full paper** -- Get a structured audit with 3 simulated reviewer perspectives and a 100-point score.
+- **Writing a grant proposal** -- Structure an NSF, ERC, or institutional proposal that sells a research plan, not a finished paper.
+- **Writing for policy audiences** -- Translate academic findings into plain-language policy briefs and op-eds.
+- **Converting a working paper to journal format** -- Cut strategically, meet journal length norms, organize the online appendix.
+- **Preparing a replication package** -- Follow AEA Data Editor standards for data citation, code reproducibility, and README structure.
 
 ---
 
@@ -182,6 +194,9 @@ The skill includes four files:
 7. **Paper Structure Templates** -- Templates for applied, theory, mixed theory-empirical, and structural papers, plus appendix organization guidance
 8. **Use Case Instructions** -- Specific instructions for drafting, rewriting, reviewing/auditing, introductions, literature reviews, abstracts, conclusions, results, theory papers, data sections, presentations, and referee responses
 9. **Revision Checklist** -- A 24-item pre-submission checklist covering content, style, and modern standards
+10. **Field-Specific Conventions** -- Adaptations for macro, trade, development, and finance
+11. **AEA Replication Standards** -- Data Editor requirements for replication packages, data citation, and AI disclosure
+12. **Dissertation Structure** -- Three-essays format and JMP positioning
 
 ### `identification-strategies.md`
 

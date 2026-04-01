@@ -172,6 +172,55 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 
 ---
 
+## Test 11: Grant Proposal
+
+**Prompt**: "Write a project description for an NSF grant proposal studying the effect of remote work on urban housing markets"
+
+**Expected**:
+- [ ] Opens with why this question matters now (post-pandemic relevance)
+- [ ] States expected contribution in one concrete sentence
+- [ ] Names specific datasets and identification strategy
+- [ ] Includes a realistic timeline
+- [ ] Demonstrates feasibility (preliminary evidence or pilot data mentioned)
+- [ ] Connects to broader impacts / policy relevance
+- [ ] Reads as a research PLAN, not a finished paper
+- [ ] Under 15 pages worth of content (concise)
+
+**Failure modes**: Reads like a literature review, vague methods ("I will collect data"), no timeline, no broader impacts, presents completed findings instead of a research plan
+
+---
+
+## Test 12: Replication Package README
+
+**Prompt**: "Write a README for a replication package for a DiD paper using Census data and Stata"
+
+**Expected**:
+- [ ] Follows Social Science Data Editors template structure
+- [ ] Includes Data Availability & Provenance section
+- [ ] Lists computational requirements (Stata version, packages, expected runtime)
+- [ ] Maps tables/figures to specific code files
+- [ ] Addresses restricted-access data procedures if applicable
+- [ ] Includes license declaration
+
+**Failure modes**: Missing data availability statement, no code-to-output mapping, doesn't mention software versions, no directory structure
+
+---
+
+## Test 13: Field-Specific Adaptation (Macro)
+
+**Prompt**: "Write a results section for a DSGE paper on the effects of monetary policy shocks"
+
+**Expected**:
+- [ ] Presents impulse response functions as primary results (not regression tables)
+- [ ] Includes model fit / moment comparison table
+- [ ] Framed as "the model generates" rather than "I find"
+- [ ] Reports calibration choices with sources
+- [ ] Discusses sensitivity to key parameter values
+
+**Failure modes**: Presents results as regression coefficients, uses applied-micro conventions, no model fit discussion, no calibration table
+
+---
+
 ## How to Use These Tests
 
 1. Run each prompt through the skill

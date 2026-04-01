@@ -34,6 +34,8 @@
 | 18 | How to Build an Economic Model in Your Spare Time | Hal Varian | UC Berkeley / Google | `25_varian_build_model.pdf` | https://people.ischool.berkeley.edu/~hal/Papers/how.pdf |
 | 19 | My System of Work (Not!) | Avinash Dixit | Princeton | `23_dixit_my_system_of_work.pdf` | http://www.princeton.edu/~dixitak/home/dixitwrk.pdf |
 | 20 | 10 Q&A for Lost Graduate Students | Ariel Rubinstein | Tel Aviv / NYU | `31_rubinstein_10qa.pdf` | http://arielrubinstein.tau.ac.il/papers/10QA.pdf |
+| 21 | Generative AI for Economic Research (JEL 2023, updated 2025) | Anton Korinek | UVA / Brookings | — | Definitive guide on economists using AI tools including writing assistance |
+| 22 | Data and Code Availability Policy and Guidance (2024-2026) | AEA Data Editor | AEA | — | Mandatory replication package standards for AEA journals |
 
 ### TIER 3: Excellent Supplementary (University Guides & Specialized)
 
@@ -77,6 +79,7 @@
 | 46 | How to Write the Introduction | David K. Evans | https://www.cgdev.org/blog/how-write-introduction-your-development-economics-paper |
 | 47 | 20 Rules for Refereeing | Marc F. Bellemare | http://marcfbellemare.com/wordpress/5542 |
 | 48 | Advice for Grad Students | N. Gregory Mankiw | http://gregmankiw.blogspot.com/2006/05/advice-for-grad-students.html |
+| — | Economist Writing Every Day | Community | economistwritingeveryday.com — Community blog on economist writing norms, AI in economics |
 
 ### Meta-Collections (Resource Hubs)
 

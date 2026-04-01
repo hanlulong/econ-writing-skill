@@ -439,6 +439,25 @@ The three most important things: Identification, Identification, Identification.
 - Do NOT cite papers you have not read. If you know a paper only through secondary citations, cite the secondary source: "as discussed in [secondary source]"
 - For well-known results (e.g., Mincer returns, gravity equation), cite the original source, not a textbook or survey
 
+## Replication Packages (AEA Data Editor Standards)
+- Every empirical paper submitted to AEA journals (and increasingly other journals) must include a replication package
+- Include a README following the Social Science Data Editors template: Data Availability & Provenance Statements, Dataset List, Computational Requirements (software versions, hardware, expected runtime), Description of Programs, Instructions for Replicators
+- Cite every dataset in the manuscript's References section with standard in-text citations -- including datasets you created
+- Directory structure: `data/raw/`, `data/analysis/`, `code/`, `results/`. Never commingle code and data files
+- Code must reproduce all results without manual intervention. The only exception: a single config file where replicators set directory paths
+- For restricted-access data: provide a Data Availability Statement explaining application procedures, expected wait times, and any monetary costs
+- Include a `LICENSE.txt` (default: CC-BY 4.0 for data and code)
+- Map every table and figure to a specific program file: "Table 3 is produced by `code/table3_main_results.do`"
+- These standards apply to AEA, Econometrica (ES Data Editor), Economic Journal, and increasingly to field journals
+
+## AI Use Disclosure
+- AEA policy: AI may not be listed as an author. If AI was used in drafting or editing the manuscript, disclose this during submission
+- Econometric Society: requires a responsibility statement that all co-authors accept responsibility for all content
+- What to disclose: drafting assistance, code generation, literature search assistance, data analysis suggestions
+- What typically does not require disclosure: spell-check, grammar tools, LaTeX formatting
+- Regardless of journal policy: you are responsible for verifying ALL AI-generated content, including citations, numerical claims, and statistical interpretations
+- Practical rule: if AI drafted a paragraph, read it as if a careless RA wrote it -- verify every fact, every citation, every number
+
 ---
 
 # TITLE WRITING
@@ -466,6 +485,36 @@ When writing or reviewing a title, score on these dimensions:
 - Bad: "A Difference-in-Differences Analysis of Education Policy" (methodology, not finding)
 - Bad: "On the Relationship Between Various Factors and Economic Outcomes" (says nothing)
 - Bad: "Essays on Labor Economics" (acceptable for a dissertation, never for a paper)
+
+---
+
+# FIELD-SPECIFIC CONVENTIONS
+
+Not all economics subfields follow identical conventions. Adapt these rules by field:
+
+## Applied Micro (Labor, Public, Health, Education, Development)
+- This is the default style the skill assumes. Most rules above apply directly
+- For development RCTs: pre-registration is nearly mandatory; include a CONSORT-style flow diagram; report cost-effectiveness alongside treatment effects
+- Balance tables are central for experimental work -- report them prominently, not in an appendix
+
+## Macroeconomics
+- Papers are longer (40-60 pages is normal); the "under 40 pages" advice does not apply
+- Calibration tables are standard: columns for parameter name, value, source/target moment
+- Impulse response functions (IRFs) are the primary results visualization, not regression tables
+- Model validation section ("Model Fit") comparing model moments to data moments is expected
+- DSGE papers: describe the steady state, log-linearization or solution method, and shock specification
+- Results are often framed as "the model generates X" rather than "I find X"
+
+## Trade
+- Gravity model estimation has specific conventions: PPML estimation (Santos Silva and Tenreyro 2006), multilateral resistance controls, fixed effects structure
+- General equilibrium counterfactuals are expected in structural trade papers
+- Use 3-year or 5-year panel intervals (not annual) with specific justification
+
+## Finance
+- Abstract limit is often 100 words at some journals (not 150)
+- Fama-MacBeth regressions and portfolio-sort presentation are standard conventions
+- Variable winsorization at 1%/99% is expected and must be reported
+- Chicago Manual of Style citation format at some journals (differs from AEA)
 
 ---
 
@@ -537,6 +586,15 @@ When writing or reviewing a title, score on these dimensions:
 - Signal your awareness of the broader literature beyond your subfield -- hiring departments want colleagues, not narrow specialists
 - If your paper uses a novel method, emphasize the economic insight it delivers, not the method itself. Committees hire economists, not econometricians (unless you are applying for a methods position)
 - Presentation materials (job talk slides) should follow the same "get to the result fast" principle -- the main result should appear within the first 10 minutes
+
+## Dissertation Structure (Three-Essays Format)
+- Standard economics PhD dissertation: introduction chapter, three standalone papers, conclusion chapter (~150 pages total)
+- **Introduction chapter** (10-15 pages): establishes thematic linkage between the three papers, provides essential background. NOT a literature review -- each paper has its own
+- **Each essay must be free-standing**: readable independently, with its own abstract, introduction, and conclusion. They should share a common theme but not depend on each other
+- **Conclusion chapter** (5-10 pages): ties papers together, discusses the unified contribution, identifies cross-cutting future directions
+- At least one essay should be sole-authored. The JMP should ideally be sole-authored
+- Order the essays by quality: strongest paper first (committees often read only the first essay in detail)
+- Senior/undergraduate theses differ: may include a preface, require a table of contents, and typically have a single extended paper rather than three essays
 
 ---
 
@@ -616,6 +674,36 @@ When writing or reviewing a title, score on these dimensions:
 3. Slides should contain equations, tables, and graphs -- not bullet points for every word
 4. Leave slides up long enough for digestion (not 1 per minute)
 5. Speak loudly, slowly, clearly. Listen to questions fully before answering
+
+## When asked to write a SURVEY or REVIEW PAPER (JEL, JEP, Handbook chapter):
+1. The contribution is the synthesis and framing, not new results. State your organizing framework in the introduction
+2. Structure by research question or theme, NOT by method or chronology
+3. Build a narrative argument about where the field stands and where it should go -- not an annotated bibliography
+4. Citation density is much higher than original papers (50-200+ references is normal)
+5. JEL articles: abstract under 100 words (stricter than standard 150); section headings use Roman numerals (I., II., III.)
+6. JEP articles: accessible to all economists; minimal math; emphasis on economic intuition; typically commissioned
+7. Handbook chapters: definitive references, can be technical, 40-80 pages is normal
+8. Common mistake: listing papers without building toward a conclusion about the state of knowledge
+
+## When asked to convert a WORKING PAPER to a JOURNAL VERSION:
+1. Identify the core 15-page paper (the essential contribution) and separate everything else into appendix material
+2. Cut in this order: (a) redundant motivation, (b) literature tangents, (c) robustness checks that don't change the story, (d) theory restating well-known results (cite instead), (e) verbose table/figure captions
+3. Journal-specific length norms: AER Insights has a 6,000-word / 5-exhibit limit; REStat requires under 35 pages; AER has no hard limit but 45 pages is a practical ceiling
+4. Move extended robustness, data appendices, and proofs to an online supplement -- but reference every appendix item from the main text
+5. Anticipate referees: organize defensively by separating the core contribution from extensions that can be cut if demanded
+6. After journal acceptance, do NOT update the working paper version; instead append a citation to the published version
+
+## When asked to write a GRANT PROPOSAL (NSF, NBER, ERC, institutional):
+1. Lead with the research question and why it matters NOW -- grant reviewers want to fund timely, important work
+2. State the expected contribution in one sentence: "This project will [produce/estimate/test] [specific output] that [specific benefit to knowledge/policy]"
+3. Demonstrate feasibility: describe the data you already have access to, the methods you have already mastered, and preliminary results if available
+4. Research design section must be concrete and specific -- name the datasets, describe the identification strategy, specify the sample period. Vague proposals ("I will collect data") lose to specific ones ("I will use the 2015-2023 ACS linked to IRS tax records")
+5. Budget justification should connect costs to research activities: "RA support ($X) for data cleaning of [specific dataset]", not "RA support for research assistance"
+6. For NSF proposals: follow the required structure (Project Summary, Project Description, References). The 15-page limit is strict -- every paragraph must earn its place
+7. For ERC proposals: emphasize PI track record and the "high-risk, high-gain" nature of the project
+8. Timeline should be realistic: year 1 = data collection and preliminary analysis, year 2 = main analysis and robustness, year 3 = writing and dissemination
+9. Broader impacts (NSF) or societal relevance (ERC): connect to real policy questions, not abstract "advancing knowledge"
+10. Common mistake: writing a grant proposal like a finished paper. A proposal sells a research PLAN, not completed findings. Emphasize what you WILL learn, not what you already know
 
 ## When asked to write for a NON-ACADEMIC AUDIENCE (policy brief, op-ed, blog post):
 1. Lead with the policy implication, not the research question
