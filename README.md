@@ -251,18 +251,6 @@ The first version tells the reader nothing. The second gives a concrete finding 
 
 ---
 
-## Related Projects
-
-Other useful tools for economists working with AI assistants:
-
-- [awesome-econ-ai-stuff](https://github.com/meleantonio/awesome-econ-ai-stuff) -- Curated AI skills for economists (data analysis, Beamer, R)
-- [claude-code-my-workflow](https://github.com/pedrohcgs/claude-code-my-workflow) -- Ready-to-fork Claude Code template for academics using LaTeX/R
-- [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) -- Full academic writing pipeline with multi-reviewer simulation
-- [claude-skills (econ/finance)](https://github.com/zirui-song/claude-skills) -- Claude Code skills for empirical research in economics and finance
-- [anthropics/skills](https://github.com/anthropics/skills) -- Official Agent Skills specification and skill creator
-
----
-
 ## Contributing
 
 Contributions are welcome. If you know of an authoritative economics writing guide that should be included, or if you have suggestions for improving the skill's formulas or rules, please open an issue or submit a pull request.

@@ -169,6 +169,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 - **Delete "In other words" (Rule: Say it right the first time):** The original said the same thing twice. The revision says it once.
 - **Active voice (Rule 6):** "Banks face higher funding costs and reduce lending" replaces "it is necessary to consider the various channels through which monetary policy operates."
 - **Simple words (Rule 7):** "Raise" not "are transmitted to." "Lend less" not "reduce their lending activity, which has the effect of constraining economic activity."
+- **Anti-AI pattern flagged (Anti-AI Rules):** The original uses "complex and multifaceted" -- a telltale AI-generated phrase. Real economists write "the bank lending channel works as follows" or simply describe the mechanism.
 - **Concrete numbers (Rule 4):** Added Kashyap and Stein's actual estimates (2.6 pp, 4.1 pp) instead of vague claims about "implications for investment and consumption decisions."
 - **Every word counts (Rule 5):** Cut from 148 words to 97 words while adding more information (the small-bank heterogeneity, the regional amplification mechanism).
 - **Subject-verb-object structure (Rule: Use normal sentence structure):** Short, direct sentences replace nested subordinate clauses.
@@ -229,18 +230,147 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 ---
 
+## 9. Data Section
+
+**Topic:** The effect of air pollution on worker productivity
+
+### BEFORE
+
+> The data used in this study come from a variety of sources. We use data on pollution levels and worker productivity from several databases. The data cover a significant period of time and include many observations. We construct our sample by merging different datasets together. Several variables are used in the analysis, including measures of pollution, productivity, and various control variables. The data are cleaned and processed according to standard procedures. Descriptive statistics are presented in Table 1.
+
+**(77 words -- the reader knows nothing about the actual data)**
+
+### AFTER
+
+> I combine three administrative datasets from China's Jiangsu province, 2015-2019. First, daily PM2.5 readings from 142 government air quality monitoring stations provide pollution exposure at the zip-code level. Second, daily piecework output records from 14 garment factories (N = 4.2 million worker-days) measure individual productivity as units produced per hour. Third, personnel files provide worker demographics and tenure. I match workers to the nearest monitor within 10 km (median distance: 3.2 km) and restrict the sample to workers with at least 90 days of continuous employment, yielding a final panel of 18,700 workers across 1,420 production lines.
+>
+> Table 1 reports summary statistics. Mean daily PM2.5 is 68 µg/m³ (SD = 41), well above the WHO guideline of 15 µg/m³. Mean output is 12.3 units per hour (SD = 3.1). Treatment and control groups -- defined by above- vs. below-median pollution exposure -- are balanced on age, tenure, and baseline productivity (balance tests in Table A1).
+
+**(161 words -- the reader knows every dataset, the merge procedure, the sample restriction, and the key variable distributions)**
+
+### What changed
+
+- **Source first (Data Section Rule):** Named the three datasets, the geographic coverage (Jiangsu province), the time period (2015-2019), and the unit of observation (worker-days) in the first sentence.
+- **Sample construction is explicit:** The matching procedure (nearest monitor within 10 km), the sample restriction (90+ days), and the final sample size (18,700 workers, 1,420 lines) are all stated -- a reader could replicate this.
+- **Variables defined precisely:** PM2.5 in µg/m³, productivity as units per hour -- not "measures of pollution and productivity."
+- **Descriptive statistics previewed:** The mean, SD, and a policy benchmark (WHO guideline) give the reader immediate context for magnitudes.
+- **Balance tests referenced:** Treatment/control balance is noted and pointed to an appendix table.
+
+---
+
+## 10. Title Evaluation
+
+**Topic:** Evaluating and improving paper titles
+
+### BEFORE
+
+> **Title A:** "An Empirical Investigation of the Relationship Between Environmental Regulations and Firm-Level Outcomes Using a Difference-in-Differences Approach"
+>
+> **Title B:** "Three Essays on Topics in Environmental and Industrial Economics"
+>
+> **Title C:** "On the Effects of Policy"
+
+### AFTER (rewritten)
+
+> **Title A → "Clean Air, Dirty Profits? The Cost of Environmental Regulation for Indian Manufacturers"**
+>
+> **Title B → "Pollution Regulation and Plant-Level Productivity: Evidence from India's National Air Quality Standards"**
+>
+> **Title C → left as is -- too vague to rescue without knowing the paper's content**
+
+### What changed
+
+- **Title A** violated three rules: (1) led with methodology ("Difference-in-Differences Approach") instead of the finding, (2) was 18 words (aim for under 12), (3) used vague "firm-level outcomes" instead of naming the outcome. The rewrite names treatment (regulation) and outcome (costs/profits), adds a memorable hook (the question format), and fits in 12 words.
+- **Title B** is a dissertation title format, never acceptable for a paper. Rewritten to name the treatment (pollution regulation), outcome (productivity), and context (India).
+- **Title C** is unsalvageable without content -- demonstrates that a title must contain enough information to tell the reader what the paper finds.
+- **Scoring** (Title evaluation criteria): Title A scores 2/10 clarity, 1/10 memorability. The rewrite scores 8/10 clarity, 9/10 memorability. Title B original scores 0/10 on all dimensions.
+
+---
+
+## 11. Referee Response
+
+**Topic:** Responding to referee concerns about identification
+
+### BEFORE
+
+> Dear Editor, we thank the referee for the comments. Regarding the concern about endogeneity, we believe our identification strategy is sound. We have addressed this issue in our paper. The referee suggests that our instrument may be weak, but we disagree. Our instrument is strong and valid. We have also conducted additional robustness checks as the referee suggested. We believe these additional results address the referee's concerns and we hope the paper is now suitable for publication.
+
+**(79 words -- defensive, vague, no evidence)**
+
+### AFTER
+
+> **Referee Comment:** "The authors do not adequately address the possibility of reverse causality between hospital quality and patient volume. The instrument (distance to hospital) may also capture unobserved neighborhood characteristics."
+>
+> **Response:**
+>
+> We thank the referee for raising these important identification concerns. We address each in turn.
+>
+> **Reverse causality.** The referee is correct that OLS estimates may reflect reverse causality if higher-quality hospitals attract more patients. Our instrument -- straight-line distance from the patient's residential zip code centroid to the nearest hospital -- addresses this by exploiting geographic variation that is plausibly exogenous to hospital quality. However, to further alleviate this concern, we now present three additional tests:
+>
+> (i) We show that our results are unchanged when we exclude patients who moved within two years prior to hospitalization (Table A8, column 2; coefficient = 0.034, SE = 0.011, vs. baseline 0.037), suggesting that residential sorting does not drive the results.
+>
+> (ii) We add zip-code-level controls for median income, education, and insurance coverage (Table A8, column 3; coefficient = 0.032, SE = 0.012). The estimate falls by 14% but remains significant at the 1% level.
+>
+> (iii) Following Altonji, Elder, and Taber (2005), we compute the ratio of selection on observables to selection on unobservables required to explain away the result: the ratio is 4.7, well above the threshold of 1 (Table A9).
+>
+> **Instrument validity.** Regarding the concern that distance captures neighborhood characteristics: we now report results from a specification that includes zip-code fixed effects (Table A8, column 4). The instrument in this specification relies solely on within-zip-code variation in distance across hospitals. The coefficient is 0.029 (SE = 0.013), smaller but qualitatively consistent with the baseline. The first-stage F-statistic remains 28.4.
+>
+> These additions appear on pages 18-19 and in Appendix Tables A8-A9 of the revised manuscript.
+
+**(250 words -- quotes the concern, addresses each point with evidence, states exactly what changed and where)**
+
+### What changed
+
+- **Quote the referee (Referee Response Rule):** The revision opens by quoting the exact concern, so the editor can follow the exchange.
+- **Point-by-point structure:** Each concern (reverse causality, instrument validity) gets its own subsection with specific tests and results.
+- **Evidence, not assertion:** Instead of "we disagree," the revision provides three specific tests with coefficients, standard errors, and table references.
+- **Respectful tone:** "The referee is correct that..." and "to further alleviate this concern" -- never defensive.
+- **Exact locations:** "pages 18-19 and Appendix Tables A8-A9" tells the editor where to find the changes.
+- **Never dismissive:** Even the instrument concern -- which the authors believe is already addressed -- receives a concrete new analysis (zip-code fixed effects).
+
+---
+
+## 12. Macro Paper: Impulse Response Results
+
+**Topic:** The effects of monetary policy shocks on output and inflation (DSGE model)
+
+### BEFORE
+
+> The model is simulated and impulse response functions are generated for various shocks. Figure 1 shows the impulse response functions for a monetary policy shock. The results indicate that output declines following a contractionary monetary policy shock, which is consistent with the theoretical predictions of the model. Inflation also declines, as expected. The results are robust to alternative parameterizations of the model. These findings are consistent with the existing literature on the effects of monetary policy shocks.
+
+**(80 words -- no magnitudes, no model specifics, pure hand-waving)**
+
+### AFTER
+
+> Figure 1 traces the economy's response to a 25 basis point increase in the policy rate. Output falls by 0.3% on impact, reaches a trough of -0.8% after 6 quarters, and returns to steady state within 4 years. The hump-shaped response reflects the interaction between habit persistence in consumption (h = 0.7) and nominal price rigidity (Calvo parameter θ = 0.75, implying an average price duration of 4 quarters). Inflation declines by 0.15 percentage points on impact and remains below baseline for 8 quarters, consistent with the output-inflation trade-off in the New Keynesian Phillips curve.
+>
+> The transmission works primarily through the investment channel. The real interest rate rise increases the user cost of capital, causing investment to drop by 1.4% on impact -- four times the output response. Consumption, dampened by habit formation, falls by only 0.2%. These relative magnitudes are consistent with the VAR evidence in Christiano, Eichenbaum, and Evans (2005), where investment accounts for 60-70% of the output response to monetary shocks. Column 2 of Table 4 shows that the model matches 11 of 13 targeted second moments within one standard error of their empirical counterparts.
+
+**(186 words -- the reader knows the shock size, the magnitudes, the timing, the mechanism, and the model fit)**
+
+### What changed
+
+- **Macro conventions (Field-Specific Rules):** Results are framed as "the model generates" and "the economy responds" rather than "I find." The focus is on impulse responses, not regression coefficients.
+- **Magnitudes with timing:** Output falls by 0.3% on impact, troughs at -0.8% after 6 quarters -- not "output declines."
+- **Parameters connected to dynamics:** The Calvo parameter (θ = 0.75) and habit persistence (h = 0.7) are named because they drive the shape of the response. The reader understands WHY the response is hump-shaped.
+- **Model fit reported:** "Matches 11 of 13 targeted moments" gives the reader confidence in the calibration. The original mentioned no model validation.
+- **Mechanism decomposed:** Investment (-1.4%) vs. consumption (-0.2%) clarifies the transmission channel. The comparison to Christiano, Eichenbaum, and Evans (2005) anchors the result in established empirical facts.
+- **No "consistent with theoretical predictions":** This phrase adds nothing. Instead, the revision explains which feature of the model generates each dynamic.
+
+---
+
 ## Summary of Principles Demonstrated
 
 | Principle | Examples where applied |
 |-----------|----------------------|
-| Concrete, not abstract | 1, 2, 4, 5, 6, 7, 8 |
-| Active voice, present tense | 1, 2, 4, 6, 7, 8 |
-| Triangular/newspaper style (most important first) | 2, 4, 7 |
+| Concrete, not abstract | 1, 2, 4, 5, 6, 7, 8, 9, 12 |
+| Active voice, present tense | 1, 2, 4, 6, 7, 8, 11 |
+| Triangular/newspaper style (most important first) | 2, 4, 7, 12 |
 | No throat-clearing | 1, 2, 6, 7 |
-| Every word must count | 1, 5, 6 |
+| Every word must count | 1, 5, 6, 9 |
 | Story-driven literature review | 3 |
 | 3-part conclusion formula (no caveats) | 5 |
-| Economic significance, not just statistical | 4, 5, 8 |
+| Economic significance, not just statistical | 4, 5, 8, 12 |
 | Head's introduction formula (hook with a fact) | 2, 7 |
 | Cost-benefit in conclusion | 5 |
 | No caveats in conclusion | 5 |
@@ -250,7 +380,12 @@ The rules referenced in each "What changed" note correspond to the principles do
 | Multiple testing acknowledgment | 8 |
 | Mechanisms tested, not listed | 8 |
 | Phrases to delete ("contributes to literature") | 7 |
+| Anti-AI pattern flagged | 6 |
+| Data section formula (source/time/unit first) | 9 |
+| Title evaluation with scoring | 10 |
+| Referee response (point-by-point with evidence) | 11 |
+| Macro conventions (IRFs, model fit, calibration) | 12 |
 
 ---
 
-*These examples are generated by the econ-write skill, which synthesizes advice from 50+ economics writing guides. Examples 7 and 8 illustrate principles specific to theory papers (stating the key insight early, previewing testable predictions) and empirical mechanisms sections (testing channels with evidence rather than listing possibilities, acknowledging multiple testing). See the full skill definition for the complete set of rules and formulas.*
+*These examples are generated by the econ-write skill, which synthesizes advice from 50+ economics writing guides. The examples cover all major sections (abstract, introduction, literature review, results, data, conclusion), specialized modes (theory papers, heterogeneity/mechanisms, referee responses, title evaluation), and field-specific conventions (macro DSGE). See the full skill definition for the complete set of rules and formulas.*
