@@ -235,22 +235,6 @@ The full ranked list of all 50+ sources with links, tiers, and notes is availabl
 
 ---
 
-## Examples
-
-See [`examples/before-after.md`](examples/before-after.md) for full before-and-after transformations. Here is a brief preview:
-
-**Before** (Cochrane's illustration of what NOT to write):
-
-> "I analyze data on executive compensation and find many interesting results."
-
-**After** (same topic, rewritten by the skill):
-
-> "CEOs at S&P 500 firms whose compensation exceeded $10 million received 40% of their pay from stock options, yet a one-standard-deviation increase in option grants predicts no significant improvement in firm ROA over the following three years (coeff. = 0.002, SE = 0.003)."
-
-The first tells the reader nothing. The second gives a concrete finding with a magnitude, a context, and a standard error -- exactly what Cochrane, Shapiro, and Goldin and Katz demand.
-
----
-
 ## Contributing
 
 Contributions are welcome. If you know of an authoritative economics writing guide that should be included, or if you have suggestions for improving the skill's formulas or rules, please open an issue or submit a pull request.
@@ -267,6 +251,12 @@ Areas where contributions are especially useful:
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Examples
+
+See [`examples/before-after.md`](examples/before-after.md) for 12 full before-and-after transformations covering abstracts, introductions, literature reviews, results, conclusions, data sections, titles, referee responses, theory papers, heterogeneity analysis, and macro papers.
 
 ---
 
