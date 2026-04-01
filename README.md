@@ -18,14 +18,19 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 ## Key Features
 
 - **Works for all paper types** -- Applied empirical, pure theory, mixed theory-empirical, structural, and descriptive papers each get tailored structure and guidance
-- **Dedicated formulas for every major section** -- Abstract (4-part formula), Introduction (Head's Hook-Question-Results-Antecedents-Roadmap formula), Literature Review (story-driven, embedded in the intro), and Conclusion (Bellemare's 4-part formula: Summary, Limitations, Policy, Future Research)
-- **Identification strategy guidance** -- Specific writing advice for RCT, DiD, IV, RDD, Synthetic Control, and structural estimation papers
+- **Dedicated formulas for every major section** -- Abstract (4-part formula), Introduction (Head's Hook-Question-Results-Literature Review & Value Added-Roadmap formula), Model Section (Glaeser/Varian), Data Section, Conclusion (3-part formula: Summary, Implications, Future Research)
+- **Identification strategy guidance** -- Specific writing advice for RCT, DiD, IV, RDD, Synthetic Control, Bunching, Shift-Share/Bartik, Event Studies, ML for Causal Inference, Structural Estimation, and Descriptive papers
 - **Theory paper support** -- Model presentation, proposition writing, and Glaeser's "start with an example" approach
 - **Style rules from McCloskey and Cochrane** -- active voice, concrete language, triangular structure, reader-first writing
+- **Anti-AI writing patterns** -- Eliminate telltale AI-generated writing (banned words, uniform sentence length, generic phrasing) and write like a real economist
+- **Paper review and audit mode** -- Simulated 3-reviewer feedback (Methodologist, Field Expert, Writing Critic) with a 100-point scoring rubric
+- **Title evaluation framework** -- Score titles on clarity, specificity, length, and memorability with good/bad examples
+- **LaTeX formatting guide** -- Practical LaTeX tips for tables (booktabs, threeparttable), figures, bibliography (natbib), and journal submission requirements for AER/QJE/Econometrica/REStud/JPE
 - **Modern empirical practices** -- pre-registration, multiple testing, specification robustness, transparency and reproducibility
 - **Tables and figures best practices** -- self-contained captions, figure vs. table trade-offs, data visualization from Schwabish (JEP)
 - **Before/after examples** -- see how vague, passive, throat-clearing prose transforms into clear, concrete economics writing
-- **Expanded revision checklist** -- 22-item pre-submission checklist covering content, style, and modern standards
+- **Referee response guidance** -- Point-by-point response structure for revise-and-resubmit
+- **Pre-submission checklist** -- 24-item checklist covering content, style, and modern standards
 
 ---
 
@@ -130,11 +135,16 @@ Once installed, invoke the skill from your AI assistant:
 /econ-write help me structure the model section for my theory paper
 ```
 
-The skill works in three modes:
+```
+/econ-write audit my full paper and score it
+```
+
+The skill works in four modes:
 
 - **Drafting**: generates new text following the formulas and rules, marking areas that need your specific results with `[AUTHOR: ...]` placeholders.
 - **Rewriting**: identifies violations of the rules (passive voice, vague language, buried leads, throat-clearing) and fixes them while preserving your meaning and contribution.
 - **Reviewing**: checks existing text against all rules and provides a detailed report of issues with suggested fixes.
+- **Auditing**: scores the full paper from three simulated reviewer perspectives and returns a 100-point rubric with prioritized feedback.
 
 ---
 
@@ -142,7 +152,7 @@ The skill works in three modes:
 
 - **Drafting a new paper section** -- Generate a first draft of any section (abstract, introduction, data, results, conclusion) that follows established formulas from the start.
 - **Rewriting existing text for clarity** -- Tighten prose, eliminate passive voice, cut throat-clearing, and make results concrete.
-- **Writing an introduction from scratch** -- Follow Head's formula exactly: Hook, Research Question, Main Results, Antecedents and Value Added, Literature Review, Roadmap.
+- **Writing an introduction from scratch** -- Follow Head's formula exactly: Hook, Research Question, Main Results, Literature Review & Value Added, Roadmap.
 - **Conducting and writing a literature review** -- Build a story-driven review of the 5-10 closest papers, embedded in the introduction, that establishes your paper's niche.
 - **Writing up existing empirical results** -- Present results in the correct order (main result first, most parsimonious to least parsimonious) with proper emphasis on economic significance.
 - **Writing a theory paper** -- Structure model presentation, write propositions with intuition before proofs, generate testable predictions.
@@ -153,23 +163,31 @@ The skill works in three modes:
 
 ## What's Inside
 
-The skill includes two files:
+The skill includes four files:
 
 ### `SKILL.md` (main skill file)
 
 1. **Core Principles** -- Seven foundational rules (Reader First, Triangular Style, One Central Contribution, Concrete Not Abstract, Every Word Counts, Active Voice, Simple over Complex)
-2. **Section Formulas** -- Step-by-step formulas for the Abstract, Introduction (with Head's formula), Literature Review, Conclusion (Bellemare's formula), Results, and Title
-3. **Style Rules** -- Detailed guidance on sentence structure, word choice, voice, pronouns, footnotes, numbers, notation, and paragraphs
+2. **Section Formulas** -- Step-by-step formulas for the Abstract, Introduction (Head's formula), Model Section (Glaeser/Varian), Data Section, Conclusion (3-part formula), and Title (with evaluation criteria)
+3. **Style Rules** -- Detailed guidance on sentence structure, word choice, voice, pronouns, footnotes, numbers, notation, paragraphs, and anti-AI writing patterns
 4. **Tables and Figures** -- Best practices for captions, formatting, figure vs. table trade-offs, and data visualization
-5. **Empirical Work Rules** -- Identification, results presentation, heterogeneity analysis, mechanisms, and common mistakes
+5. **Empirical Work Rules** -- Identification, results presentation, null results, heterogeneity analysis, mechanisms, and common mistakes
 6. **Modern Empirical Practices** -- Pre-registration, multiple testing, specification robustness, transparency
-7. **Paper Structure Templates** -- Templates for applied, theory, mixed theory-empirical, and structural papers
-8. **Use Case Instructions** -- Specific instructions for drafting, rewriting, introductions, literature reviews, abstracts, conclusions, results, theory papers, and presentations
-9. **Revision Checklist** -- A 22-item pre-submission checklist covering content, style, and modern standards
+7. **Paper Structure Templates** -- Templates for applied, theory, mixed theory-empirical, and structural papers, plus appendix organization guidance
+8. **Use Case Instructions** -- Specific instructions for drafting, rewriting, reviewing/auditing, introductions, literature reviews, abstracts, conclusions, results, theory papers, data sections, presentations, and referee responses
+9. **Revision Checklist** -- A 24-item pre-submission checklist covering content, style, and modern standards
 
-### `identification-strategies.md` (supporting file)
+### `identification-strategies.md`
 
-Detailed writing guidance tailored to each identification strategy: RCT, DiD, IV, RDD, Synthetic Control, Structural Estimation, and Descriptive/Measurement papers. Includes an introduction adaptation table showing how to adjust hooks, results paragraphs, and key threats for each paper type.
+Detailed writing guidance tailored to each identification strategy: RCT, DiD, IV, RDD, Synthetic Control, Structural Estimation, Descriptive/Measurement, Bunching Estimation, Shift-Share/Bartik Instruments, Event Studies, and Machine Learning for Causal Inference. Includes an introduction adaptation table showing how to adjust hooks, results paragraphs, and key threats for 12 paper types.
+
+### `latex-tips.md`
+
+Practical LaTeX guidance for economics papers: document structure, essential packages (booktabs, threeparttable, natbib, siunitx), regression table formatting, figure best practices (PDF vector graphics, subfigures), bibliography management, math formatting, cross-referencing with cleveref, journal submission requirements (AER, QJE, Econometrica, REStud, JPE), Beamer presentations, and common pitfalls.
+
+### `review-checklist.md`
+
+Structured paper review framework with quick-scan mode (5-minute check), deep-review mode (3 simulated reviewers: Methodologist, Field Expert, Writing Critic), anti-AI detection checklist, 100-point pre-submission scoring rubric, and journal fit assessment for top-5 vs. field journal targeting.
 
 ---
 
@@ -209,6 +227,18 @@ See [`examples/before-after.md`](examples/before-after.md) for full before-and-a
 > "CEOs at S&P 500 firms whose compensation exceeded $10 million received 40% of their pay from stock options, yet a one-standard-deviation increase in option grants predicts no significant improvement in firm ROA over the following three years (coeff. = 0.002, SE = 0.003)."
 
 The first version tells the reader nothing. The second gives a concrete finding with a magnitude, a context, and a standard error -- exactly what Cochrane, Shapiro, and Goldin and Katz demand.
+
+---
+
+## Related Projects
+
+Other useful tools for economists working with AI assistants:
+
+- [awesome-econ-ai-stuff](https://github.com/meleantonio/awesome-econ-ai-stuff) -- Curated AI skills for economists (data analysis, Beamer, R)
+- [claude-code-my-workflow](https://github.com/pedrohcgs/claude-code-my-workflow) -- Ready-to-fork Claude Code template for academics using LaTeX/R
+- [academic-research-skills](https://github.com/Imbad0202/academic-research-skills) -- Full academic writing pipeline with multi-reviewer simulation
+- [claude-skills (econ/finance)](https://github.com/zirui-song/claude-skills) -- Claude Code skills for empirical research in economics and finance
+- [anthropics/skills](https://github.com/anthropics/skills) -- Official Agent Skills specification and skill creator
 
 ---
 

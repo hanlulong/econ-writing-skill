@@ -14,7 +14,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 > The question of how immigration affects native-born workers' wages has been an important and much-debated topic in the field of labor economics for several decades. In this paper, the relationship between immigration and wages is investigated using a novel dataset that was recently made available. It is found that there are several interesting and noteworthy results regarding the impact of immigration on wages across different skill groups. The implications of these findings are discussed in the context of current policy debates about immigration reform. This paper contributes to the existing body of literature by utilizing a new identification strategy that addresses some of the endogeneity concerns that have been raised in prior studies. Our analysis suggests that additional research on this topic would be valuable.
 
-**(98 words of nothing concrete)**
+**(125 words of nothing concrete)**
 
 ### AFTER
 
@@ -129,21 +129,19 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 > Conditional cash transfers of $30 per month per child, conditional on regular health clinic visits, reduce stunting rates by 8 percentage points and anemia prevalence by 12 percentage points among children under five in rural Mexico. These health gains emerge within 18 months of enrollment and persist through age seven, the last point at which I observe treated children in the data.
 >
-> These estimates have limitations. The identification relies on the randomized rollout across 506 villages, but compliance was imperfect: 23% of treatment-group families did not meet the clinic visit requirement. My intent-to-treat estimates therefore understate the effect of actual program participation. The sample is also limited to rural communities with fewer than 2,500 residents, so the results may not generalize to peri-urban settings where health infrastructure differs.
->
 > A back-of-the-envelope cost-benefit calculation suggests the program passes a strict welfare test. At $360 per child per year, the reduction in stunting alone generates an estimated $4,200 in lifetime earnings gains (based on the stunting-earnings gradient in Hoddinott, Maluccio, Behrman, Flores, and Martorell 2008), yielding a benefit-cost ratio of approximately 12:1. The primary losers are taxpayers funding the transfers, though the fiscal cost is partially offset by reduced public health expenditures on childhood anemia treatment.
 >
-> Two extensions would strengthen these findings. First, linking treated children to administrative earnings records at age 25-30 would test whether the health gains translate into the labor market returns that the cost-benefit calculation assumes. Second, replicating the design in peri-urban Mexico or comparable Central American settings would address the external validity constraint.
+> Two extensions would strengthen these findings. First, linking treated children to administrative earnings records at age 25-30 would test whether the health gains translate into the labor market returns that the cost-benefit calculation assumes. Second, replicating the design in peri-urban Mexico or comparable Central American settings would test whether similar programs work in areas with different health infrastructure.
 
-**(262 words following Bellemare's four-part formula)**
+**(195 words following the 3-part conclusion formula: Summary, Implications, Future Research)**
 
 ### What changed
 
-- **Bellemare's conclusion formula (Summary/Limitations/Policy/Future Research):** The revision follows all four parts in order. The original was a shapeless repetition of "our results are important."
+- **3-part conclusion formula (Summary/Implications/Future Research):** The revision follows all three parts in order. The original was a shapeless repetition of "our results are important."
 - **Different phrasing from abstract/introduction (Rule: Do not copy-paste):** The summary uses specific numbers (8 pp stunting, 12 pp anemia, $30/month) but frames them differently -- as a cost-per-outcome statement rather than a coefficient.
-- **Honest limitations (Rule: Limitations build credibility):** Specific numbers on compliance (23%) and sample restriction (< 2,500 residents) replace vague hand-waving.
+- **No caveats section:** The conclusion projects confidence. Any methodological caveats belong in the body of the paper, near the relevant analysis -- not in the conclusion where they undermine the findings.
 - **Cost-benefit calculation (Rule: Back-of-the-envelope is fine):** The 12:1 benefit-cost ratio gives policymakers something concrete. Winners (children/society) and losers (taxpayers) are identified.
-- **Concrete future research (Rule: Do not say "I leave X for future research"):** Two specific extensions with clear rationales, not a wish list. Each extension is tied to a specific limitation.
+- **Concrete future research (Rule: Do not say "I leave X for future research"):** Two specific extensions with clear rationales, not a wish list.
 - **No speculation beyond the data (Rule):** Deleted "investments in early childhood can have lasting effects on economic outcomes" -- a claim the paper's data do not support.
 - **No self-congratulation:** Deleted "our results contribute to the growing body of evidence."
 
@@ -184,7 +182,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 > The literature on moral hazard is vast and has been studied extensively by many researchers over the past several decades. In this paper, we develop a theoretical model to analyze moral hazard in insurance markets. Our model incorporates several important features that have not been considered in the existing literature. We derive several interesting results regarding the optimal insurance contract under moral hazard. The model yields testable implications that could potentially be examined using data from insurance markets. We believe that our model contributes to the growing body of literature on moral hazard in insurance.
 
-**(89 words -- no insight, no mechanism, pure throat-clearing)**
+**(95 words -- no insight, no mechanism, pure throat-clearing)**
 
 ### AFTER
 
@@ -231,23 +229,21 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 ---
 
----
-
 ## Summary of Principles Demonstrated
 
 | Principle | Examples where applied |
 |-----------|----------------------|
-| Concrete, not abstract | 1, 2, 4, 5, 6 |
-| Active voice, present tense | 1, 2, 4, 6 |
-| Triangular/newspaper style (most important first) | 2, 4 |
-| No throat-clearing | 1, 2, 6 |
+| Concrete, not abstract | 1, 2, 4, 5, 6, 7, 8 |
+| Active voice, present tense | 1, 2, 4, 6, 7, 8 |
+| Triangular/newspaper style (most important first) | 2, 4, 7 |
+| No throat-clearing | 1, 2, 6, 7 |
 | Every word must count | 1, 5, 6 |
 | Story-driven literature review | 3 |
-| Bellemare's conclusion formula | 5 |
-| Economic significance, not just statistical | 4, 5 |
-| Head's introduction formula (hook with a fact) | 2 |
+| 3-part conclusion formula (no caveats) | 5 |
+| Economic significance, not just statistical | 4, 5, 8 |
+| Head's introduction formula (hook with a fact) | 2, 7 |
 | Cost-benefit in conclusion | 5 |
-| Honest limitations | 5 |
+| No caveats in conclusion | 5 |
 | Simple words | 6 |
 | Theory paper introduction formula | 7 |
 | Heterogeneity with magnitudes | 8 |

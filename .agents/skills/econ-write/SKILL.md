@@ -1,6 +1,6 @@
 ---
 name: econ-write
-description: Expert economics paper writing assistant synthesizing advice from 50+ top guides by Cochrane, McCloskey, Shapiro, Head, Bellemare, Goldin, Glaeser, Kremer, and other leading economists. Covers all paper types (applied, theory, structural, mixed) and all sections.
+description: "Expert economics paper writing assistant synthesizing advice from 50+ top guides by Cochrane, McCloskey, Shapiro, Head, Bellemare, Goldin, Glaeser, Kremer, and other leading economists. USE THIS SKILL whenever the user writes, edits, reviews, rewrites, or structures any economics paper, thesis, job market paper, abstract, introduction, conclusion, results section, literature review, or referee response. Also handles LaTeX formatting, presentations, and paper audits. Covers all paper types (applied, theory, structural, mixed) and all sections."
 argument-hint: "<task> e.g. 'write introduction for my DiD paper on minimum wage' or 'rewrite this paragraph for clarity' or 'review my results section' or 'draft conclusion for my RCT paper' or 'help me structure the model section'"
 user-invocable: true
 ---
@@ -202,24 +202,18 @@ Outline the paper's organization. CUSTOMIZE it to your specific paper -- do not 
 
 # WRITING THE CONCLUSION
 
-## Formula (Bellemare) -- Adapt by Paper Type
+## Formula (Bellemare, adapted) -- Adapt by Paper Type
 
 ### Part 1: SUMMARY (1-2 paragraphs)
 Reiterate main findings in a DIFFERENT way from the abstract and introduction. Tell a story. Do not simply copy-paste earlier text. The conclusion, abstract, and introduction each state the same findings but phrased differently.
 
-### Part 2: LIMITATIONS (1 paragraph)
-Re-emphasize limitations of your approach. Even if discussed earlier, state them again here. Honesty builds credibility.
-- For empirical papers: internal validity, external validity, measurement limitations
-- For theory papers: which assumptions are strongest, what the model omits, scope of applicability
-- For structural papers: sensitivity to functional form, identification assumptions, computational constraints
-
-### Part 3: IMPLICATIONS (1 paragraph)
+### Part 2: IMPLICATIONS (1 paragraph)
 - For applied empirical papers: policy implications with rough cost-benefit assessment (back-of-the-envelope is fine). Identify winners and losers. Do NOT make claims unsupported by your results
 - For theory papers: broader applicability of the mechanism, relationship to other theoretical frameworks, what the model says about unresolved debates
 - For structural papers: what the counterfactuals imply for policy, welfare calculations
 
-### Part 4: FUTURE RESEARCH (1 paragraph)
-Identify 1-2 specific, concrete directions tied to your paper's limitations:
+### Part 3: FUTURE RESEARCH (1 paragraph)
+Identify 1-2 specific, concrete directions:
 - Better identification strategies or richer data
 - Broader external validity (new populations, settings)
 - Extensions of the model or relaxation of key assumptions
@@ -231,6 +225,7 @@ Identify 1-2 specific, concrete directions tied to your paper's limitations:
 - Do NOT speculate beyond what the data or model show
 - Do NOT write your grant application here (Cochrane)
 - Do NOT say "I leave X for future research" (Cochrane) -- instead, describe concretely what the extension would look like
+- Do NOT add a separate "limitations" or "caveats" subsection in the conclusion -- the conclusion should project confidence in the findings, not undermine them. If limitations exist, they belong in the body of the paper near the relevant analysis
 - If applied micro, consider framing the conclusion like a policy brief (Nikolov)
 
 ---
@@ -259,7 +254,7 @@ Cut these on sight -- they add no information:
 
 ## Word Choice
 - Use simple words: "use" not "utilize", "but" not "however", "so" not "consequently"
-- Use concrete words: "people" not "agents", "companies" not "firms" (when appropriate)
+- Use concrete words: "people" not "agents", "workers" not "labor market participants"
 - Do NOT use adjectives to describe your own work ("striking results", "very significant")
 - Do NOT use double adjectives ("very novel")
 - Clothe the naked "this" -- write "This regression shows..." not "This shows..."
@@ -295,7 +290,18 @@ Cut these on sight -- they add no information:
 - One idea per paragraph
 - Topic sentence first
 - Paragraphs should flow logically from one to the next
-- Avoid forward references ("As we will see in Table 6") and backward references ("Recall from Section 2 that...") -- these signal that material is in the wrong order. If a reader needs information now, present it now
+- Minimize forward references ("As we will see in Table 6") and backward references ("Recall from Section 2 that...") -- these often signal that material is in the wrong order. If a reader needs information now, present it now. Brief backward references to earlier results are acceptable when building on them
+
+## Avoiding AI-Generated Writing Patterns
+AI-assisted writing often has telltale patterns. Eliminate these:
+- **Banned words**: Never use "delve", "crucial", "landscape", "multifaceted", "notably", "comprehensive", "leverage" (as verb meaning "use"), "robust" (outside its statistical meaning). Use "use" not "utilize"
+- **Vary sentence length**: Mix short sentences (8-12 words) with longer ones (15-25 words). AI tends toward uniform medium-length sentences
+- **Use field-specific vocabulary naturally**: "extensive margin" in labor, "pass-through" in IO, "treatment on the treated" in program evaluation. Generic phrasing signals AI
+- **Include parenthetical asides and em-dashes** -- real academics use these for qualifications and side notes
+- **Allow natural roughness**: Not every transition needs to be perfectly smooth. Real papers have some friction between sections. A period and a new topic sentence is fine
+- **Be specific about institutions**: Name the actual dataset, agency, policy, or country. AI defaults to generic placeholder language
+- **Avoid perfect parallel structure in every list**: Vary your constructions. Real writing is slightly irregular
+- **Hedge appropriately**: Write "This likely reflects..." or "One interpretation is..." when warranted. AI either over-hedges everything or never hedges
 
 ---
 
@@ -419,12 +425,29 @@ The three most important things: Identification, Identification, Identification.
 
 # TITLE WRITING
 
+## Formulas
 - Best form: "The Impact of [D] on [Y]: Evidence from [Context]"
 - Alternative: "[D] and [Y]" (shorter, acceptable)
 - For theory papers: name the key mechanism or insight, not the technique
+- For structural papers: "[Counterfactual Question]: Evidence from [Context]"
 - Keep titles short -- shorter titles receive more citations (Letchford, Moat, and Preis 2015)
 - Do NOT emphasize methodology in title unless you invented the method
-- Clever titles should appeal broadly and fit the paper perfectly
+
+## Title Evaluation Criteria
+When writing or reviewing a title, score on these dimensions:
+1. **Clarity** -- Can a non-specialist understand the topic in one reading?
+2. **Specificity** -- Are the treatment/cause and outcome/effect both named?
+3. **Length** -- Under 12 words is ideal; under 15 is acceptable
+4. **Memorability** -- Would someone remember this title at a conference?
+5. **No methodology** -- Does it emphasize the finding, not the method?
+
+## Good vs. Bad Title Examples
+- Good: "The Oregon Health Insurance Experiment: Evidence from the First Year" (clear, specific, memorable)
+- Good: "The China Syndrome: Local Labor Market Effects of Import Competition" (clever + clear)
+- Good: "Pollution and Mortality: Evidence from the 1952 London Fog" (treatment + outcome + context)
+- Bad: "A Difference-in-Differences Analysis of Education Policy" (methodology, not finding)
+- Bad: "On the Relationship Between Various Factors and Economic Outcomes" (says nothing)
+- Bad: "Essays on Labor Economics" (acceptable for a dissertation, never for a paper)
 
 ---
 
@@ -527,10 +550,11 @@ The three most important things: Identification, Identification, Identification.
 4. No citations, no jargon, no passive voice
 
 ## When asked to write a CONCLUSION:
-1. Follow Bellemare's 4-part formula: Summary/Limitations/Implications/Future Research
+1. Follow the 3-part formula: Summary/Implications/Future Research
 2. Keep it to one page
 3. Phrase findings differently from abstract and introduction
 4. Do not speculate beyond the data or model
+5. Do NOT add a limitations or caveats section -- project confidence
 
 ## When asked to write RESULTS:
 1. Main result first -- no warmup exercises
@@ -565,6 +589,14 @@ The three most important things: Identification, Identification, Identification.
 4. Leave slides up long enough for digestion (not 1 per minute)
 5. Speak loudly, slowly, clearly. Listen to questions fully before answering
 
+## When asked to REVIEW or AUDIT a paper:
+1. Use the review checklist framework (see [review-checklist.md](review-checklist.md))
+2. Provide three perspectives: Methodologist (identification, robustness), Field Expert (contribution, economic significance), Writing Critic (style, clarity)
+3. Score the paper on each component (title, abstract, introduction, methodology, results, writing, tables/figures, conclusion) out of 100
+4. Flag any AI-generated writing patterns (see Anti-AI section above)
+5. Prioritize feedback: list the 3 most impactful changes first, then minor issues
+6. For each issue, state what is wrong, why it matters, and how to fix it with a concrete example
+
 ## When asked to write a REFEREE RESPONSE:
 1. Begin with a brief, respectful summary: thank the editor and referees for their time and constructive feedback
 2. Structure point-by-point: quote each comment, then provide your response immediately below
@@ -588,7 +620,7 @@ Before submitting, verify:
 - [ ] Every number in tables is discussed in text
 - [ ] Standard errors reported for every important number
 - [ ] Identification strategy is clearly explained in economic terms
-- [ ] Conclusion is under one page
+- [ ] Conclusion is under one page with no separate limitations/caveats section
 - [ ] Abstract is under 150 words and concrete
 - [ ] Paper is under 40 pages (check target journal guidelines)
 - [ ] All Greek letters and notation are defined with names
@@ -607,5 +639,9 @@ Before submitting, verify:
 ---
 
 *For identification-strategy-specific writing guidance (RCT, DiD, IV, RDD, Synthetic Control, Bunching, Shift-Share, ML), see [identification-strategies.md](identification-strategies.md).*
+
+*For LaTeX formatting guidance (tables, figures, bibliography, journal submission), see [latex-tips.md](latex-tips.md).*
+
+*For structured paper review with simulated reviewers and scoring, see [review-checklist.md](review-checklist.md).*
 
 *This skill synthesizes advice from 50+ sources. Top sources: Cochrane (Chicago/Hoover), McCloskey (Chicago/UIC), Shapiro (Harvard), Head (UBC), Bellemare (Minnesota), Goldin & Katz (Harvard), Glaeser (Harvard), Kremer (Harvard/Chicago), Nikolov (Binghamton/Harvard), Schwabish (JEP), Evans (CGDev), Dudenhefer (Duke). Full source list: github.com/hanlulong/econ-writing-skill*

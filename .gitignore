@@ -6,6 +6,9 @@ converted_md/
 download_pdfs.sh
 download_pdfs_batch2.sh
 
+# Session state (internal tracking, not for distribution)
+SESSION_STATE.md
+
 # macOS
 .DS_Store
 *.swp
