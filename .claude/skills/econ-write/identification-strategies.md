@@ -20,6 +20,10 @@ Different identification strategies and paper types require different narrative 
 - Show pre-trends visually (event study plot is mandatory for modern DiD papers)
 - Discuss treatment timing variation and staggered adoption if relevant
 - If using staggered DiD, address recent econometric concerns (Goodman-Bacon, Sun and Abraham, Callaway and Sant'Anna)
+- For staggered treatment: report the decomposition of the two-way fixed effects estimate (Goodman-Bacon 2021) to show which comparisons drive the result
+- Use appropriate estimators: Callaway and Sant'Anna (2021) for heterogeneous treatment effects over time, Sun and Abraham (2021) for event-study specifications, de Chaisemartin and D'Haultfoeuille (2020) for the no-sign-reversal assumption
+- Present results from BOTH the traditional TWFE and the robust estimator. If they differ, explain why (negative weights, treatment effect heterogeneity)
+- Show the event-study plot from the robust estimator, not just the TWFE version
 - Report results with and without covariates to show sensitivity
 - Discuss anticipation effects if the policy was announced before implementation
 - Address compositional changes in treated vs. control groups over time
@@ -53,6 +57,14 @@ Different identification strategies and paper types require different narrative 
 - Report donor weights -- which comparison units receive the most weight?
 - Address concerns about interpolation bias if donor units are very different from treated unit
 - For multiple treated units, consider the augmented/penalized synthetic control or the synthetic DiD
+
+## Synthetic Difference-in-Differences (Arkhangelsky et al.)
+- Lead with the policy change and why neither standard DiD nor synthetic control alone is sufficient
+- Explain the doubly robust property: valid if either the parallel trends assumption OR the synthetic control weights are correct
+- Present both the standard DiD and synthetic control estimates alongside the synthetic DiD estimate for comparison
+- Show unit weights and time weights -- readers need to understand which comparison units and pre-treatment periods drive the estimate
+- For inference: use the placebo-based procedure (permuting treatment assignment) rather than asymptotic standard errors
+- Discuss when synthetic DiD is preferred: settings with few treated units where DiD is noisy, or many pre-periods where synthetic control may overfit
 
 ## Structural Estimation
 - Clearly state the economic model and its key assumptions in plain English before the math
@@ -112,6 +124,14 @@ Different identification strategies and paper types require different narrative 
 - Compare ML estimates to simpler parametric estimates for credibility
 - For LASSO-based variable selection: justify why data-driven selection is appropriate and report sensitivity to penalization
 
+## Papers Using Multiple Identification Strategies
+- Many modern papers combine strategies (e.g., DiD as main specification + IV as robustness, or RDD + synthetic control)
+- Designate one strategy as "primary" and present it first. Additional strategies should be framed as robustness or complementary evidence
+- When strategies yield similar estimates, emphasize convergence: "The IV estimate of X is statistically indistinguishable from the DiD estimate of Y, reinforcing the causal interpretation"
+- When strategies yield different estimates, explain why: different local populations (LATE vs. ATT), different identifying assumptions, or different margins of adjustment
+- Do NOT present multiple strategies as equally weighted unless you genuinely have no reason to prefer one. Readers want to know which result you stand behind
+- In the introduction, name the primary strategy. Mention the secondary strategy briefly: "I confirm these findings using [alternative method]"
+
 ---
 
 ## Adapting the Introduction by Paper Type
@@ -123,6 +143,7 @@ Different identification strategies and paper types require different narrative 
 | IV | The instrument and why it's clever | OLS vs. IV comparison | Exclusion restriction, weak instruments |
 | RDD | The cutoff and its stakes | RD estimate + bandwidth sensitivity | Manipulation, other discontinuities |
 | Synthetic Control | The treated unit and the event | Synthetic vs. actual trajectory | Pre-treatment fit, donor pool |
+| Synthetic DiD | Policy change + few treated units | Synthetic DiD vs. DiD vs. SC comparison | Parallel trends, synthetic control fit |
 | Structural | The economic question that requires a model | Key counterfactual results | Model assumptions, external validity |
 | Theory | The puzzle or paradox the model resolves | Main proposition and intuition | Robustness of mechanism to assumptions |
 | Descriptive | Why the fact/measurement matters | Key patterns with magnitudes | Measurement validity, sample selection |

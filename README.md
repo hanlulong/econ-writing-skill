@@ -19,7 +19,7 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 
 - **Works for all paper types** -- Applied empirical, pure theory, mixed theory-empirical, structural, and descriptive papers each get tailored structure and guidance
 - **Dedicated formulas for every major section** -- Abstract (4-part formula), Introduction (Head's Hook-Question-Results-Literature Review & Value Added-Roadmap formula), Model Section (Glaeser/Varian), Data Section, Conclusion (3-part formula: Summary, Implications, Future Research)
-- **Identification strategy guidance** -- Specific writing advice for RCT, DiD, IV, RDD, Synthetic Control, Bunching, Shift-Share/Bartik, Event Studies, ML for Causal Inference, Structural Estimation, and Descriptive papers
+- **Identification strategy guidance** -- Specific writing advice for RCT, DiD (including staggered DiD), IV, RDD, Synthetic Control, Synthetic DiD, Bunching, Shift-Share/Bartik, Event Studies, ML for Causal Inference, Structural Estimation, Descriptive papers, and guidance for papers using multiple strategies
 - **Theory paper support** -- Model presentation, proposition writing, and Glaeser's "start with an example" approach
 - **Style rules from McCloskey and Cochrane** -- active voice, concrete language, triangular structure, reader-first writing
 - **Anti-AI writing patterns** -- Eliminate telltale AI-generated writing (banned words, uniform sentence length, generic phrasing) and write like a real economist
@@ -30,6 +30,12 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 - **Tables and figures best practices** -- self-contained captions, figure vs. table trade-offs, data visualization from Schwabish (JEP)
 - **Before/after examples** -- see how vague, passive, throat-clearing prose transforms into clear, concrete economics writing
 - **Referee response guidance** -- Point-by-point response structure for revise-and-resubmit
+- **Citation integrity** -- Anti-hallucination guidance for verifying references, distinguishing working paper vs. published versions, and avoiding misattributed citations
+- **Job market paper (JMP) guidance** -- Tailored advice for the most important paper of your career: title, abstract, introduction polish, length, signaling breadth
+- **Coauthorship conventions** -- Voice consistency, designated "voice editor", signaling individual contributions
+- **Policy brief and op-ed writing** -- Translate findings for non-academic audiences: plain language, everyday magnitudes, concrete recommendations
+- **Economic significance framework** -- How to translate coefficients into meaningful units, policy benchmarks, and back-of-envelope calculations
+- **Evaluation test suite** -- 10 test cases with expected criteria for benchmarking skill output quality
 - **Pre-submission checklist** -- 24-item checklist covering content, style, and modern standards
 
 ---

@@ -267,6 +267,13 @@ Cut these on sight -- they add no information:
 - Never write "one can see that..."
 - Passive voice exceptions: passive is acceptable in methods descriptions where the agent is irrelevant ("Wages were measured using administrative tax records") and in table/figure captions ("Standard errors are clustered at the state level"). In all other prose, use active voice
 
+## Coauthorship and Multi-Author Writing
+- Before writing, agree on voice: "we" throughout, or let the lead author use a consistent style
+- Designate one person as the "voice editor" -- the coauthor responsible for ensuring consistent tone, tense, and style across all sections
+- When describing individual contributions (e.g., in footnotes or author statements), use "Author A conducted the empirical analysis; Author B developed the theoretical model"
+- Do NOT let different writing styles coexist across sections. A paper that sounds like two different people wrote it signals careless editing
+- For job market papers: the candidate's name should appear first. The introduction should make clear which contributions are the candidate's
+
 ## Pronouns and References
 - "Where" refers to a place. "In which" refers to a model
 - Write "models in which consumers have shocks" not "models where consumers have shocks"
@@ -294,7 +301,7 @@ Cut these on sight -- they add no information:
 
 ## Avoiding AI-Generated Writing Patterns
 AI-assisted writing often has telltale patterns. Eliminate these:
-- **Banned words**: Never use "delve", "crucial", "landscape", "multifaceted", "notably", "comprehensive", "leverage" (as verb meaning "use"), "robust" (outside its statistical meaning). Use "use" not "utilize"
+- **Banned words** (in addition to the phrases listed under Phrases to Delete above): Never use "delve", "landscape", "multifaceted", "notably", "leverage" (as verb meaning "use"), "robust" (outside its statistical meaning), "pivotal", "groundbreaking", "shed light on", "pave the way"
 - **Vary sentence length**: Mix short sentences (8-12 words) with longer ones (15-25 words). AI tends toward uniform medium-length sentences
 - **Use field-specific vocabulary naturally**: "extensive margin" in labor, "pass-through" in IO, "treatment on the treated" in program evaluation. Generic phrasing signals AI
 - **Include parenthetical asides and em-dashes** -- real academics use these for qualifications and side notes
@@ -364,6 +371,10 @@ The three most important things: Identification, Identification, Identification.
 - Follow with limited robustness checks (put most in web appendix)
 - Give stylized facts in the data, not just estimates and p-values
 - Explain economic significance, not just statistical significance
+- Translate coefficients into meaningful units: dollars, percentage points, standard deviations, or equivalent policy benchmarks
+- Compare your effect size to: (a) the mean of the dependent variable, (b) the effect of a well-known intervention, or (c) a policy-relevant threshold. Example: "The effect equals 40% of the black-white test score gap"
+- For elasticities, state whether they are at the mean, at the median, or arc elasticities
+- Back-of-envelope calculations are encouraged: "At the sample mean, this implies X additional dollars per household per year"
 - Present results from most parsimonious to least parsimonious specification
 
 ## Presenting Null Results
@@ -420,6 +431,13 @@ The three most important things: Identification, Identification, Identification.
 - Provide or reference replication code
 - Describe any data cleaning decisions that materially affect results
 - If using restricted data, describe the application process so others can replicate
+
+## Citation Integrity
+- Verify every citation: confirm that the author names, year, journal, and key finding are accurate. AI tools frequently hallucinate or misattribute citations
+- When citing a result from another paper, check that you are citing the correct specification (e.g., the preferred estimate, not a robustness check)
+- Distinguish between working paper versions and published versions -- findings sometimes change between versions
+- Do NOT cite papers you have not read. If you know a paper only through secondary citations, cite the secondary source: "as discussed in [secondary source]"
+- For well-known results (e.g., Mincer returns, gravity equation), cite the original source, not a textbook or survey
 
 ---
 
@@ -510,6 +528,16 @@ When writing or reviewing a title, score on these dimensions:
 - Organize the appendix in the same order as the main paper
 - Online supplements can be longer than the main paper, but each item should still be referenced in the main text
 
+## Job Market Paper (JMP) Considerations
+- The JMP is your calling card. It must demonstrate that you can identify an important question, execute credibly, and write clearly -- all by yourself (even if coauthored, your contribution must be unmistakable)
+- Title: should be memorable and signal your field. Avoid generic titles -- hiring committees scan hundreds of JMPs
+- Abstract: this is your elevator pitch. Lead with the finding, not the method. Make it intelligible to economists outside your subfield
+- Introduction: must be exceptionally polished. Many committee members read only the introduction. Front-load your most impressive result
+- Length: aim for the shorter end (30-35 pages). Committees are reading dozens of papers; shorter papers get read more carefully
+- Signal your awareness of the broader literature beyond your subfield -- hiring departments want colleagues, not narrow specialists
+- If your paper uses a novel method, emphasize the economic insight it delivers, not the method itself. Committees hire economists, not econometricians (unless you are applying for a methods position)
+- Presentation materials (job talk slides) should follow the same "get to the result fast" principle -- the main result should appear within the first 10 minutes
+
 ---
 
 # USE CASE INSTRUCTIONS
@@ -588,6 +616,16 @@ When writing or reviewing a title, score on these dimensions:
 3. Slides should contain equations, tables, and graphs -- not bullet points for every word
 4. Leave slides up long enough for digestion (not 1 per minute)
 5. Speak loudly, slowly, clearly. Listen to questions fully before answering
+
+## When asked to write for a NON-ACADEMIC AUDIENCE (policy brief, op-ed, blog post):
+1. Lead with the policy implication, not the research question
+2. State the finding in plain language -- no jargon, no Greek letters, no regression terminology
+3. Use one concrete example or anecdote to illustrate the mechanism
+4. Magnitude in everyday terms: "equivalent to $X per household" or "the same as adding one teacher per school"
+5. One figure maximum. It should be self-explanatory without reading the text
+6. Keep it under 1,500 words for a policy brief, under 800 for an op-ed
+7. Do NOT cite standard errors, p-values, or confidence intervals. Instead: "The effect is large and precisely estimated" or "We can confidently rule out effects smaller than X"
+8. End with a concrete policy recommendation, not "more research is needed"
 
 ## When asked to REVIEW or AUDIT a paper:
 1. Use the review checklist framework (see [review-checklist.md](review-checklist.md))
