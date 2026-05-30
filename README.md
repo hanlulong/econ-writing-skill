@@ -115,6 +115,8 @@ cd econ-writing-skill
 mkdir -p ~/.claude/skills/econ-write
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/SKILL.md -o ~/.claude/skills/econ-write/SKILL.md
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/identification-strategies.md -o ~/.claude/skills/econ-write/identification-strategies.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/latex-tips.md -o ~/.claude/skills/econ-write/latex-tips.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/review-checklist.md -o ~/.claude/skills/econ-write/review-checklist.md
 ```
 
 #### Project-specific
@@ -128,10 +130,11 @@ cp -r econ-writing-skill/.claude/skills/econ-write/ /path/to/your/project/.claud
 
 | Flag | Behavior |
 |------|----------|
-| (default) | Install globally for all projects |
+| `--global` | Install globally for all projects (default) |
 | `--local` | Install to current project only |
 | `--claude` | Install for Claude Code only |
 | `--codex` | Install for Codex only |
+| `--all` | Install for all supported platforms (default) |
 
 Example: `./install.sh --local --claude /path/to/project`
 
@@ -213,7 +216,7 @@ The skill includes four files:
 
 ### `identification-strategies.md`
 
-Detailed writing guidance tailored to each identification strategy: RCT, DiD, IV, RDD, Synthetic Control, Structural Estimation, Descriptive/Measurement, Bunching Estimation, Shift-Share/Bartik Instruments, Event Studies, and Machine Learning for Causal Inference. Includes an introduction adaptation table showing how to adjust hooks, results paragraphs, and key threats for 12 paper types.
+Detailed writing guidance tailored to each identification strategy: RCT, DiD (including staggered), IV, RDD, Synthetic Control, Synthetic DiD, Structural Estimation, Descriptive/Measurement, Bunching Estimation, Shift-Share/Bartik Instruments, Event Studies, and Machine Learning for Causal Inference, plus guidance for papers combining multiple strategies. Includes an introduction adaptation table showing how to adjust hooks, results paragraphs, and key threats for 13 paper types.
 
 ### `latex-tips.md`
 
@@ -242,7 +245,7 @@ This skill synthesizes advice from **50+ authoritative sources**. The top 10 sou
 | 9 | Writing Papers: A Checklist | Michael Kremer | Harvard / UChicago |
 | 10 | An Economist's Guide to Visualizing Data | Jonathan A. Schwabish | JEP (AEA) |
 
-Notable authorities include **Nobel laureates** (Goldin 2023, Kremer 2019), a **Clark Medal winner** (Shapiro 2022), and editors of leading journals (Bellemare at AJAE, Beatty at AJAE, Shimshack at JEEM).
+Notable authorities include **Nobel laureates** (Goldin 2023, Kremer 2019), a **Clark Medal winner** (Gentzkow 2014), a **MacArthur Fellow** (Shapiro 2021), and editors of leading journals (Bellemare at AJAE, Beatty at AJAE, Shimshack at JEEM).
 
 The full ranked list of all 50+ sources with links, tiers, and notes is available in [`sources/SOURCES_RANKED.md`](sources/SOURCES_RANKED.md).
 
