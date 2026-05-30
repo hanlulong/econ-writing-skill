@@ -46,7 +46,7 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 
 **Expected**:
 - [ ] Follows 3-part formula: Summary, Implications, Future Research
-- [ ] No separate "limitations" or "caveats" subsection
+- [ ] No generic caveats dump that undermines confidence (a brief, specific limitations note is acceptable, especially for experimental/policy work)
 - [ ] Findings phrased differently from how they would appear in the abstract
 - [ ] Policy implications with cost-benefit reasoning
 - [ ] Concrete future research directions (not "more research is needed")
@@ -54,7 +54,7 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 - [ ] No self-congratulation ("this paper contributes to...")
 - [ ] Projects confidence in findings
 
-**Failure modes**: Adds limitations paragraph, copy-pastes abstract language, says "I leave X for future research", exceeds one page, ends with "our results contribute to the growing body of literature"
+**Failure modes**: Generic caveats dump that undermines confidence, copy-pastes abstract language, says "I leave X for future research", exceeds one page, ends with "our results contribute to the growing body of literature"
 
 ---
 
@@ -243,7 +243,7 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 **Expected**:
 - [ ] Identifies the ~15-page core contribution
 - [ ] Proposes cuts in the skill's priority order (redundant motivation, literature tangents, non-essential robustness, restated theory, verbose captions)
-- [ ] Respects REStat's length norm (45 pages at acceptance; Short Papers track noted if relevant)
+- [ ] Respects REStat's length norm (45-page limit, overlong papers returned unreviewed; Short Papers track noted if relevant)
 - [ ] Moves robustness/proofs to an online supplement while keeping a main-text reference to each
 - [ ] Does not add new content
 
