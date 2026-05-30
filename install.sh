@@ -14,7 +14,7 @@
 set -e
 
 REPO_URL="https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main"
-SKILL_FILES=("SKILL.md" "identification-strategies.md" "latex-tips.md" "review-checklist.md")
+SKILL_FILES=("SKILL.md" "identification-strategies.md" "latex-tips.md" "review-checklist.md" "specialized-tasks.md")
 
 # Parse arguments
 MODE="global"
@@ -78,7 +78,13 @@ install_skill() {
             if curl -fsSL "$REPO_URL/.claude/skills/econ-write/$file" -o "$dest_dir/$file" 2>/dev/null; then
                 true
             else
-                [ "$file" = "SKILL.md" ] && echo "  Error: Failed to download $file" && return 1
+                rm -f "$dest_dir/$file"
+                if [ "$file" = "SKILL.md" ]; then
+                    echo "  Error: Failed to download $file"
+                    return 1
+                else
+                    echo "  Warning: Failed to download $file (the skill links to it)"
+                fi
             fi
         fi
     done

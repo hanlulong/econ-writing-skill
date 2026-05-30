@@ -28,7 +28,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 - **Active voice (Rule 6):** Changed "it is found that" and "the relationship is investigated" to "I estimate" and "I find."
 - **Abstract formula (What/How/Findings/Implications):** Structured as research question, then method and data, then central finding, then implication.
 - **No throat-clearing:** Deleted the entire first sentence about decades of debate.
-- **Every word counts (Rule 5):** Cut from vague 98 words to dense 109 words that actually say something.
+- **Every word counts (Rule 5):** Cut from vague 125 words to dense 109 words that actually say something.
 - **Identification strategy named:** "shift-share instrument" gives the reader immediate methodological context.
 
 ---
@@ -139,7 +139,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 - **3-part conclusion formula (Summary/Implications/Future Research):** The revision follows all three parts in order. The original was a shapeless repetition of "our results are important."
 - **Different phrasing from abstract/introduction (Rule: Do not copy-paste):** The summary uses specific numbers (8 pp stunting, 12 pp anemia, $30/month) but frames them differently -- as a cost-per-outcome statement rather than a coefficient.
-- **No caveats section:** The conclusion projects confidence. Any methodological caveats belong in the body of the paper, near the relevant analysis -- not in the conclusion where they undermine the findings.
+- **No caveats dump:** The conclusion projects confidence rather than piling on generic caveats. A brief, specific limitations note can be appropriate (especially in experimental or policy work); here the relevant caveats live in the body, near the analysis.
 - **Cost-benefit calculation (Rule: Back-of-the-envelope is fine):** The 12:1 benefit-cost ratio gives policymakers something concrete. Winners (children/society) and losers (taxpayers) are identified.
 - **Concrete future research (Rule: Do not say "I leave X for future research"):** Two specific extensions with clear rationales, not a wish list.
 - **No speculation beyond the data (Rule):** Deleted "investments in early childhood can have lasting effects on economic outcomes" -- a claim the paper's data do not support.
@@ -174,6 +174,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 - **Every word counts (Rule 5):** Cut from 148 words to 97 words while adding more information (the small-bank heterogeneity, the regional amplification mechanism).
 - **Subject-verb-object structure (Rule: Use normal sentence structure):** Short, direct sentences replace nested subordinate clauses.
 
+---
 
 ## 7. Theory Paper Introduction
 
@@ -187,13 +188,13 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 ### AFTER
 
-> When drivers buy more comprehensive auto insurance, they drive 10-15% more miles per year (Bolduc, Boucher, and Denuit 2008). This behavioral response -- moral hazard -- erodes 20-30% of the welfare gains from insurance coverage. Yet optimal contract theory typically assumes the insurer can fully observe the change in behavior, or cannot observe it at all. In practice, insurers observe noisy signals: claims frequency, telematics data, credit scores. This paper asks: how should an insurer design contracts when monitoring is imperfect and costly? I develop a principal-agent model in which the insurer chooses both coverage and monitoring intensity. The key insight is that monitoring and coverage are complements: the optimal contract offers more generous coverage than the unmonitored benchmark precisely because monitoring reduces moral hazard, and the marginal value of monitoring increases with coverage. The model predicts that the recent adoption of telematics devices should lead to higher average coverage levels and lower premiums -- a prediction I test in Section 5 using data from a large US auto insurer.
+> When drivers gain more comprehensive auto insurance, they take more risk on the road and file more claims -- a textbook case of moral hazard (Weisburd 2015). In this setting, that behavioral response erodes an estimated 20-30% of the welfare gains from coverage. Yet optimal contract theory typically assumes the insurer can fully observe the change in behavior, or cannot observe it at all. In practice, insurers observe noisy signals: claims frequency, telematics data, credit scores. This paper asks: how should an insurer design contracts when monitoring is imperfect and costly? I develop a principal-agent model in which the insurer chooses both coverage and monitoring intensity. The key insight is that monitoring and coverage are complements: the optimal contract offers more generous coverage than the unmonitored benchmark precisely because monitoring reduces moral hazard, and the marginal value of monitoring increases with coverage. The model predicts that the recent adoption of telematics devices should lead to higher average coverage levels and lower premiums -- a prediction I test in Section 5 using data from a large US auto insurer.
 
 **(168 words -- the reader knows the puzzle, the mechanism, and the key prediction)**
 
 ### What changed
 
-- **Hook with a fact, not literature (Rule 1, Rule 2):** Replaced "The literature on moral hazard is vast" with a specific empirical fact (10-15% more miles) and its consequence (20-30% welfare erosion).
+- **Hook with a fact, not literature (Rule 1, Rule 2):** Replaced "The literature on moral hazard is vast" with a concrete, cited empirical fact (a documented moral-hazard response) and its consequence (20-30% welfare erosion).
 - **Main insight stated early (Rule 2, Triangular style):** The complementarity between monitoring and coverage -- the paper's key contribution -- appears in paragraph 1, not buried in a proposition.
 - **Concrete, not abstract (Rule 4):** Instead of "several interesting results," the revision states the specific mechanism (monitoring and coverage are complements) and a testable prediction (telematics → higher coverage, lower premiums).
 - **No "contributes to the literature" (Phrases to Delete):** The old version ends with self-congratulation. The new version ends with a testable prediction.
@@ -317,7 +318,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 >
 > These additions appear on pages 18-19 and in Appendix Tables A8-A9 of the revised manuscript.
 
-**(250 words -- quotes the concern, addresses each point with evidence, states exactly what changed and where)**
+**(261 words -- quotes the concern, addresses each point with evidence, states exactly what changed and where)**
 
 ### What changed
 
@@ -344,7 +345,7 @@ The rules referenced in each "What changed" note correspond to the principles do
 
 > Figure 1 traces the economy's response to a 25 basis point increase in the policy rate. Output falls by 0.3% on impact, reaches a trough of -0.8% after 6 quarters, and returns to steady state within 4 years. The hump-shaped response reflects the interaction between habit persistence in consumption (h = 0.7) and nominal price rigidity (Calvo parameter θ = 0.75, implying an average price duration of 4 quarters). Inflation declines by 0.15 percentage points on impact and remains below baseline for 8 quarters, consistent with the output-inflation trade-off in the New Keynesian Phillips curve.
 >
-> The transmission works primarily through the investment channel. The real interest rate rise increases the user cost of capital, causing investment to drop by 1.4% on impact -- four times the output response. Consumption, dampened by habit formation, falls by only 0.2%. These relative magnitudes are consistent with the VAR evidence in Christiano, Eichenbaum, and Evans (2005), where investment accounts for 60-70% of the output response to monetary shocks. Column 2 of Table 4 shows that the model matches 11 of 13 targeted second moments within one standard error of their empirical counterparts.
+> The transmission works primarily through the investment channel. The real interest rate rise increases the user cost of capital, causing investment to drop by 1.4% on impact -- nearly five times the output response. Consumption, dampened by habit formation, falls by only 0.2%. These relative magnitudes are consistent with the VAR evidence in Christiano, Eichenbaum, and Evans (2005), where investment accounts for 60-70% of the output response to monetary shocks. Column 2 of Table 4 shows that the model matches 11 of 13 targeted second moments within one standard error of their empirical counterparts.
 
 **(186 words -- the reader knows the shock size, the magnitudes, the timing, the mechanism, and the model fit)**
 

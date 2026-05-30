@@ -5,6 +5,7 @@ Different identification strategies and paper types require different narrative 
 ---
 
 ## Randomized Controlled Trials (RCTs)
+- Intuition: randomization makes treatment independent of potential outcomes, so treatment and control groups are comparable in expectation and a simple difference in means is unbiased for the average treatment effect
 - Lead with the intervention and its policy relevance
 - Describe randomization mechanism and balance tests early
 - Emphasize intent-to-treat (ITT) as main specification; discuss compliance and LATE separately
@@ -17,11 +18,13 @@ Different identification strategies and paper types require different narrative 
 ## Difference-in-Differences (DiD)
 - Lead with the policy change or natural experiment that generates treatment variation
 - The parallel trends assumption is the core of your identification -- devote a full paragraph to it
+- Intuition: under parallel trends (and no anticipation), the control group's before-after change is the counterfactual change the treated group would have experienced absent treatment, so the second difference nets out fixed group differences and shocks common to both, leaving the effect on the treated (ATT, not the ATE)
 - Show pre-trends visually (event study plot is mandatory for modern DiD papers)
+- A flat, non-significant pre-trend does not prove parallel counterfactual trends, and pre-tests are often underpowered -- report sensitivity to violations of parallel trends using HonestDiD (Rambachan and Roth 2023)
 - Discuss treatment timing variation and staggered adoption if relevant
 - If using staggered DiD, address recent econometric concerns (Goodman-Bacon, Sun and Abraham, Callaway and Sant'Anna)
 - For staggered treatment: report the decomposition of the two-way fixed effects estimate (Goodman-Bacon 2021) to show which comparisons drive the result
-- Use appropriate estimators: Callaway and Sant'Anna (2021) for heterogeneous treatment effects over time, Sun and Abraham (2021) for event-study specifications, de Chaisemartin and D'Haultfoeuille (2020) for the no-sign-reversal assumption
+- Use an appropriate estimator for the setting: Callaway and Sant'Anna (2021) for heterogeneous effects over event time, Sun and Abraham (2021) for event-study specifications, and de Chaisemartin and D'Haultfoeuille (2020), whose estimator guards against the sign reversal that TWFE can produce under heterogeneous effects
 - Present results from BOTH the traditional TWFE and the robust estimator. If they differ, explain why (negative weights, treatment effect heterogeneity)
 - Show the event-study plot from the robust estimator, not just the TWFE version
 - Report results with and without covariates to show sensitivity
@@ -29,16 +32,18 @@ Different identification strategies and paper types require different narrative 
 - Address compositional changes in treated vs. control groups over time
 
 ## Instrumental Variables (IV)
+- Intuition: a valid instrument moves the endogenous regressor only through a channel unrelated to the outcome's error, so 2SLS uses just that exogenous variation; under monotonicity it recovers a local average treatment effect (LATE) for the compliers whose behavior the instrument shifts, which generally differs from both OLS and the population ATE
 - Name the instrument in the first paragraph of the introduction
-- Devote a full paragraph to instrument relevance (first stage F-statistic; report the Kleibergen-Paap or effective F-statistic)
+- Devote a full paragraph to instrument relevance: report the effective (Montiel Olea and Pflueger 2013) or Kleibergen-Paap F-statistic. Treat the old "F > 10" rule as a minimal screen, not a guarantee
 - Devote a full paragraph to the exclusion restriction -- argue it economically, not just statistically
 - Report both OLS and IV estimates; explain why they differ (measurement error, selection, LATE vs. ATE)
 - Discuss what the complier population looks like -- who are the marginal individuals whose behavior is shifted by the instrument?
-- If the instrument is weak (F < 10), use Anderson-Rubin confidence intervals
+- For weak or moderate instruments, report Anderson-Rubin confidence intervals (robust to any instrument strength); for single-instrument t-tests, apply the tF standard-error adjustment of Lee, McCrary, Moreira, and Porter (2022)
 - Address the monotonicity assumption if estimating LATE
 - Common instruments to discuss carefully: Bartik/shift-share (Goldsmith-Pinkham, Sorkin, and Swift 2020), judge/examiner leniency, historical/geographic instruments
 
 ## Regression Discontinuity (RDD)
+- Intuition: if potential outcomes vary smoothly through the cutoff, units just above and just below are comparable in everything except treatment, so a jump in the outcome at the threshold is the causal effect -- but only locally, at the cutoff (sharp RDD) or for compliers at the cutoff (fuzzy RDD)
 - Lead with the running variable and the cutoff
 - Show the discontinuity visually (RD plot is mandatory -- this is your "figure 1")
 - Discuss manipulation of the running variable (McCrary/density test)
@@ -49,6 +54,7 @@ Different identification strategies and paper types require different narrative 
 - Address any other discontinuities at the cutoff that might confound your estimates
 
 ## Synthetic Control
+- Intuition: a weighted average of untreated donor units (non-negative weights summing to one), chosen so the synthetic unit tracks the treated unit's pre-treatment path and predictors, proxies its no-treatment counterfactual; given close pre-period fit, the post-intervention gap between the actual and synthetic series is the estimated effect
 - Lead with the treated unit and the event/policy
 - Describe donor pool selection criteria (why these comparison units?)
 - Show pre-treatment fit visually -- this is your identification (if pre-treatment fit is poor, the method fails)
@@ -75,6 +81,7 @@ Different identification strategies and paper types require different narrative 
 - Counterfactual simulations are the payoff -- present them prominently
 - Discuss sensitivity to key assumptions: what if risk aversion is different? What if agents have different information?
 - Compare structural estimates to reduced-form estimates where possible for credibility
+- Report the sensitivity of key estimates to the identifying moments (Andrews, Gentzkow, and Shapiro 2017) to show which moments drive each parameter
 
 ## Descriptive and Measurement Papers
 - Lead with why the measurement/description matters for economics
@@ -85,6 +92,7 @@ Different identification strategies and paper types require different narrative 
 - Relate your descriptive findings to existing theoretical predictions
 
 ## Bunching Estimation (Saez, Kleven)
+- Intuition: a kink changes the marginal incentive (the slope of the choice set) and a notch changes the level; either way, agents who would have optimized just past the threshold relocate to it, and the excess mass relative to a smooth counterfactual density reveals how strongly behavior responds -- which maps to a structural elasticity under an optimization model
 - Lead with the policy kink or notch that generates the bunching
 - Show the bunching visually -- the bunching plot is your central figure
 - Describe the counterfactual distribution and how it is estimated
@@ -97,6 +105,7 @@ Different identification strategies and paper types require different narrative 
 ## Shift-Share / Bartik Instruments
 - Name the shift-share instrument explicitly in the introduction
 - Describe both components clearly: the "shares" (exposure weights) and the "shifts" (national/sectoral shocks)
+- Intuition: the instrument isolates the variation in the regressor driven by pre-period industry shares interacting with common sectoral shocks; it is valid only if that predicted variation is uncorrelated with the local error -- either because the initial shares are as-good-as-randomly assigned, or because the many shocks are themselves quasi-random
 - State which source of variation you rely on for identification:
   - If relying on exogeneity of shares: argue why pre-period industry composition is exogenous (Goldsmith-Pinkham, Sorkin, and Swift 2020)
   - If relying on exogeneity of shifts: argue why the shocks are as-good-as-random (Borusyak, Hull, and Jaravel 2022)
@@ -109,6 +118,7 @@ Different identification strategies and paper types require different narrative 
 - Lead with the event and its economic significance
 - Present the event study plot as the central figure
 - Include pre-event coefficients to assess pre-trends (at least 3-4 pre-periods)
+- Intuition: identification is the dynamic form of parallel trends (plus no anticipation) -- pre-event coefficients near zero are consistent with, but do not prove, treated and control units evolving together absent the event; post-event coefficients then trace the dynamic effect relative to the omitted base period. Under staggered timing with heterogeneous effects, raw TWFE leads/lags can be contaminated (Sun and Abraham 2021), so use a robust estimator
 - Normalize one pre-period coefficient to zero (typically t = -1)
 - Discuss the interpretation of post-event dynamics: is the effect immediate, gradual, or temporary?
 - For staggered events: use appropriate estimators (Sun and Abraham, Callaway and Sant'Anna) and discuss treatment effect heterogeneity
@@ -117,7 +127,7 @@ Different identification strategies and paper types require different narrative 
 
 ## Machine Learning for Causal Inference
 - Clearly state whether ML is used for prediction, heterogeneity, or causal estimation
-- For heterogeneous treatment effects (Causal Forests, Athey and Imbens 2016): describe the sample splitting procedure and how overfitting is avoided
+- For heterogeneous treatment effects (Causal Forests, Wager and Athey 2018, building on the honest sample-splitting trees of Athey and Imbens 2016): describe the sample splitting procedure and how overfitting is avoided
 - For double/debiased ML (Chernozhukov et al. 2018): explain the cross-fitting procedure and why it is necessary
 - Report traditional standard errors and confidence intervals -- ML does not change inference requirements
 - Discuss the interpretability trade-off: more flexible models may sacrifice economic intuition

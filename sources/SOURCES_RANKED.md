@@ -9,9 +9,9 @@
 
 | Rank | Title | Author(s) | Institution | PDF File | Source URL | Notes |
 |------|-------|-----------|-------------|----------|-----------|-------|
-| 1 | Writing Tips for Ph.D. Students | John H. Cochrane | U Chicago Booth / Hoover Institution | `01_cochrane_writing_tips.pdf` | https://www.fma.org/assets/docs/membercontent/writing_cochrane.pdf | Most-cited writing guide in economics. Cochrane's "all-time most-read paper." |
+| 1 | Writing Tips for Ph.D. Students | John H. Cochrane | U Chicago Booth / Hoover Institution | `01_cochrane_writing_tips.pdf` | https://www.fma.org/assets/docs/membercontent/writing_cochrane.pdf | One of the most widely cited and recommended writing guides in economics; Cochrane's self-described "all-time most-read paper." |
 | 2 | Economical Writing (Book) | Deirdre N. McCloskey | UIC / U Chicago | `02_mcloskey_economical_writing.pdf` | https://www.studyingeconomics.ac.uk/uploads/Economical%20Writing%20by%20Deirdre%20McCloskey.pdf | 35 rules for clear prose. Foundational text in economics writing. |
-| 3 | Four Steps to an Applied Micro Paper | Jesse M. Shapiro | Harvard (formerly Brown) | `06_shapiro_four_steps.pdf` | https://www.brown.edu/Research/Shapiro/pdfs/foursteps.pdf | Concise, actionable. Clark Medal winner. |
+| 3 | Four Steps to an Applied Micro Paper | Jesse M. Shapiro | Harvard (formerly Brown) | `06_shapiro_four_steps.pdf` | https://www.brown.edu/Research/Shapiro/pdfs/foursteps.pdf | Concise, actionable. Shapiro is a 2021 MacArthur Fellow. |
 | 4 | The Introduction Formula | Keith Head | UBC Sauder | `08_head_introduction_formula.pdf` | https://blogs.ubc.ca/khead/research/research-advice/formula | Hook-Question-Antecedents-Value Added-Roadmap formula. Universally adopted. |
 | 5 | Ten Most Important Rules of Writing Your Job Market Paper | Claudia Goldin & Lawrence F. Katz | Harvard Economics | `05_goldin_katz_ten_rules.pdf` | https://economics.ucla.edu/wp-content/uploads/2016/10/Goldin.pdf | Nobel laureate (Goldin). Harvard job market standard. |
 | 6 | Writing Tips for Economics Research Papers | Plamen Nikolov | Binghamton / Harvard | `03_nikolov_writing_tips.pdf` | https://docs.iza.org/dp16276.pdf | Most comprehensive single guide. CC-BY 4.0 licensed. |
@@ -96,7 +96,8 @@
 ## Notes on Authority
 
 - **Nobel Laureates**: Claudia Goldin (2023), Michael Kremer (2019)
-- **Clark Medal Winners**: Jesse Shapiro (2022)
+- **Clark Medal Winners**: Matthew Gentzkow (2014, co-author of "Code and Data for the Social Sciences"); Amy Finkelstein (2012, AER: Insights founding editor)
+- **MacArthur Fellows**: Jesse Shapiro (2021)
 - **Journal Editors/Associate Editors**: Marc Bellemare (AJAE), Timothy Beatty (AJAE), Jay Shimshack (JEEM), Amy Finkelstein (AER: Insights founding editor)
 - **Presidents/CEA**: N. Gregory Mankiw (CEA Chair)
 - **Institutional Authority**: Harvard, MIT, Stanford, Chicago, LSE, Princeton, Berkeley, Columbia, Yale, Duke
