@@ -105,7 +105,10 @@ if [ "$MODE" = "global" ]; then
         install_skill "$HOME/.claude/skills/econ-write" "Claude Code (global)" "$SCRIPT_DIR/.claude/skills/econ-write"
     fi
     if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "codex" ]; then
-        install_skill "$HOME/.codex/skills/econ-write" "Codex (global)" "$SCRIPT_DIR/.claude/skills/econ-write"
+        # Codex reads user-scope skills from ~/.agents/skills (current convention);
+        # also install to ~/.codex/skills for older Codex builds that still use it.
+        install_skill "$HOME/.agents/skills/econ-write" "Codex (global)" "$SCRIPT_DIR/.claude/skills/econ-write"
+        install_skill "$HOME/.codex/skills/econ-write" "Codex (global, legacy path)" "$SCRIPT_DIR/.claude/skills/econ-write"
     fi
 
     echo ""

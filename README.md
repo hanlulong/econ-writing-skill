@@ -70,7 +70,7 @@ Install globally for all projects with a single command:
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
 ```
 
-This installs the skill to `~/.claude/skills/econ-write/` (Claude Code) and `~/.codex/skills/econ-write/` (Codex). The skill is immediately available in all your projects.
+This installs the skill to `~/.claude/skills/econ-write/` (Claude Code) and `~/.agents/skills/econ-write/` (Codex; also `~/.codex/skills/econ-write/` for older Codex builds). The skill is immediately available in all your projects.
 
 ### Install from Claude Code
 
