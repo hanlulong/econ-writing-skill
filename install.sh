@@ -14,7 +14,7 @@
 set -e
 
 REPO_URL="https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main"
-SKILL_FILES=("SKILL.md" "identification-strategies.md" "latex-tips.md" "review-checklist.md")
+SKILL_FILES=("SKILL.md" "identification-strategies.md" "latex-tips.md" "review-checklist.md" "specialized-tasks.md")
 
 # Parse arguments
 MODE="global"

@@ -38,7 +38,7 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 
 - **Paper review and audit mode** -- Simulated 3-reviewer feedback (Methodologist, Field Expert, Writing Critic) with a 100-point scoring rubric
 - **Pre-submission checklist** -- 24-item checklist covering content, style, and modern standards
-- **Evaluation test suite** -- 13 test cases for benchmarking skill output quality
+- **Evaluation test suite** -- 18 test cases for benchmarking skill output quality
 
 ### Academic Workflow
 
@@ -117,6 +117,7 @@ curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/identification-strategies.md -o ~/.claude/skills/econ-write/identification-strategies.md
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/latex-tips.md -o ~/.claude/skills/econ-write/latex-tips.md
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/review-checklist.md -o ~/.claude/skills/econ-write/review-checklist.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/specialized-tasks.md -o ~/.claude/skills/econ-write/specialized-tasks.md
 ```
 
 #### Project-specific
@@ -197,7 +198,7 @@ The skill works in four modes:
 
 ## What's Inside
 
-The skill includes four files:
+The skill includes five files:
 
 ### `SKILL.md` (main skill file)
 
@@ -226,6 +227,10 @@ Practical LaTeX guidance for economics papers: document structure, essential pac
 
 Structured paper review framework with quick-scan mode (5-minute check), deep-review mode (3 simulated reviewers: Methodologist, Field Expert, Writing Critic), anti-AI detection checklist, 100-point pre-submission scoring rubric, and journal fit assessment for top-5 vs. field journal targeting.
 
+### `specialized-tasks.md`
+
+Task-specific instructions for lower-frequency writing jobs that build on the core skill: conference and seminar presentations, survey/review papers (JEL, JEP, Handbook chapters), converting a working paper to a journal version, grant proposals (NSF, ERC, institutional), writing for non-academic audiences (policy briefs, op-eds), and referee responses for revise-and-resubmit. Splitting these out of `SKILL.md` keeps the always-loaded core leaner.
+
 ---
 
 ## Sources and Acknowledgements
@@ -245,7 +250,7 @@ This skill synthesizes advice from **50+ authoritative sources**. The top 10 sou
 | 9 | Writing Papers: A Checklist | Michael Kremer | Harvard / UChicago |
 | 10 | An Economist's Guide to Visualizing Data | Jonathan A. Schwabish | JEP (AEA) |
 
-Notable authorities include **Nobel laureates** (Goldin 2023, Kremer 2019), a **Clark Medal winner** (Gentzkow 2014), a **MacArthur Fellow** (Shapiro 2021), and editors of leading journals (Bellemare at AJAE, Beatty at AJAE, Shimshack at JEEM).
+Notable authorities include **Nobel laureates** (Goldin 2023, Kremer 2019), **Clark Medal winners** (Gentzkow 2014, Finkelstein 2012), a **MacArthur Fellow** (Shapiro 2021), and editors of leading journals (Bellemare at AJAE, Beatty at AJAE, Shimshack at JEEM).
 
 The full ranked list of all 50+ sources with links, tiers, and notes is available in [`sources/SOURCES_RANKED.md`](sources/SOURCES_RANKED.md).
 
