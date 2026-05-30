@@ -9,7 +9,7 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 **Prompt**: "Write an abstract for a paper that uses DiD to study the effect of paid family leave on maternal labor supply"
 
 **Expected**:
-- [ ] Under 150 words
+- [ ] 100-150 words (does not exceed 150)
 - [ ] Contains a concrete effect size (coefficient or percentage)
 - [ ] Names the identification strategy (difference-in-differences)
 - [ ] Follows 4-part formula: what/how/findings/implications
@@ -31,7 +31,7 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 - [ ] Main result with magnitude stated in the introduction
 - [ ] Results occupy ~25-30% of the introduction
 - [ ] Literature review tells a story (not a list)
-- [ ] Literature review appears after results section
+- [ ] Literature review appears within the introduction, after the main-results paragraphs and before the roadmap (not as a separate section)
 - [ ] Ends with a roadmap paragraph
 - [ ] 3-5 pages total
 - [ ] Active voice, no throat-clearing
@@ -96,7 +96,7 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 **Prompt**: "Write a paragraph about how minimum wage affects employment"
 
 **Expected**:
-- [ ] No banned words: "delve", "landscape", "multifaceted", "notably", "crucial", "comprehensive"
+- [ ] No banned words: "delve", "landscape", "multifaceted", "notably", "crucial", "comprehensive", "leverage" (as verb), "pivotal", "groundbreaking", "shed light on", "pave the way"
 - [ ] Sentence length varies (mix of short and long)
 - [ ] Uses field-specific terms naturally (e.g., "disemployment effects", "extensive margin")
 - [ ] Contains at least one parenthetical aside or em-dash
@@ -218,6 +218,82 @@ Test prompts and expected behaviors for evaluating the econ-write skill. Each te
 - [ ] Discusses sensitivity to key parameter values
 
 **Failure modes**: Presents results as regression coefficients, uses applied-micro conventions, no model fit discussion, no calibration table
+
+---
+
+## Test 14: Presentation / Job Talk Slides
+
+**Prompt**: "Outline job-talk slides for my DiD paper on the minimum wage and employment"
+
+**Expected**:
+- [ ] Main result appears within the first ~3 slides (first 10 minutes)
+- [ ] No opening literature-review or motivation slide
+- [ ] Slides built around a key table, figure, or equation -- not full-sentence bullet points
+- [ ] Result-first structure ("Look at Table 1")
+- [ ] Backup-slide strategy mentioned for anticipated questions
+
+**Failure modes**: Opens with motivation/literature, bullet-point-heavy slides, main result buried past the first few slides
+
+---
+
+## Test 15: Working Paper to Journal Conversion
+
+**Prompt**: "I have a 70-page working paper. Help me cut it to a journal submission for REStat"
+
+**Expected**:
+- [ ] Identifies the ~15-page core contribution
+- [ ] Proposes cuts in the skill's priority order (redundant motivation, literature tangents, non-essential robustness, restated theory, verbose captions)
+- [ ] Respects REStat's length norm (45 pages at acceptance; Short Papers track noted if relevant)
+- [ ] Moves robustness/proofs to an online supplement while keeping a main-text reference to each
+- [ ] Does not add new content
+
+**Failure modes**: Uses the wrong REStat page limit, fails to identify a core, cuts nothing concrete, leaves orphaned appendix references
+
+---
+
+## Test 16: Survey / Review Paper
+
+**Prompt**: "Draft the introduction and section outline for a JEP survey on the economics of remote work"
+
+**Expected**:
+- [ ] States an organizing framework in the introduction
+- [ ] Sections organized by research question or theme, NOT by chronology or method
+- [ ] Builds a narrative about where the field stands and where it should go
+- [ ] Minimal math; accessible to all economists (JEP convention)
+- [ ] Not an annotated bibliography
+
+**Failure modes**: Lists papers without a framework, organizes by method/chronology, heavy math, no argument about the state of the field
+
+---
+
+## Test 17: Policy Brief / Op-Ed
+
+**Prompt**: "Turn my finding -- a 0.3 SD test-score gain from smaller classes -- into a 600-word op-ed"
+
+**Expected**:
+- [ ] Opens with the policy takeaway, not the research question
+- [ ] No standard errors, p-values, confidence intervals, or Greek letters
+- [ ] Magnitude translated into everyday terms
+- [ ] One concrete example or anecdote
+- [ ] Ends with a concrete recommendation, not "more research is needed"
+- [ ] Within the length limit
+
+**Failure modes**: Leads with methods, includes regression jargon, vague magnitude, ends with "more research is needed", exceeds length
+
+---
+
+## Test 18: Paper Audit (Three-Reviewer)
+
+**Prompt**: "Review this introduction: 'This paper studies education and wages. The literature has long debated this. We use data and find effects. Section 2 describes the data...'"
+
+**Expected**:
+- [ ] Applies the three reviewer perspectives (Methodologist, Field Expert, Writing Critic)
+- [ ] Component scores toward a /100 total (per review-checklist.md)
+- [ ] Lists the top 3 fixes first
+- [ ] Flags the buried lead, the literature-first opening, and the absence of a concrete result/magnitude
+- [ ] Gives concrete fix examples, not just diagnoses
+
+**Failure modes**: Single undifferentiated review, no scoring, misses the missing-magnitude problem, vague feedback
 
 ---
 
