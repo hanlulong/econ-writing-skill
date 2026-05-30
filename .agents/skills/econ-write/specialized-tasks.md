@@ -44,13 +44,14 @@ All CORE PRINCIPLES, STYLE RULES, and section formulas in [SKILL.md](SKILL.md) s
 10. Common mistake: writing a grant proposal like a finished paper. A proposal sells a research PLAN, not completed findings. Emphasize what you WILL learn, not what you already know
 
 ## When asked to write for a NON-ACADEMIC AUDIENCE (policy brief, op-ed, blog post):
+These ship as FINISHED prose: do not leave [AUTHOR: ...] placeholders for the core content -- if a number is unknown, supply a defensible illustrative value and add one short note after the piece. Treat the word limit as binding: self-trim to it; never append a note telling the reader to cut.
 1. Lead with the policy implication, not the research question
-2. State the finding in plain language -- no jargon, no Greek letters, no regression terminology
+2. State the finding in plain language -- no jargon, no Greek letters, no regression terminology (avoid "standard deviations", "elasticity", "extensive margin")
 3. Use one concrete example or anecdote to illustrate the mechanism
-4. Magnitude in everyday terms: "equivalent to $X per household" or "the same as adding one teacher per school"
+4. Translate the magnitude into everyday terms yourself -- e.g., a 0.3 SD test-score gain is roughly a 12-percentile-point move, about a third of the Black-white test-score gap, or a fraction of a year of learning -- not "0.3 standard deviations"
 5. One figure maximum. It should be self-explanatory without reading the text
-6. Keep it under 1,500 words for a policy brief, under 800 for an op-ed
-7. Do NOT cite standard errors, p-values, or confidence intervals. Instead: "The effect is large and precisely estimated" or "We can confidently rule out effects smaller than X"
+6. Keep it under 1,500 words for a policy brief, under 800 for an op-ed -- and actually hit that count
+7. Do NOT cite standard errors, p-values, or confidence intervals. Convey precision in words ("the effect is large and consistent across schools"), varying the phrasing -- do not reuse a stock template sentence verbatim
 8. End with a concrete policy recommendation, not "more research is needed"
 
 ## When asked to write a REFEREE RESPONSE:
