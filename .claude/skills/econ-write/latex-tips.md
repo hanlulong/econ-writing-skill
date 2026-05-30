@@ -7,7 +7,7 @@ Practical LaTeX guidance for writing, formatting, and submitting economics paper
 ```latex
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{setspace}\doublespacing  % most journals require double-spacing
+\usepackage{setspace}\doublespacing  % many journals require double or 1.5 spacing -- check target journal
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx,float}
 \usepackage{booktabs,threeparttable}
@@ -117,7 +117,7 @@ This avoids inconsistencies like "table 1" vs "Table 1" throughout the paper.
 
 | Journal | Key requirements |
 |---------|-----------------|
-| AER | 12pt, double-spaced, figures/tables at end, anonymous |
+| AER | 11pt or 12pt, 1.5 spacing, 1-inch margins; ~40-45 pp incl. everything; single-blind (names on page 1) |
 | QJE | Similar to AER; online appendix as separate PDF |
 | Econometrica | Own `ecta` document class; strict formatting |
 | REStud | `restud` class available; figures at end |
@@ -125,7 +125,7 @@ This avoids inconsistencies like "table 1" vs "Table 1" throughout the paper.
 
 **Anonymous submissions:** remove author names and self-citations that reveal identity. Use `\thanks{}` sparingly. Add `\date{}` to suppress the date.
 
-**Word counts:** run `texcount paper.tex` from the command line. Most top-5 journals expect 8,000--12,000 words for the main text.
+**Word counts:** run `texcount paper.tex` from the command line. Top-5 journals state length in pages, not words: AER ~40-45 pp (avg 35-36 typeset pp); Econometrica and REStud cap at 45 pp (12pt, 1.5 spacing); QJE and JPE set no hard limit. As a rough proxy a 40-page double-spaced manuscript is ~10,000 words -- but check each journal's current page-based guidelines.
 
 **Online appendix:** create a separate file (`appendix.pdf`) with its own title page. Cross-reference from the main text: "see Online Appendix Table A1."
 

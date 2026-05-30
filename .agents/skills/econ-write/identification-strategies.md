@@ -18,6 +18,7 @@ Different identification strategies and paper types require different narrative 
 - Lead with the policy change or natural experiment that generates treatment variation
 - The parallel trends assumption is the core of your identification -- devote a full paragraph to it
 - Show pre-trends visually (event study plot is mandatory for modern DiD papers)
+- A flat, non-significant pre-trend does not prove parallel counterfactual trends, and pre-tests are often underpowered -- report sensitivity to violations of parallel trends using HonestDiD (Rambachan and Roth 2023)
 - Discuss treatment timing variation and staggered adoption if relevant
 - If using staggered DiD, address recent econometric concerns (Goodman-Bacon, Sun and Abraham, Callaway and Sant'Anna)
 - For staggered treatment: report the decomposition of the two-way fixed effects estimate (Goodman-Bacon 2021) to show which comparisons drive the result
@@ -30,11 +31,11 @@ Different identification strategies and paper types require different narrative 
 
 ## Instrumental Variables (IV)
 - Name the instrument in the first paragraph of the introduction
-- Devote a full paragraph to instrument relevance (first stage F-statistic; report the Kleibergen-Paap or effective F-statistic)
+- Devote a full paragraph to instrument relevance: report the effective (Montiel Olea and Pflueger 2013) or Kleibergen-Paap F-statistic. Treat the old "F > 10" rule as a minimal screen, not a guarantee
 - Devote a full paragraph to the exclusion restriction -- argue it economically, not just statistically
 - Report both OLS and IV estimates; explain why they differ (measurement error, selection, LATE vs. ATE)
 - Discuss what the complier population looks like -- who are the marginal individuals whose behavior is shifted by the instrument?
-- If the instrument is weak (F < 10), use Anderson-Rubin confidence intervals
+- For weak or moderate instruments, report Anderson-Rubin confidence intervals (robust to any instrument strength); for single-instrument t-tests, apply the tF standard-error adjustment of Lee, McCrary, Moreira, and Porter (2022)
 - Address the monotonicity assumption if estimating LATE
 - Common instruments to discuss carefully: Bartik/shift-share (Goldsmith-Pinkham, Sorkin, and Swift 2020), judge/examiner leniency, historical/geographic instruments
 
@@ -75,6 +76,7 @@ Different identification strategies and paper types require different narrative 
 - Counterfactual simulations are the payoff -- present them prominently
 - Discuss sensitivity to key assumptions: what if risk aversion is different? What if agents have different information?
 - Compare structural estimates to reduced-form estimates where possible for credibility
+- Report the sensitivity of key estimates to the identifying moments (Andrews, Gentzkow, and Shapiro 2017) to show which moments drive each parameter
 
 ## Descriptive and Measurement Papers
 - Lead with why the measurement/description matters for economics
@@ -117,7 +119,7 @@ Different identification strategies and paper types require different narrative 
 
 ## Machine Learning for Causal Inference
 - Clearly state whether ML is used for prediction, heterogeneity, or causal estimation
-- For heterogeneous treatment effects (Causal Forests, Athey and Imbens 2016): describe the sample splitting procedure and how overfitting is avoided
+- For heterogeneous treatment effects (Causal Forests, Wager and Athey 2018, building on the honest sample-splitting trees of Athey and Imbens 2016): describe the sample splitting procedure and how overfitting is avoided
 - For double/debiased ML (Chernozhukov et al. 2018): explain the cross-fitting procedure and why it is necessary
 - Report traditional standard errors and confidence intervals -- ML does not change inference requirements
 - Discuss the interpretability trade-off: more flexible models may sacrifice economic intuition

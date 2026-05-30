@@ -17,7 +17,7 @@ When the user asks you to write or rewrite economics text, follow ALL the princi
 "Keep track of what your reader knows and doesn't know." (Cochrane) Most readers are busy, impatient, and will skim. Make it easy for them to find your basic result quickly. Write for PhD economists who are NOT experts in your specific field.
 
 ## 2. Triangular / Newspaper Style
-Put the most important information FIRST, then fill in details. NEVER write in "joke" or "novel" style where the punchline comes at the end. "Get to the point. Your reader's time is precious." (Shapiro)
+Put the most important information FIRST, then fill in details. NEVER write in "joke" or "novel" style where the punchline comes at the end. Get to the point; do not bury the lead -- your reader's time is precious (Shapiro, Varian).
 
 ## 3. One Central Contribution
 Every paper must have ONE central, novel contribution. Write it down in one paragraph. If you cannot state it concisely, you have not figured it out yet. Everything in the paper serves this one contribution.
@@ -32,7 +32,7 @@ Say what you FIND, not what you LOOK for. Give actual coefficients, actual magni
 Write "I find that..." not "It was found that..." Use present tense for results and when citing other work: "Fama and French (1993) find that..." Keep tense consistent throughout.
 
 ## 7. Simple > Complex
-Use short, common words. "Use" not "utilize." "Several" not "diverse." "People" not "agents." The less math, the better -- even in theory papers. Simpler estimation techniques are better. Do not dress up papers to look impressive -- the opposite is true.
+Use short, common words. "Use" not "utilize." "Several" not "diverse." "People" not "agents." Use no more math than the insight requires, and prefer simpler estimators -- though in theory and structural work the formalism is the contribution, so do not under-formalize just to look accessible. Do not dress up papers to look impressive -- the opposite is true.
 
 ---
 
@@ -67,7 +67,7 @@ Write the abstract LAST, after the introduction is complete. Extract key sentenc
 
 # WRITING THE INTRODUCTION
 
-The introduction determines 75% of whether a paper is accepted or rejected. (Bellemare) Write it first, rewrite it every time you work on the paper, expect to revise it hundreds of times.
+The introduction is where most accept/reject decisions are effectively made -- it is the highest-leverage part of the paper (Bellemare). Write it first, rewrite it every time you work on the paper, expect to revise it hundreds of times.
 
 ## The Introduction Formula (Head / Evans / Bellemare)
 
@@ -136,7 +136,7 @@ Outline the paper's organization. CUSTOMIZE it to your specific paper -- do not 
 # WRITING THE MODEL SECTION (Theory and Structural Papers)
 
 ## Core Principles (Glaeser, Varian)
-- "Start with an example. A good example is worth a thousand theorems." (Glaeser)
+- Start with an example, and use the simplest one that generates the key insight (Varian). Glaeser likewise urges starting from "an interesting real world puzzle," not a literature gap
 - Use the simplest model that generates the key insight. If a two-period model works, do not use infinite horizon
 - Every assumption should earn its place: explain which are essential to the result and which are simplifying
 
@@ -192,11 +192,7 @@ Outline the paper's organization. CUSTOMIZE it to your specific paper -- do not 
 - Do NOT bury important data limitations in footnotes -- state them in the text
 
 ## Descriptive Statistics Tables
-- Report N, mean, SD, min, max for key variables
-- Separate panels for treatment vs. control groups when applicable
-- Report balance tests in a separate table for RCTs and quasi-experiments
-- Define every variable in the table notes (not just in the text)
-- Round to 2-3 meaningful decimal places
+- Present a summary statistics table (see Tables and Figures > Descriptive Statistics Tables below for formatting), and report balance tests in a separate table for RCTs and quasi-experiments
 
 ---
 
@@ -297,11 +293,11 @@ Cut these on sight -- they add no information:
 - One idea per paragraph
 - Topic sentence first
 - Paragraphs should flow logically from one to the next
-- Minimize forward references ("As we will see in Table 6") and backward references ("Recall from Section 2 that...") -- these often signal that material is in the wrong order. If a reader needs information now, present it now. Brief backward references to earlier results are acceptable when building on them
+- Minimize narrative forward references ("As we will see in Table 6") and backward references ("Recall from Section 2 that...") -- these often signal that material is in the wrong order. If a reader needs information now, present it now. This does NOT apply to standard cross-references to numbered tables, figures, and appendix items, which should always be referenced from the main text. Brief backward references to earlier results are acceptable when building on them
 
 ## Avoiding AI-Generated Writing Patterns
 AI-assisted writing often has telltale patterns. Eliminate these:
-- **Banned words** (in addition to the phrases listed under Phrases to Delete above): Never use "delve", "landscape", "multifaceted", "notably", "leverage" (as verb meaning "use"), "robust" (outside its statistical meaning), "pivotal", "groundbreaking", "shed light on", "pave the way"
+- **Banned words** (in addition to the phrases listed under Phrases to Delete above): Never use "delve", "landscape", "multifaceted", "notably", "crucial", "comprehensive", "furthermore", "leverage" (as verb meaning "use"), "robust" (outside its statistical meaning), "pivotal", "groundbreaking", "shed light on", "pave the way"
 - **Vary sentence length**: Mix short sentences (8-12 words) with longer ones (15-25 words). AI tends toward uniform medium-length sentences
 - **Use field-specific vocabulary naturally**: "extensive margin" in labor, "pass-through" in IO, "treatment on the treated" in program evaluation. Generic phrasing signals AI
 - **Include parenthetical asides and em-dashes** -- real academics use these for qualifications and side notes
@@ -313,6 +309,8 @@ AI-assisted writing often has telltale patterns. Eliminate these:
 ---
 
 # TABLES AND FIGURES
+
+*For LaTeX formatting of tables, figures, and bibliographies, see [latex-tips.md](latex-tips.md).*
 
 ## Regression Tables
 - Every table must have a self-contained caption explaining the regression, variables, and what is shown
@@ -329,6 +327,7 @@ AI-assisted writing often has telltale patterns. Eliminate these:
 - Separate panels for treatment vs. control groups (if applicable)
 - Balance tests: report difference in means with p-values in a separate column or table
 - Define every variable in the table notes
+- Round to 2-3 meaningful decimal places
 
 ## Figures
 - Good figures communicate patterns much better than big tables
@@ -364,6 +363,8 @@ The three most important things: Identification, Identification, Identification.
 4. Explain the economics of why your instruments are valid
 5. Describe the source of variation driving your estimates for every number you present
 
+*For strategy-specific narrative structure (RCT, DiD/staggered, IV, RDD, Synthetic Control/DiD, Bunching, Shift-Share, Event Study, ML, Structural), see [identification-strategies.md](identification-strategies.md).*
+
 ## Results Presentation
 - Start with the main result. No warmup exercises
 - Follow with graphs and tables giving intuition
@@ -386,12 +387,17 @@ The three most important things: Identification, Identification, Identification.
 - Relate to prior literature: does the null contradict or refine previous findings?
 
 ## Common Empirical Mistakes
-- R-squared interpretation depends on context: in cross-sectional micro regressions (wages, health), 0.1-0.3 is typical; high R-squared (> 0.8) usually signals mechanical relationships -- you included "right shoes" to predict "left shoes" (Cochrane). In time-series or macro, high R-squared may be appropriate. Never judge a paper by R-squared; the coefficient on X and its standard error are what matter
+- R-squared interpretation depends on context: in cross-sectional micro regressions (wages, health), 0.1-0.3 is typical; an R-squared near 1 in a cross-section often signals a mechanical relationship -- you included "right shoes" to predict "left shoes" (Cochrane). In time-series or macro, high R-squared may be appropriate. Never judge a paper by R-squared; the coefficient on X and its standard error are what matter
 - Do not include all determinants of Y as controls. Education's effect works partly through industry
 - Do not confuse instruments with controls
 - Do not claim causality without clearly explaining your identification strategy
 - Do not ignore reverse causality
 - Always address: (i) reverse causality, (ii) unobserved heterogeneity, (iii) measurement error
+
+## Standard Errors and Inference
+- Cluster standard errors at the level of treatment assignment (not the most granular unit), and state the clustering level explicitly
+- With few clusters (rule of thumb: fewer than ~40, and worse when cluster sizes are unbalanced), cluster-robust standard errors over-reject -- use the wild cluster bootstrap (Cameron, Gelbach, and Miller 2008) or randomization inference instead of asymptotic standard errors
+- For randomized or design-based settings, randomization (permutation) inference is often more credible than relying on asymptotic standard errors
 
 ## Heterogeneity Analysis
 - Present heterogeneity results AFTER the main result, not before
@@ -414,11 +420,13 @@ The three most important things: Identification, Identification, Identification.
 ## Pre-Registration and Pre-Analysis Plans
 - If your study is pre-registered, state this in the introduction (it is a credibility asset)
 - Clearly distinguish pre-specified analyses from exploratory analyses
+- Report any deviations from the pre-analysis plan explicitly, with the reason for each
 - Reference the pre-analysis plan (e.g., AEA RCT Registry number)
 
 ## Multiple Testing
 - When testing multiple outcomes or subgroups, acknowledge the multiple testing problem
-- Report family-wise error rate corrections (Bonferroni, Holm) or false discovery rate (Benjamini-Hochberg)
+- Pre-specify outcome families and consider summary indices to reduce the number of tests
+- Report family-wise error rate corrections (Bonferroni, Holm) or false discovery rate (Benjamini-Hochberg); for pre-specified outcome families, report Anderson (2008) sharpened FDR q-values
 - At minimum, flag which results survive multiple testing correction
 
 ## Specification Robustness
@@ -446,7 +454,7 @@ The three most important things: Identification, Identification, Identification.
 - Directory structure: `data/raw/`, `data/analysis/`, `code/`, `results/`. Never commingle code and data files
 - Code must reproduce all results without manual intervention. The only exception: a single config file where replicators set directory paths
 - For restricted-access data: provide a Data Availability Statement explaining application procedures, expected wait times, and any monetary costs
-- Include a `LICENSE.txt` (default: CC-BY 4.0 for data and code)
+- Include a `LICENSE.txt` (AEA recommends CC-BY 4.0 for data and documents, and the modified BSD license for code)
 - Map every table and figure to a specific program file: "Table 3 is produced by `code/table3_main_results.do`"
 - These standards apply to AEA, Econometrica (ES Data Editor), Economic Journal, and increasingly to field journals
 
@@ -467,7 +475,7 @@ The three most important things: Identification, Identification, Identification.
 - Alternative: "[D] and [Y]" (shorter, acceptable)
 - For theory papers: name the key mechanism or insight, not the technique
 - For structural papers: "[Counterfactual Question]: Evidence from [Context]"
-- Keep titles short -- shorter titles receive more citations (Letchford, Moat, and Preis 2015)
+- Keep titles short -- some studies find shorter titles are associated with more citations (Letchford, Moat, and Preis 2015), though the evidence is mixed
 - Do NOT emphasize methodology in title unless you invented the method
 
 ## Title Evaluation Criteria
@@ -528,7 +536,7 @@ Not all economics subfields follow identical conventions. Adapt these rules by f
 5. **Data and Descriptive Statistics** (answer all questions about the data)
 6. **Empirical Framework** (estimation strategy + identification strategy)
 7. **Results and Discussion** (main results, robustness, mechanisms, limitations)
-8. **Conclusion** (summary, limitations, policy implications, future research)
+8. **Conclusion** (summary, policy implications, future research)
 9. **References**
 10. **Appendix / Online Supplement** (robustness checks, proofs, extra tables)
 
@@ -655,7 +663,7 @@ Not all economics subfields follow identical conventions. Adapt these rules by f
 2. Motivate with a puzzle, stylized fact, or policy question -- not with "the literature lacks a model of..."
 3. Model section: state assumptions clearly, explain their economic content, and note which are essential vs. simplifying
 4. Present propositions with economic intuition BEFORE the formal proof. Readers should understand the result before seeing the math
-5. Use the simplest model that generates the key insight. "Start with an example. A good example is worth a thousand theorems." (Glaeser)
+5. Use the simplest model that generates the key insight, and start from a concrete example rather than the general case (Varian)
 6. Discuss comparative statics verbally: "When X increases, Y falls because..."
 7. Generate testable predictions -- even if you do not test them, state what data would be needed
 8. Proofs belong in the appendix unless they illuminate the economic mechanism
@@ -688,7 +696,7 @@ Not all economics subfields follow identical conventions. Adapt these rules by f
 ## When asked to convert a WORKING PAPER to a JOURNAL VERSION:
 1. Identify the core 15-page paper (the essential contribution) and separate everything else into appendix material
 2. Cut in this order: (a) redundant motivation, (b) literature tangents, (c) robustness checks that don't change the story, (d) theory restating well-known results (cite instead), (e) verbose table/figure captions
-3. Journal-specific length norms: AER Insights has a 6,000-word / 5-exhibit limit; REStat requires under 35 pages; AER has no hard limit but 45 pages is a practical ceiling
+3. Journal-specific length norms: AER: Insights has a 6,000-word / 5-exhibit limit; REStat requires 45 pages or less (double-spaced, 12pt) at acceptance, with a separate Short Papers track (6,000 words / 5 exhibits); AER recommends ~40 pages (11pt, 1.5 spacing) and averages 35-36 typeset pages
 4. Move extended robustness, data appendices, and proofs to an online supplement -- but reference every appendix item from the main text
 5. Anticipate referees: organize defensively by separating the core contribution from extensions that can be cut if demanded
 6. After journal acceptance, do NOT update the working paper version; instead append a citation to the published version
@@ -739,7 +747,7 @@ Not all economics subfields follow identical conventions. Adapt these rules by f
 Before submitting, verify:
 - [ ] Central contribution is stated concretely in paragraphs 1-3 of introduction
 - [ ] Main results appear in the introduction with magnitudes
-- [ ] No passive voice in prose (search for "is" and "are"; passive acceptable in table captions and methods)
+- [ ] No needless passive voice in prose (search for "to be" + past participle -- "was estimated", "is shown", "are reported" -- and "by"-agent phrases, NOT every "is"/"are", which also mark present tense; passive acceptable in table captions and methods)
 - [ ] No throat-clearing before the main point
 - [ ] Literature review tells a story, not a list
 - [ ] Every table has a self-contained caption with clustering/SE specification

@@ -65,7 +65,7 @@ A structured framework for reviewing and auditing economics papers, inspired by 
 
 Signs that writing sounds AI-generated -- avoid all of these:
 
-**Word choice red flags**: Overuse of "delve", "crucial", "landscape", "multifaceted", "notably", "furthermore", "comprehensive", "robust" (outside its statistical meaning), "utilize" (instead of "use"), "leverage" (as a verb meaning "use").
+**Word choice red flags**: Overuse of "delve", "crucial", "landscape", "multifaceted", "notably", "furthermore", "comprehensive", "robust" (outside its statistical meaning), "utilize" (instead of "use"), "leverage" (as a verb meaning "use"), "pivotal", "groundbreaking", "shed light on", "pave the way". (Canonical banned-word list lives in SKILL.md > Avoiding AI-Generated Writing Patterns.)
 
 **Sentence-level tells**:
 - Every sentence roughly the same length (vary between 8-25 words)
