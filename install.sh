@@ -60,7 +60,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || echo
 
 # Check if running from local repo or via curl | bash
 is_local() {
-    [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/.claude/skills/econ-write/SKILL.md" ]
+    [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/skills/econ-write/SKILL.md" ]
 }
 
 install_skill() {
@@ -75,7 +75,7 @@ install_skill() {
             cp "$source_dir/$file" "$dest_dir/$file"
         else
             # Download from GitHub
-            if curl -fsSL "$REPO_URL/.claude/skills/econ-write/$file" -o "$dest_dir/$file" 2>/dev/null; then
+            if curl -fsSL "$REPO_URL/skills/econ-write/$file" -o "$dest_dir/$file" 2>/dev/null; then
                 true
             else
                 rm -f "$dest_dir/$file"
@@ -102,13 +102,13 @@ if [ "$MODE" = "global" ]; then
     echo ""
 
     if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "claude" ]; then
-        install_skill "$HOME/.claude/skills/econ-write" "Claude Code (global)" "$SCRIPT_DIR/.claude/skills/econ-write"
+        install_skill "$HOME/.claude/skills/econ-write" "Claude Code (global)" "$SCRIPT_DIR/skills/econ-write"
     fi
     if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "codex" ]; then
         # Codex reads user-scope skills from ~/.agents/skills (current convention);
         # also install to ~/.codex/skills for older Codex builds that still use it.
-        install_skill "$HOME/.agents/skills/econ-write" "Codex (global)" "$SCRIPT_DIR/.claude/skills/econ-write"
-        install_skill "$HOME/.codex/skills/econ-write" "Codex (global, legacy path)" "$SCRIPT_DIR/.claude/skills/econ-write"
+        install_skill "$HOME/.agents/skills/econ-write" "Codex (global)" "$SCRIPT_DIR/skills/econ-write"
+        install_skill "$HOME/.codex/skills/econ-write" "Codex (global, legacy path)" "$SCRIPT_DIR/skills/econ-write"
     fi
 
     echo ""
@@ -120,10 +120,10 @@ elif [ "$MODE" = "local" ]; then
     echo ""
 
     if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "claude" ]; then
-        install_skill "$TARGET/.claude/skills/econ-write" "Claude Code (local)" "$SCRIPT_DIR/.claude/skills/econ-write"
+        install_skill "$TARGET/.claude/skills/econ-write" "Claude Code (local)" "$SCRIPT_DIR/skills/econ-write"
     fi
     if [ "$PLATFORM" = "all" ] || [ "$PLATFORM" = "codex" ]; then
-        install_skill "$TARGET/.agents/skills/econ-write" "Codex (local)" "$SCRIPT_DIR/.claude/skills/econ-write"
+        install_skill "$TARGET/.agents/skills/econ-write" "Codex (local)" "$SCRIPT_DIR/skills/econ-write"
     fi
 
     echo ""

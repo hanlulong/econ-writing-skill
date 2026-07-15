@@ -62,17 +62,74 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 
 ## Installation
 
-### One-Line Install (Recommended)
+### Native plugin (recommended)
 
-Install globally for all projects with a single command:
+The native plugin works on macOS, Linux, and Windows and keeps updates under
+your assistant's plugin manager. OpenEconAI uses one catalog for all of its
+plugins.
+
+#### Claude Code
+
+Run these commands from Claude Code:
+
+```text
+/plugin marketplace add OpenEconAI/plugins
+/plugin install econ-write@openeconai
+```
+
+Restart Claude Code after installation.
+
+#### Codex
+
+Run these commands in a terminal:
+
+```bash
+codex plugin marketplace add OpenEconAI/plugins
+codex plugin add econ-write@openeconai
+```
+
+Start a new Codex session after installation.
+
+#### Update
+
+Refresh the shared catalog and then update the plugin:
+
+```bash
+claude plugin marketplace update openeconai
+claude plugin update econ-write@openeconai
+
+codex plugin marketplace upgrade openeconai
+codex plugin add econ-write@openeconai
+```
+
+#### Remove
+
+Remove only the plugin; keep the `openeconai` catalog if you use another
+OpenEconAI plugin:
+
+```bash
+claude plugin uninstall econ-write@openeconai
+codex plugin remove econ-write@openeconai
+```
+
+If you previously used the direct installer below, remove the old
+`econ-write` directories under `~/.claude/skills`, `~/.agents/skills`, and
+`~/.codex/skills` before switching to the native plugin. Remove only those
+named skill directories, not their parent directories. This avoids loading two
+copies of the skill.
+
+### Direct installer
+
+The direct installer remains available when you do not want to configure a
+plugin catalog. On macOS or Linux, install globally for all projects with:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
 ```
 
-This installs the skill to `~/.claude/skills/econ-write/` (Claude Code) and `~/.agents/skills/econ-write/` (Codex; also `~/.codex/skills/econ-write/` for older Codex builds). The skill is immediately available in all your projects.
+This installs the skill to `~/.claude/skills/econ-write/` (Claude Code) and `~/.agents/skills/econ-write/` (Codex; also `~/.codex/skills/econ-write/` for older Codex builds). Restart your assistant so the new skill is loaded for all projects.
 
-### Install from Claude Code
+#### Run the direct installer from Claude Code
 
 You can install without leaving your AI assistant. Tell Claude Code:
 
@@ -83,7 +140,7 @@ curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/i
 
 After installation, restart your session. Then use `/econ-write` followed by your task.
 
-### Install from Codex
+#### Run the direct installer from Codex
 
 Tell Codex:
 
@@ -109,22 +166,35 @@ cd econ-writing-skill
 
 ### Manual Installation
 
-#### Global (all projects)
+The direct installer above is the simplest way to cover both clients. If you
+prefer to copy the skill yourself, use the canonical `skills/econ-write/`
+directory.
+
+#### Claude Code, global
 
 ```bash
 mkdir -p ~/.claude/skills/econ-write
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/SKILL.md -o ~/.claude/skills/econ-write/SKILL.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/identification-strategies.md -o ~/.claude/skills/econ-write/identification-strategies.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/latex-tips.md -o ~/.claude/skills/econ-write/latex-tips.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/review-checklist.md -o ~/.claude/skills/econ-write/review-checklist.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/.claude/skills/econ-write/specialized-tasks.md -o ~/.claude/skills/econ-write/specialized-tasks.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/SKILL.md -o ~/.claude/skills/econ-write/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/identification-strategies.md -o ~/.claude/skills/econ-write/identification-strategies.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/latex-tips.md -o ~/.claude/skills/econ-write/latex-tips.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/review-checklist.md -o ~/.claude/skills/econ-write/review-checklist.md
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/specialized-tasks.md -o ~/.claude/skills/econ-write/specialized-tasks.md
+```
+
+#### Codex, global
+
+```bash
+git clone https://github.com/hanlulong/econ-writing-skill.git
+mkdir -p ~/.agents/skills
+cp -R econ-writing-skill/skills/econ-write ~/.agents/skills/econ-write
 ```
 
 #### Project-specific
 
 ```bash
 git clone https://github.com/hanlulong/econ-writing-skill.git
-cp -r econ-writing-skill/.claude/skills/econ-write/ /path/to/your/project/.claude/skills/econ-write/
+cp -R econ-writing-skill/skills/econ-write /path/to/your/project/.claude/skills/econ-write
+cp -R econ-writing-skill/skills/econ-write /path/to/your/project/.agents/skills/econ-write
 ```
 
 ### Install Options
@@ -143,30 +213,38 @@ Example: `./install.sh --local --claude /path/to/project`
 
 ## Usage
 
-Once installed, invoke the skill from your AI assistant:
+Natural-language requests can activate the skill automatically. To invoke it
+explicitly, use `/econ-write` in Claude Code or `$econ-write` in Codex (you can
+also select it from Codex's `/skills` menu).
+
+Claude Code:
 
 ```
 /econ-write write introduction for my paper on the effect of minimum wage on employment
 ```
 
+Codex:
+
 ```
-/econ-write rewrite this abstract to be more concrete and under 150 words
+$econ-write rewrite this abstract to be more concrete and under 150 words
+```
+
+Either client can also use an ordinary request such as:
+
+```
+Use econ-write to draft a conclusion for my RDD paper on school funding.
 ```
 
 ```
-/econ-write draft a conclusion for my RDD paper on school funding
+Use econ-write to review this paragraph for style violations.
 ```
 
 ```
-/econ-write review this paragraph for style violations
+Use econ-write to help me structure the model section for my theory paper.
 ```
 
 ```
-/econ-write help me structure the model section for my theory paper
-```
-
-```
-/econ-write audit my full paper and score it
+Use econ-write to audit my full paper and score it.
 ```
 
 The skill works in four modes:

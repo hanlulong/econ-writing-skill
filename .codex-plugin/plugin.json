@@ -1,0 +1,40 @@
+{
+  "name": "econ-write",
+  "version": "0.1.0",
+  "description": "Write, edit, restructure, and audit economics papers using field-aware guidance from leading economists.",
+  "author": {
+    "name": "Lu Han",
+    "url": "https://openecon.ai"
+  },
+  "homepage": "https://openecon.ai",
+  "repository": "https://github.com/hanlulong/econ-writing-skill",
+  "license": "MIT",
+  "keywords": [
+    "economics",
+    "academic-writing",
+    "research-paper",
+    "editing",
+    "latex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Econ Write",
+    "shortDescription": "Economics paper writing and editing",
+    "longDescription": "Draft, rewrite, restructure, and audit economics papers with field-aware guidance for empirical, theoretical, structural, and mixed work.",
+    "developerName": "Lu Han",
+    "category": "Education & Research",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://openecon.ai",
+    "defaultPrompt": [
+      "Use econ-write to rewrite this economics paper section for clarity and precision.",
+      "Use econ-write to structure this economics paper around its main contribution and results.",
+      "Use econ-write to audit this economics paper's writing, organization, tables, and figures."
+    ],
+    "brandColor": "#2F6F68",
+    "screenshots": []
+  }
+}
