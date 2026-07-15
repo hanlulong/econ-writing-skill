@@ -1,206 +1,105 @@
 # Install or update Econ Write
 
-This is the canonical installation contract for Econ Write. When a user sends
-an agent here, the agent should complete the work itself and return a concise
-result—not a list of commands for the user to run.
+This is the canonical installation contract for Econ Write. Standalone skill
+installation is the default for Claude Code and Codex. Native plugins remain an
+optional installation method.
+
+When a user sends an agent here, the agent should complete the work itself and
+return a concise result—not a list of commands for the user to run.
 
 ## Instructions for Codex and Claude Code agents
 
-Follow every step below. The workflow is idempotent: it must work for a first
-installation, an update, or an already-current installation.
+Follow every step below. The workflow must be safe for a first installation, an
+update, an already-current installation, or an explicitly requested migration.
 
-1. Detect whether the current task is running in Claude Code or Codex. Use the
-   native plugin CLI for that client and user scope. Do not install into both
-   clients unless the user explicitly asks for both.
-2. Inspect the current state before changing it. Treat each reported installation
-   scope separately rather than assuming that one record represents every scope:
-   - Claude Code: `claude plugin marketplace list` and
-     `claude plugin list --json`.
-   - Codex: `codex plugin marketplace list` and
-     `codex plugin list --json`.
-3. Ensure the GitHub marketplace `OpenEconAI/plugins` is registered with the
-   marketplace name `openeconai`:
-   - If it is absent, add it with the current client's marketplace command.
-   - If it is present and points to `OpenEconAI/plugins`, refresh it.
-   - If the name exists but points somewhere else, do not load code from that
-     source, do not replace it automatically, and do not create a second entry
-     with the same identity. Stop safely and report the source conflict as the
-     only incomplete item.
-4. Install or update the user-scoped `econ-write@openeconai`:
-   - Claude Code, absent at user scope:
-     `claude plugin install econ-write@openeconai --scope user`.
-   - Claude Code, installed at user scope: first run
-     `claude plugin marketplace update openeconai`, then
-     `claude plugin update econ-write@openeconai --scope user`.
-   - Codex: run `codex plugin marketplace upgrade openeconai`, then
-     `codex plugin add econ-write@openeconai --json`. The add command installs
-     an absent plugin or refreshes an existing installation from the current
-     catalog snapshot.
-   - If Claude Code reports the installed plugin as disabled, run
-     `claude plugin enable econ-write@openeconai --scope user`. Confirm that it
-     is enabled before continuing. Codex's add command should return the plugin
-     to an installed, enabled state; verify this in its JSON listing.
-   Use the native plugin manager only. Do not also use `curl`, `npx`, `git
-   clone`, `scripts/install.sh`, or manual skill copies.
-5. Obtain the installed plugin directory from structured CLI output; never
-   guess a cache path. Claude Code exposes `installPath` in
-   `claude plugin list --json`. Codex returns `installedPath` from
-   `codex plugin add ... --json`. Before touching any standalone copy, verify
-   that the client reports the native plugin as installed and enabled, its
-   manifest has the expected name and a valid version, and its
-   `skills/econ-write` tree contains `SKILL.md` plus the four companion Markdown
-   files.
-6. For Claude Code, inspect the structured listing for additional
-   `econ-write@openeconai` records at `project` or `local` scope. After the
-   user-scoped installation has passed step 5, remove only scopes that the
-   listing actually reports, using
-   `claude plugin uninstall econ-write@openeconai --scope <scope> --keep-data`.
-   Do not run scoped removals speculatively. Recheck the JSON listing and confirm
-   that exactly one enabled user-scoped record remains. Codex currently has no
-   equivalent project/local plugin scope to migrate.
-7. After the package-integrity check passes, inspect these exact standalone
-   paths under the current user's home directory:
-   - `~/.claude/skills/econ-write`
-   - `~/.agents/skills/econ-write`
-   - `~/.codex/skills/econ-write`
+1. Detect whether the current task is running in Claude Code or Codex. Operate
+   on only that client unless the user explicitly asks for both. Never inspect,
+   remove, move, or back up the other client's installation paths.
+2. Use the standalone method unless the user explicitly requests the native
+   plugin. The user-level standalone destination is:
+   - Claude Code: `${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/econ-write`
+   - Codex: `$HOME/.agents/skills/econ-write`
 
-   Also inspect the following paths under the current project root, if they are
-   distinct from the home paths:
-   - `<project>/.claude/skills/econ-write`
-   - `<project>/.agents/skills/econ-write`
-   - `<project>/.codex/skills/econ-write`
+   For a project-local request, use `<project>/.claude/skills/econ-write` for
+   Claude Code or `<project>/.agents/skills/econ-write` for Codex. Use user scope
+   unless the user explicitly requests project-local installation.
+3. Inspect the selected client's state before changing it:
+   - Inspect the selected standalone destination without following symbolic
+     links, Windows junctions, or other reparse points.
+   - Inspect the selected client's other active standalone scope when it is
+     distinct from the destination. For Codex, also inspect the legacy
+     `.codex/skills/econ-write` path at the same user or project scope.
+   - Check the selected client's native plugin state with structured output:
+     - Claude Code: `claude plugin list --json`
+     - Codex: `codex plugin list --json`
+   - Do not query the other client's plugin manager.
+4. Before changing a project path, check whether it is tracked by that
+   project's version control. Never remove or move a tracked path. This includes
+   the `.claude`, `.agents`, and `skills` mirrors in an
+   `econ-writing-skill` source checkout. Report a tracked path instead of
+   treating it as a legacy installation.
+5. Install or update the standalone skill for the selected client:
+   - From a source checkout, run the applicable command:
+     - Claude Code: `./scripts/install.sh --global --claude`
+     - Codex: `./scripts/install.sh --global --codex`
+   - For a remote macOS or Linux installation, run the applicable command:
+     - Claude Code: `curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --claude`
+     - Codex: `curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --codex`
+   - On Windows, use the Agent Skills installer described below or copy the
+     complete `skills/econ-write` directory to the selected client destination.
 
-   Before changing a project path, check whether it is tracked by that project's
-   version control. Never remove or move a tracked path; this includes the
-   package mirrors inside an `econ-writing-skill` source checkout. Leave tracked
-   source material intact and identify it in the result instead of treating it
-   as a legacy installation.
+   The Bash installer downloads one version-pinned source archive, validates the
+   five required files, stages the complete replacement, and changes the active
+   destination only after staging succeeds. An existing non-identical copy is
+   normally preserved under `~/.openeconai/backups/econ-write/<timestamp>/`. If that
+   central backup root is unavailable or unsafe, the installer uses a reported
+   same-volume `.openeconai-inactive/econ-write/` path outside skill discovery.
+   A link or junction is moved as an object; its target is never followed or
+   modified.
+6. Verify the selected standalone destination before deactivating any prior
+   copy. It must be an ordinary directory containing these five non-empty files
+   from the same source snapshot and no incomplete staging directory:
+   - `SKILL.md`
+   - `identification-strategies.md`
+   - `latex-tips.md`
+   - `review-checklist.md`
+   - `specialized-tasks.md`
+7. Enforce one active Econ Write copy for the selected client only:
+   - For any other untracked standalone copy belonging to that client, remove it
+     only when its complete tree is byte-for-byte identical to the verified
+     destination. If it differs or contains extra files, move it to a unique
+     reported backup path, normally under
+     `~/.openeconai/backups/econ-write/<timestamp>/`, with the same-volume
+     inactive location as the safe fallback. Move a link or junction itself and
+     never follow its target. Never remove a parent `skills` directory or touch
+     another skill.
+   - If `econ-write@openeconai` is installed for the selected client, remove it
+     only after step 6 passes:
+     - Claude Code: remove only scopes actually reported by the JSON listing,
+       using `claude plugin uninstall econ-write@openeconai --scope <scope> --keep-data`.
+       Never run a scoped removal speculatively.
+     - Codex: `codex plugin remove econ-write@openeconai --json`.
+   - Do not remove a similarly named package from any other marketplace, and do
+     not touch the other client even if it also has Econ Write installed.
+8. Perform final verification for the selected client:
+   - The selected standalone destination remains complete and byte-for-byte
+     consistent with the staged source.
+   - No untracked same-client duplicate or same-client native plugin remains
+     active. A tracked project source path may remain but must be reported.
+   - Every modified prior copy has a recorded backup path.
+9. If a safe command fails, diagnose the cause, correct it, and retry. Never
+   remove a prior copy before the replacement passes verification. If cleanup
+   fails after successful installation, leave the verified replacement intact
+   and report the remaining same-client duplicate precisely.
+10. Finish with a concise result stating the client, standalone destination,
+    verification outcome, same-client migration outcome, and any backup created.
+    Do not give the user more installation commands. A newly installed skill may
+    require a new client session before it appears.
 
-   Inspect path metadata without following a symbolic link, Windows junction,
-   or other reparse point. Always move a link or junction itself to the backup
-   location; never follow it, delete its target, or treat it as a verified
-   duplicate. For an ordinary directory, compare the complete tree with the installed plugin's
-   `skills/econ-write` tree. Remove it only when it is a byte-for-byte
-   duplicate. If it contains local changes or extra files, move it to a unique
-   backup under `~/.openeconai/backups/econ-write/YYYYMMDDTHHMMSSZ/`. Use a
-   collision-proof label that identifies the original path. Never delete a
-   parent `skills` directory or touch another skill.
-8. Perform a final verification:
-   - The native `econ-write@openeconai` plugin remains installed and enabled
-     from `openeconai` with the same verified version and complete skill tree.
-   - No unmanaged standalone `econ-write` path remains active; any modified copy
-     has a recorded backup path. A version-controlled project source path may
-     remain, but must be reported explicitly.
-9. If a safe command fails, diagnose the cause, correct it, and retry. Do not
-   switch to a standalone installation that would create a duplicate. Do not
-   delete or move an existing standalone copy until the package-integrity check
-   in step 5 has passed.
-10. Finish with a concise result stating the client, installed plugin version,
-   verification outcome, and any backup created. Do not give the user more
-   installation commands. If the current session cannot load a newly installed
-   plugin, leave the verified installation ready for the next session and say
-   so without asking the user to repeat any step.
+## Standalone installation commands (recommended)
 
-## Native plugin commands
-
-The instructions above are the preferred workflow. The following commands are
-for people who choose to manage the plugin directly.
-
-### Claude Code
-
-Inspect the current state:
-
-```bash
-claude plugin marketplace list
-claude plugin list --json
-```
-
-Fresh installation:
-
-```bash
-claude plugin marketplace add OpenEconAI/plugins
-claude plugin install econ-write@openeconai --scope user
-```
-
-Update:
-
-```bash
-claude plugin marketplace update openeconai
-claude plugin update econ-write@openeconai --scope user
-```
-
-Verify:
-
-```bash
-claude plugin details econ-write@openeconai
-claude plugin list --json
-```
-
-A new Claude Code session loads the installed version automatically. In an
-existing interactive session, `/reload-plugins` can load pending changes.
-
-### Codex
-
-Inspect the current state:
-
-```bash
-codex plugin marketplace list
-codex plugin list --json
-```
-
-Fresh installation:
-
-```bash
-codex plugin marketplace add OpenEconAI/plugins
-codex plugin add econ-write@openeconai
-```
-
-Update:
-
-```bash
-codex plugin marketplace upgrade openeconai
-codex plugin add econ-write@openeconai
-```
-
-Verify:
-
-```bash
-codex plugin list --marketplace openeconai --json
-```
-
-A new Codex session loads the installed version automatically.
-
-### Remove the native plugin
-
-Run only the command for the applicable client:
-
-```bash
-claude plugin uninstall econ-write@openeconai --scope user
-codex plugin remove econ-write@openeconai
-```
-
-Keep the shared `openeconai` marketplace if another OpenEcon.ai plugin uses it.
-
-## Migrate from a standalone skill manually
-
-Older installation methods may have placed Econ Write in one or more of these
-directories:
-
-- `~/.claude/skills/econ-write`
-- `~/.agents/skills/econ-write`
-- `~/.codex/skills/econ-write`
-
-Install and verify the native plugin first. Then compare each exact standalone
-directory with the plugin's bundled `skills/econ-write` tree. Remove only a
-byte-for-byte duplicate. Move a locally modified copy to
-`~/.openeconai/backups/econ-write/<timestamp>/` with its source path identified.
-Never remove a parent `skills` directory, which may contain unrelated skills.
-
-## Standalone skill alternatives
-
-Use these only when the native plugin marketplace is unavailable. They install
-the skill files directly and do not register a plugin. Rerun the same method to
-update, and never combine methods.
+The agent workflow above is preferred because it handles same-client migration
+and verification. The commands below install the standalone files directly.
 
 ### Agent Skills installer
 
@@ -210,12 +109,21 @@ On any platform with Node.js and `npx`:
 npx skills add hanlulong/econ-writing-skill
 ```
 
+Select only the client you intend to configure. Rerun the same method to update.
+
 ### Bash installer
 
-On macOS or Linux:
+On macOS or Linux, select exactly one client:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --claude
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --codex
+```
+
+Use `--all` only when you intentionally want both clients:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --all
 ```
 
 From a clone:
@@ -223,54 +131,125 @@ From a clone:
 ```bash
 git clone https://github.com/hanlulong/econ-writing-skill.git
 cd econ-writing-skill
-./scripts/install.sh
+./scripts/install.sh --global --claude
 ```
-
-The Bash installer stages all five files before changing an existing copy. A
-changed previous copy is preserved under
-`~/.openeconai/backups/econ-write/<timestamp>/`. Current Codex installations
-use `~/.agents/skills/econ-write`; an old `~/.codex/skills/econ-write` copy is
-removed when identical or backed up when modified.
 
 The installer accepts these options:
 
 | Option | Result |
 | --- | --- |
-| `--global` | Install for all projects; this is the default. |
+| `--global` | Install for all projects; this is the default scope. |
 | `--local [path]` | Install in one project. |
 | `--claude` | Install only for Claude Code. |
 | `--codex` | Install only for Codex. |
-| `--all` | Install for both clients; this is the default. |
+| `--all` | Explicitly install for both clients. |
 
-For example:
-
-```bash
-./scripts/install.sh --local --claude /path/to/project
-```
+Exactly one of `--claude`, `--codex`, or `--all` is required. The global Claude
+destination honors an absolute `CLAUDE_CONFIG_DIR`. Codex standalone skills
+remain under `$HOME/.agents/skills` and are not relocated by `CODEX_HOME`.
 
 ### Manual copy
 
-The complete, canonical skill is the `skills/econ-write` directory in this
-repository. Copy the whole directory rather than downloading only `SKILL.md`,
-because the skill references its four companion files.
+Copy the complete canonical `skills/econ-write` directory rather than only
+`SKILL.md`, because the skill references four companion files.
 
-| Client | Global destination |
+| Client | User-level destination |
 | --- | --- |
-| Claude Code | `~/.claude/skills/econ-write` |
-| Codex | `~/.agents/skills/econ-write` |
+| Claude Code | `${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/econ-write` |
+| Codex | `$HOME/.agents/skills/econ-write` |
 
-For a project-specific installation, use `.claude/skills/econ-write` or
-`.agents/skills/econ-write` under the project root. On Windows, these paths are
-relative to the user profile or project and can be copied with File Explorer
-or PowerShell.
+For project-local installation, use `.claude/skills/econ-write` or
+`.agents/skills/econ-write` under the project root.
+
+## Native plugin installation (optional)
+
+Choose this method explicitly when you prefer plugin-manager updates. Do not
+keep a standalone copy active for the same client. Install and verify the plugin
+before deactivating only that client's standalone copy.
+
+### Claude Code native plugin
+
+Fresh installation:
+
+```bash
+claude plugin marketplace add OpenEconAI/plugins
+claude plugin install econ-write@openeconai --scope user
+```
+
+Update and verify:
+
+```bash
+claude plugin marketplace update openeconai
+claude plugin update econ-write@openeconai --scope user
+claude plugin details econ-write@openeconai
+claude plugin list --json
+```
+
+Explicit plugin invocation: `/econ-write:econ-write`.
+
+Remove:
+
+```bash
+claude plugin uninstall econ-write@openeconai --scope user
+```
+
+### Codex native plugin
+
+Fresh installation:
+
+```bash
+codex plugin marketplace add OpenEconAI/plugins
+codex plugin add econ-write@openeconai --json
+```
+
+Update and verify:
+
+```bash
+codex plugin marketplace upgrade openeconai
+codex plugin add econ-write@openeconai --json
+codex plugin list --marketplace openeconai --json
+```
+
+Explicit plugin invocation: `$econ-write:econ-write`.
+
+Remove:
+
+```bash
+codex plugin remove econ-write@openeconai --json
+```
+
+Natural-language requests can activate either installation method
+automatically because both package the same `econ-write` skill description.
+
+## Switching installation methods
+
+Migrate only the selected client. Never clean the other client's paths as a
+side effect.
+
+### Native plugin to standalone
+
+Install and verify the standalone destination first. Then remove only the
+selected client's reported `econ-write@openeconai` plugin records. Recheck both
+states and confirm that only the standalone copy remains active.
+
+### Standalone to native plugin
+
+Install and verify `econ-write@openeconai` first. Then compare the selected
+client's standalone tree with the plugin's bundled `skills/econ-write` tree.
+Remove a byte-for-byte duplicate; back up a modified copy under
+`~/.openeconai/backups/econ-write/<timestamp>/`. Recheck both states and confirm
+that only the native plugin remains active.
 
 ## Troubleshooting
 
-- If the plugin is not found, refresh the `openeconai` marketplace and retry
-  the native install or update.
-- If Econ Write appears twice, keep the native `econ-write@openeconai` plugin
-  and deactivate the standalone copy after preserving local changes.
-- If the current session still shows an older installed version, open a new
-  session. Claude Code can alternatively use `/reload-plugins`.
-- If a standalone installation is incomplete, reinstall the entire
-  `skills/econ-write` directory so all five files come from one release.
+- If a standalone installation is incomplete, rerun the selected client's
+  installation so all five files come from one source snapshot.
+- If Econ Write appears twice, identify which method was selected, verify it,
+  and deactivate only the same client's other copy. Preserve local changes.
+- If a native plugin is not found, refresh the `openeconai` marketplace and
+  retry the optional native installation.
+- If the current session still shows an older copy, open a new session. Claude
+  Code can alternatively use `/reload-plugins` for native-plugin updates.
+- If the marketplace name `openeconai` points somewhere other than
+  `OpenEconAI/plugins`, do not load code from it or replace it automatically.
+  Stop safely and report the source conflict.

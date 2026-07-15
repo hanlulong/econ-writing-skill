@@ -67,38 +67,63 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 Open Codex or Claude Code in any project and paste this once:
 
 ```text
-Install or update Econ Write for me. Read and follow the complete agent instructions at https://github.com/hanlulong/econ-writing-skill/blob/main/INSTALL.md. Handle every step yourself, including migration and verification. Do not ask me to run commands. Finish with a concise result.
+Install or update Econ Write as a standalone skill for the client I am using. Read and follow https://github.com/hanlulong/econ-writing-skill/blob/main/INSTALL.md. Handle same-client migration, backups, and verification yourself. Do not install for or change the other client. Do not ask me to run commands. Finish with a concise result.
 ```
 
-The same prompt handles a first installation and future updates.
+The same prompt handles a first installation, future updates, and safe migration
+from a native plugin. It installs only for the client receiving the prompt.
 
-### Native commands (fallback)
+### Standalone commands
 
-For a fresh Claude Code installation:
+On macOS or Linux, install only for Claude Code:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --claude
+```
+
+Or install only for Codex:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --codex
+```
+
+Pass `--all` only when you intentionally want both clients. On Windows, or for
+project-local and manual installation, see [Installation and updates](INSTALL.md).
+If the same client already has the native plugin, use the recommended agent
+prompt or the migration instructions so only one copy remains active.
+
+### Native plugin installation (optional)
+
+Claude Code:
 
 ```bash
 claude plugin marketplace add OpenEconAI/plugins
 claude plugin install econ-write@openeconai --scope user
 ```
 
-For a fresh Codex installation:
+Explicit plugin invocation: `/econ-write:econ-write`.
+
+Codex:
 
 ```bash
 codex plugin marketplace add OpenEconAI/plugins
 codex plugin add econ-write@openeconai
 ```
 
-See [Installation and updates](INSTALL.md) for native update, verification,
-removal, migration, and standalone installation options. Use one installation
-method at a time so the assistant does not load duplicate copies of the skill.
+Explicit plugin invocation: `$econ-write:econ-write`.
+
+Natural-language activation works with either installation method. Use one
+method per client; when switching methods, verify the replacement before
+deactivating only that client's old copy.
 
 ---
 
 ## Usage
 
-Natural-language requests can activate the skill automatically. To invoke it
-explicitly, use `/econ-write` in Claude Code or `$econ-write` in Codex (you can
-also select it from Codex's `/skills` menu).
+With the recommended standalone installation, natural-language requests can
+activate the skill automatically. To invoke it explicitly, use `/econ-write` in
+Claude Code or `$econ-write` in Codex (you can also select it from Codex's
+`/skills` menu).
 
 Claude Code:
 

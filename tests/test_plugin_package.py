@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 import subprocess
+import tarfile
 import tempfile
 import unittest
 from pathlib import Path
@@ -65,6 +66,29 @@ def skill_files(root: Path) -> dict[str, bytes]:
     }
 
 
+def write_source_archive(archive: Path) -> None:
+    with tarfile.open(archive, "w:gz") as bundle:
+        for path in sorted(CANONICAL_SKILL.iterdir()):
+            if path.is_file():
+                bundle.add(
+                    path,
+                    arcname=f"econ-writing-skill-main/skills/econ-write/{path.name}",
+                )
+
+
+def write_source_archive_with_linked_skill(archive: Path) -> None:
+    with tarfile.open(archive, "w:gz") as bundle:
+        for path in sorted(CANONICAL_SKILL.iterdir()):
+            archive_name = f"econ-writing-skill-main/skills/econ-write/{path.name}"
+            if path.name == "SKILL.md":
+                link = tarfile.TarInfo(archive_name)
+                link.type = tarfile.SYMTYPE
+                link.linkname = "/etc/passwd"
+                bundle.addfile(link)
+            elif path.is_file():
+                bundle.add(path, arcname=archive_name)
+
+
 def write_local_catalog(catalog: Path) -> Path:
     package = catalog / "plugins" / "econ-write"
     for relative in (
@@ -118,7 +142,7 @@ class PluginPackageTests(unittest.TestCase):
                 self.assertEqual(claude[field], codex[field])
 
         self.assertEqual(claude["name"], "econ-write")
-        self.assertEqual(claude["version"], "0.1.1")
+        self.assertEqual(claude["version"], "0.1.2")
         self.assertRegex(claude["version"], SEMVER)
         self.assertEqual(claude["license"], "MIT")
         license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
@@ -184,24 +208,27 @@ class PluginPackageTests(unittest.TestCase):
         prompt = prompt_match.group(1) if prompt_match is not None else ""
 
         required_prompt_text = (
-            "Install or update Econ Write for me.",
+            "Install or update Econ Write as a standalone skill",
             "https://github.com/hanlulong/econ-writing-skill/blob/main/INSTALL.md",
-            "Handle every step yourself, including migration and verification.",
+            "Handle same-client migration, backups, and verification yourself.",
+            "Do not install for or change the other client.",
             "Do not ask me to run commands.",
             "Finish with a concise result.",
         )
         for text in required_prompt_text:
             with self.subTest(text=text):
                 self.assertIn(text, prompt)
-        self.assertLessEqual(len(prompt.split()), 45)
+        self.assertLessEqual(len(prompt.split()), 60)
 
-        required_fallback_commands = (
+        required_install_commands = (
+            "main/scripts/install.sh | bash -s -- --global --claude",
+            "main/scripts/install.sh | bash -s -- --global --codex",
             "claude plugin marketplace add OpenEconAI/plugins",
             "claude plugin install econ-write@openeconai --scope user",
             "codex plugin marketplace add OpenEconAI/plugins",
             "codex plugin add econ-write@openeconai",
         )
-        for command in required_fallback_commands:
+        for command in required_install_commands:
             with self.subTest(command=command):
                 self.assertIn(command, readme)
 
@@ -210,13 +237,24 @@ class PluginPackageTests(unittest.TestCase):
         )[0]
         self.assertLess(
             installation_section.index("### Paste this into your agent"),
-            installation_section.index("### Native commands"),
+            installation_section.index("### Standalone commands"),
+        )
+        self.assertLess(
+            installation_section.index("### Standalone commands"),
+            installation_section.index("### Native plugin installation (optional)"),
         )
         self.assertIn("[Installation and updates](INSTALL.md)", readme)
-        self.assertNotIn("curl -fsSL", installation_section)
-        self.assertNotIn("npx skills add", installation_section)
-        self.assertNotIn("### Manual Installation", installation_section)
-        self.assertNotIn("~/.claude/skills/econ-write", installation_section)
+        self.assertIn("/econ-write:econ-write", installation_section)
+        self.assertIn("$econ-write:econ-write", installation_section)
+        self.assertIn("Use one\nmethod per client", installation_section)
+
+        usage_section = readme.split("## Usage", 1)[1].split(
+            "## Common Use Cases", 1
+        )[0]
+        self.assertIn("/econ-write write introduction", usage_section)
+        self.assertIn("$econ-write rewrite this abstract", usage_section)
+        self.assertNotIn("/econ-write:econ-write", usage_section)
+        self.assertNotIn("$econ-write:econ-write", usage_section)
 
     def test_install_guide_covers_updates_and_alternatives_without_old_catalogs(
         self,
@@ -230,10 +268,17 @@ class PluginPackageTests(unittest.TestCase):
         normalized_guide = " ".join(guide.split())
         required = (
             "This is the canonical installation contract for Econ Write.",
-            "The workflow is idempotent",
-            "Do not install into both clients unless the user explicitly asks for both.",
+            "Standalone skill installation is the default for Claude Code and Codex.",
+            "Operate on only that client unless the user explicitly asks for both.",
+            "Never inspect, remove, move, or back up the other client's installation paths.",
+            "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/econ-write",
+            "$HOME/.agents/skills/econ-write",
+            "downloads one version-pinned source archive",
+            "five required files",
+            "No untracked same-client duplicate or same-client native plugin remains active.",
+            "Native plugin installation (optional)",
             "OpenEconAI/plugins",
-            "do not load code from that source",
+            "do not load code from it",
             "claude plugin marketplace update openeconai",
             "claude plugin update econ-write@openeconai --scope user",
             "claude plugin details econ-write@openeconai",
@@ -242,17 +287,19 @@ class PluginPackageTests(unittest.TestCase):
             "codex plugin add econ-write@openeconai --json",
             "codex plugin list --marketplace openeconai --json",
             "codex plugin remove econ-write@openeconai",
-            "never guess a cache path",
-            "remove only scopes that the listing actually reports",
+            "remove only scopes actually reported by the JSON listing",
             "--scope <scope> --keep-data",
             "<project>/.claude/skills/econ-write",
             "Never remove or move a tracked path",
-            "For an ordinary directory",
             "byte-for-byte",
             "~/.openeconai/backups/econ-write/<timestamp>/",
             "Do not give the user more installation commands.",
             "npx skills add hanlulong/econ-writing-skill",
-            "main/scripts/install.sh | bash",
+            "main/scripts/install.sh | bash -s -- --global --claude",
+            "main/scripts/install.sh | bash -s -- --global --codex",
+            "/econ-write:econ-write",
+            "$econ-write:econ-write",
+            "Exactly one of `--claude`, `--codex`, or `--all` is required.",
             "skills/econ-write",
         )
         for text in required:
@@ -269,9 +316,34 @@ class PluginPackageTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertNotIn(text, combined)
 
+        self.assertLess(
+            guide.index("## Standalone installation commands (recommended)"),
+            guide.index("## Native plugin installation (optional)"),
+        )
+
         installer = INSTALLER.read_text(encoding="utf-8")
-        self.assertIn('$REPO_URL/skills/econ-write/$file', installer)
-        self.assertNotIn('$REPO_URL/.claude/skills/econ-write/$file', installer)
+        self.assertIn('RELEASE_TAG="econ-write--v0.1.2"', installer)
+        self.assertIn("REPO_ARCHIVE_URL=", installer)
+        self.assertIn("codeload.github.com/hanlulong/econ-writing-skill/tar.gz", installer)
+        self.assertIn("/refs/tags/$RELEASE_TAG", installer)
+        self.assertNotIn("/refs/heads/main", installer)
+        self.assertNotIn("/main/skills/econ-write/", installer)
+        self.assertIn('PLATFORM=""', installer)
+
+    def test_skill_metadata_preserves_implicit_and_explicit_standalone_invocation(
+        self,
+    ) -> None:
+        metadata = frontmatter(CANONICAL_SKILL / "SKILL.md")
+        self.assertIn("name: econ-write", metadata)
+        description_match = re.search(r'^description: "(.*)"$', metadata, re.MULTILINE)
+        self.assertIsNotNone(description_match)
+        description = description_match.group(1) if description_match else ""
+        self.assertLessEqual(len(description), 1024)
+        for trigger in ("economics paper", "abstract", "results section", "referee response"):
+            with self.subTest(trigger=trigger):
+                self.assertIn(trigger, description)
+        self.assertNotIn("disable-model-invocation", metadata)
+        self.assertFalse((CANONICAL_SKILL / "agents" / "openai.yaml").exists())
 
     @unittest.skipUnless(shutil.which("claude"), "Claude Code CLI is not installed")
     def test_claude_strict_validation_and_external_catalog_install(self) -> None:
@@ -543,6 +615,125 @@ class PluginPackageTests(unittest.TestCase):
             self.assertIn("Already current for Codex", results[1].stdout)
             self.assertFalse((home / ".openeconai/backups").exists())
 
+    def test_direct_installer_never_changes_the_other_client(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            home = Path(temporary)
+            codex = home / ".agents/skills/econ-write"
+            legacy_codex = home / ".codex/skills/econ-write"
+            codex.mkdir(parents=True)
+            legacy_codex.mkdir(parents=True)
+            (codex / "sentinel.txt").write_text("current codex\n", encoding="utf-8")
+            (legacy_codex / "sentinel.txt").write_text(
+                "legacy codex\n", encoding="utf-8"
+            )
+            codex_before = skill_files(codex)
+            legacy_before = skill_files(legacy_codex)
+
+            claude_result = subprocess.run(
+                ["bash", str(INSTALLER), "--global", "--claude"],
+                cwd=ROOT,
+                env={**os.environ, "HOME": temporary},
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(
+                claude_result.returncode,
+                0,
+                claude_result.stdout + claude_result.stderr,
+            )
+            self.assertEqual(skill_files(codex), codex_before)
+            self.assertEqual(skill_files(legacy_codex), legacy_before)
+            self.assertFalse((home / ".openeconai/backups").exists())
+
+        with tempfile.TemporaryDirectory() as temporary:
+            home = Path(temporary)
+            claude = home / ".claude/skills/econ-write"
+            claude.mkdir(parents=True)
+            (claude / "sentinel.txt").write_text("claude\n", encoding="utf-8")
+            claude_before = skill_files(claude)
+
+            codex_result = subprocess.run(
+                ["bash", str(INSTALLER), "--global", "--codex"],
+                cwd=ROOT,
+                env={**os.environ, "HOME": temporary},
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(
+                codex_result.returncode,
+                0,
+                codex_result.stdout + codex_result.stderr,
+            )
+            self.assertEqual(skill_files(claude), claude_before)
+            self.assertFalse((home / ".openeconai/backups").exists())
+
+    def test_direct_installer_honors_absolute_claude_config_dir(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            home = Path(temporary) / "home"
+            config = Path(temporary) / "Claude Config With Spaces"
+            env = {
+                **os.environ,
+                "HOME": str(home),
+                "CLAUDE_CONFIG_DIR": str(config),
+            }
+            results = [
+                subprocess.run(
+                    ["bash", str(INSTALLER), "--global", "--claude"],
+                    cwd=ROOT,
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                for _ in range(2)
+            ]
+            for result in results:
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn("Claude Code: /econ-write", result.stdout)
+                self.assertNotIn("Codex: $econ-write", result.stdout)
+            self.assertEqual(
+                skill_files(config / "skills/econ-write"),
+                skill_files(CANONICAL_SKILL),
+            )
+            self.assertFalse((home / ".claude/skills/econ-write").exists())
+            self.assertIn("Already current for Claude Code", results[1].stdout)
+
+            relative = subprocess.run(
+                ["bash", str(INSTALLER), "--global", "--claude"],
+                cwd=ROOT,
+                env={
+                    **os.environ,
+                    "HOME": str(Path(temporary) / "other-home"),
+                    "CLAUDE_CONFIG_DIR": "relative-config",
+                },
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(relative.returncode, 2)
+            self.assertIn("must be an absolute path", relative.stderr)
+            self.assertFalse((ROOT / "relative-config").exists())
+
+    def test_direct_installer_prints_only_selected_client_invocation(self) -> None:
+        for platform, expected, forbidden in (
+            ("--claude", "Claude Code: /econ-write", "Codex: $econ-write"),
+            ("--codex", "Codex: $econ-write", "Claude Code: /econ-write"),
+        ):
+            with self.subTest(platform=platform), tempfile.TemporaryDirectory() as temporary:
+                result = subprocess.run(
+                    ["bash", str(INSTALLER), "--global", platform],
+                    cwd=ROOT,
+                    env={**os.environ, "HOME": temporary},
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn(expected, result.stdout)
+                self.assertNotIn(forbidden, result.stdout)
+
     def test_direct_installer_deactivates_or_preserves_legacy_codex_copy(
         self,
     ) -> None:
@@ -594,6 +785,26 @@ class PluginPackageTests(unittest.TestCase):
                 r"^\d{8}T\d{6}Z-\d+$",
             )
 
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            project = temporary_root / "project"
+            legacy = project / ".codex/skills/econ-write"
+            shutil.copytree(CANONICAL_SKILL, legacy)
+            result = subprocess.run(
+                ["bash", str(INSTALLER), "--local", "--codex", str(project)],
+                cwd=ROOT,
+                env={**os.environ, "HOME": str(temporary_root / "home")},
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertFalse(legacy.exists())
+            self.assertEqual(
+                skill_files(project / ".agents/skills/econ-write"),
+                skill_files(CANONICAL_SKILL),
+            )
+
     def test_direct_installer_failed_download_does_not_change_existing_copy(
         self,
     ) -> None:
@@ -614,17 +825,7 @@ class PluginPackageTests(unittest.TestCase):
             fake_curl = fake_bin / "curl"
             fake_curl.write_text(
                 """#!/usr/bin/env python3
-import os
-import pathlib
-import sys
-
-counter = pathlib.Path(os.environ["FAKE_CURL_COUNTER"])
-count = int(counter.read_text() if counter.exists() else "0") + 1
-counter.write_text(str(count))
-destination = pathlib.Path(sys.argv[sys.argv.index("-o") + 1])
-if count == 3:
-    raise SystemExit(22)
-destination.write_text(f"download {count}\\n")
+raise SystemExit(22)
 """,
                 encoding="utf-8",
             )
@@ -633,7 +834,6 @@ destination.write_text(f"download {count}\\n")
                 **os.environ,
                 "HOME": str(home),
                 "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
-                "FAKE_CURL_COUNTER": str(temporary_root / "curl-count"),
             }
             result = subprocess.run(
                 ["bash", str(standalone_installer), "--global", "--claude"],
@@ -644,7 +844,7 @@ destination.write_text(f"download {count}\\n")
                 timeout=60,
             )
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("existing installation was not changed", result.stdout)
+            self.assertIn("existing installations were not changed", result.stderr)
             self.assertEqual(skill_files(installed), before)
             self.assertEqual(
                 list(installed.parent.glob(".econ-write-install.*")), []
@@ -654,9 +854,12 @@ destination.write_text(f"download {count}\\n")
         with tempfile.TemporaryDirectory() as temporary:
             env = {**os.environ, "HOME": temporary}
             cases = (
+                [],
                 ["--unknown"],
-                ["target-without-local"],
-                ["--local", "first", "second"],
+                ["--claude", "--codex"],
+                ["--all", "--codex"],
+                ["--claude", "target-without-local"],
+                ["--local", "--claude", "first", "second"],
             )
             for arguments in cases:
                 with self.subTest(arguments=arguments):
@@ -669,6 +872,10 @@ destination.write_text(f"download {count}\\n")
                         timeout=60,
                     )
                     self.assertEqual(result.returncode, 2)
+            home = Path(temporary)
+            self.assertFalse((home / ".claude").exists())
+            self.assertFalse((home / ".agents").exists())
+            self.assertFalse((home / ".codex").exists())
 
     def test_direct_installer_requires_complete_local_source(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -699,7 +906,7 @@ destination.write_text(f"download {count}\\n")
                 timeout=60,
             )
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Local source is incomplete", result.stderr)
+            self.assertIn("Source is incomplete", result.stderr)
             self.assertEqual(skill_files(installed), before)
 
     def test_piped_installer_does_not_trust_working_directory_as_source(self) -> None:
@@ -715,6 +922,8 @@ destination.write_text(f"download {count}\\n")
 
             fake_bin = temporary_root / "bin"
             fake_bin.mkdir()
+            remote_archive = temporary_root / "source.tar.gz"
+            write_source_archive(remote_archive)
             fake_curl = fake_bin / "curl"
             fake_curl.write_text(
                 """#!/usr/bin/env python3
@@ -723,9 +932,10 @@ import pathlib
 import shutil
 import sys
 
-url = next(arg for arg in sys.argv if arg.startswith("https://"))
 destination = pathlib.Path(sys.argv[sys.argv.index("-o") + 1])
-shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_SKILL"]) / url.rsplit("/", 1)[-1], destination)
+shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_ARCHIVE"]), destination)
+counter = pathlib.Path(os.environ["FAKE_CURL_COUNTER"])
+counter.write_text(str(int(counter.read_text() if counter.exists() else "0") + 1))
 """,
                 encoding="utf-8",
             )
@@ -735,7 +945,8 @@ shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_SKILL"]) / url.rsplit("/", 1)[
                 **os.environ,
                 "HOME": str(home),
                 "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
-                "FAKE_REMOTE_SKILL": str(CANONICAL_SKILL),
+                "FAKE_REMOTE_ARCHIVE": str(remote_archive),
+                "FAKE_CURL_COUNTER": str(temporary_root / "curl-count"),
             }
             result = subprocess.run(
                 ["bash", "-s", "--", "--global", "--claude"],
@@ -750,6 +961,102 @@ shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_SKILL"]) / url.rsplit("/", 1)[
             installed = home / ".claude/skills/econ-write"
             self.assertEqual(skill_files(installed), skill_files(CANONICAL_SKILL))
             self.assertNotEqual(skill_files(installed), skill_files(malicious_skill))
+            self.assertEqual((temporary_root / "curl-count").read_text(), "1")
+
+    def test_piped_all_client_install_uses_one_source_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            archive = temporary_root / "source.tar.gz"
+            write_source_archive(archive)
+            fake_bin = temporary_root / "bin"
+            fake_bin.mkdir()
+            fake_curl = fake_bin / "curl"
+            fake_curl.write_text(
+                """#!/usr/bin/env python3
+import os
+import pathlib
+import shutil
+import sys
+
+destination = pathlib.Path(sys.argv[sys.argv.index("-o") + 1])
+shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_ARCHIVE"]), destination)
+counter = pathlib.Path(os.environ["FAKE_CURL_COUNTER"])
+counter.write_text(str(int(counter.read_text() if counter.exists() else "0") + 1))
+""",
+                encoding="utf-8",
+            )
+            fake_curl.chmod(0o755)
+            home = temporary_root / "home"
+            counter = temporary_root / "curl-count"
+            result = subprocess.run(
+                ["bash", "-s", "--", "--global", "--all"],
+                cwd=temporary_root,
+                env={
+                    **os.environ,
+                    "HOME": str(home),
+                    "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
+                    "FAKE_REMOTE_ARCHIVE": str(archive),
+                    "FAKE_CURL_COUNTER": str(counter),
+                },
+                input=INSTALLER.read_text(encoding="utf-8"),
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertEqual(counter.read_text(), "1")
+            self.assertEqual(
+                skill_files(home / ".claude/skills/econ-write"),
+                skill_files(CANONICAL_SKILL),
+            )
+            self.assertEqual(
+                skill_files(home / ".agents/skills/econ-write"),
+                skill_files(CANONICAL_SKILL),
+            )
+
+    def test_piped_installer_rejects_linked_required_archive_member(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            archive = temporary_root / "linked-source.tar.gz"
+            write_source_archive_with_linked_skill(archive)
+            fake_bin = temporary_root / "bin"
+            fake_bin.mkdir()
+            fake_curl = fake_bin / "curl"
+            fake_curl.write_text(
+                """#!/usr/bin/env python3
+import os
+import pathlib
+import shutil
+import sys
+
+destination = pathlib.Path(sys.argv[sys.argv.index("-o") + 1])
+shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_ARCHIVE"]), destination)
+""",
+                encoding="utf-8",
+            )
+            fake_curl.chmod(0o755)
+            home = temporary_root / "home"
+            installed = home / ".claude/skills/econ-write"
+            installed.mkdir(parents=True)
+            (installed / "keep.txt").write_text("prior copy\n", encoding="utf-8")
+            before = skill_files(installed)
+            result = subprocess.run(
+                ["bash", "-s", "--", "--global", "--claude"],
+                cwd=temporary_root,
+                env={
+                    **os.environ,
+                    "HOME": str(home),
+                    "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}",
+                    "FAKE_REMOTE_ARCHIVE": str(archive),
+                },
+                input=INSTALLER.read_text(encoding="utf-8"),
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("Source is incomplete", result.stderr)
+            self.assertEqual(skill_files(installed), before)
 
     def test_direct_installer_handles_space_in_local_target(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -773,6 +1080,57 @@ shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_SKILL"]) / url.rsplit("/", 1)[
             installed = target / ".claude/skills/econ-write"
             self.assertEqual(skill_files(installed), skill_files(CANONICAL_SKILL))
 
+    @unittest.skipIf(os.name == "nt", "symlink creation is privilege-dependent on Windows")
+    def test_direct_installer_refuses_linked_destination_ancestor(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            home = Path(temporary) / "home"
+            outside = Path(temporary) / "outside-agents"
+            home.mkdir()
+            outside.mkdir()
+            (home / ".agents").symlink_to(outside, target_is_directory=True)
+            result = subprocess.run(
+                ["bash", str(INSTALLER), "--global", "--codex"],
+                cwd=ROOT,
+                env={**os.environ, "HOME": str(home)},
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("unsafe Codex", result.stderr)
+            self.assertFalse((outside / "skills").exists())
+
+    @unittest.skipIf(os.name == "nt", "symlink creation is privilege-dependent on Windows")
+    def test_direct_installer_never_follows_linked_central_backup_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            home = root / "home"
+            installed = home / ".claude/skills/econ-write"
+            installed.mkdir(parents=True)
+            (installed / "local-notes.md").write_text("preserve me\n", encoding="utf-8")
+            outside = root / "outside-backups"
+            outside.mkdir()
+            (home / ".openeconai").symlink_to(outside, target_is_directory=True)
+            result = subprocess.run(
+                ["bash", str(INSTALLER), "--global", "--claude"],
+                cwd=ROOT,
+                env={**os.environ, "HOME": str(home)},
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertEqual(skill_files(installed), skill_files(CANONICAL_SKILL))
+            self.assertEqual(list(outside.rglob("local-notes.md")), [])
+            preserved = list(
+                (home / ".claude/.openeconai-inactive/econ-write").rglob(
+                    "local-notes.md"
+                )
+            )
+            self.assertEqual(len(preserved), 1)
+            self.assertEqual(preserved[0].read_text(encoding="utf-8"), "preserve me\n")
+            self.assertIn("original volume", result.stdout)
+
     def test_legacy_backup_failure_is_reported_without_false_success(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             home = Path(temporary)
@@ -781,6 +1139,9 @@ shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_SKILL"]) / url.rsplit("/", 1)[
             (legacy / "local-notes.md").write_text("keep me\n", encoding="utf-8")
             (home / ".openeconai").write_text(
                 "blocks creation of the backup directory\n", encoding="utf-8"
+            )
+            (home / ".codex/.openeconai-inactive").write_text(
+                "blocks the same-volume fallback\n", encoding="utf-8"
             )
             result = subprocess.run(
                 ["bash", str(INSTALLER), "--global", "--codex"],
@@ -794,6 +1155,32 @@ shutil.copy2(pathlib.Path(os.environ["FAKE_REMOTE_SKILL"]) / url.rsplit("/", 1)[
             self.assertTrue(legacy.is_dir())
             self.assertNotIn("Done!", result.stdout)
             self.assertIn("Could not deactivate", result.stdout)
+
+    def test_current_install_backup_failure_restores_previous_copy(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            home = Path(temporary)
+            installed = home / ".claude/skills/econ-write"
+            installed.mkdir(parents=True)
+            (installed / "local-notes.md").write_text("keep me\n", encoding="utf-8")
+            before = skill_files(installed)
+            (home / ".openeconai").write_text(
+                "blocks creation of the backup directory\n", encoding="utf-8"
+            )
+            (home / ".claude/.openeconai-inactive").write_text(
+                "blocks the same-volume fallback\n", encoding="utf-8"
+            )
+            result = subprocess.run(
+                ["bash", str(INSTALLER), "--global", "--claude"],
+                cwd=ROOT,
+                env={**os.environ, "HOME": temporary},
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(skill_files(installed), before)
+            self.assertNotIn("Done!", result.stdout)
+            self.assertIn("restoring it", result.stdout)
 
     @unittest.skipUnless(
         os.environ.get("ECON_WRITE_RUN_NPX_SMOKE") == "1",
