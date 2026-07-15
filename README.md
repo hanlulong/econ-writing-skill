@@ -62,152 +62,35 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 
 ## Installation
 
-### Native plugin (recommended)
+### Paste this into your agent (recommended)
 
-The native plugin works on macOS, Linux, and Windows and keeps updates under
-your assistant's plugin manager. OpenEconAI uses one catalog for all of its
-plugins.
-
-#### Claude Code
-
-Run these commands from Claude Code:
+Open Codex or Claude Code in any project and paste this once:
 
 ```text
-/plugin marketplace add OpenEconAI/plugins
-/plugin install econ-write@openeconai
+Install or update Econ Write for me. Read and follow the complete agent instructions at https://github.com/hanlulong/econ-writing-skill/blob/main/INSTALL.md. Handle every step yourself, including migration and verification. Do not ask me to run commands. Finish with a concise result.
 ```
 
-Restart Claude Code after installation.
+The same prompt handles a first installation and future updates.
 
-#### Codex
+### Native commands (fallback)
 
-Run these commands in a terminal:
+For a fresh Claude Code installation:
+
+```bash
+claude plugin marketplace add OpenEconAI/plugins
+claude plugin install econ-write@openeconai --scope user
+```
+
+For a fresh Codex installation:
 
 ```bash
 codex plugin marketplace add OpenEconAI/plugins
 codex plugin add econ-write@openeconai
 ```
 
-Start a new Codex session after installation.
-
-#### Update
-
-Refresh the shared catalog and then update the plugin:
-
-```bash
-claude plugin marketplace update openeconai
-claude plugin update econ-write@openeconai
-
-codex plugin marketplace upgrade openeconai
-codex plugin add econ-write@openeconai
-```
-
-#### Remove
-
-Remove only the plugin; keep the `openeconai` catalog if you use another
-OpenEconAI plugin:
-
-```bash
-claude plugin uninstall econ-write@openeconai
-codex plugin remove econ-write@openeconai
-```
-
-If you previously used the direct installer below, remove the old
-`econ-write` directories under `~/.claude/skills`, `~/.agents/skills`, and
-`~/.codex/skills` before switching to the native plugin. Remove only those
-named skill directories, not their parent directories. This avoids loading two
-copies of the skill.
-
-### Direct installer
-
-The direct installer remains available when you do not want to configure a
-plugin catalog. On macOS or Linux, install globally for all projects with:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
-```
-
-This installs the skill to `~/.claude/skills/econ-write/` (Claude Code) and `~/.agents/skills/econ-write/` (Codex; also `~/.codex/skills/econ-write/` for older Codex builds). Restart your assistant so the new skill is loaded for all projects.
-
-#### Run the direct installer from Claude Code
-
-You can install without leaving your AI assistant. Tell Claude Code:
-
-```
-Run this command to install the econ-writing skill globally:
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
-```
-
-After installation, restart your session. Then use `/econ-write` followed by your task.
-
-#### Run the direct installer from Codex
-
-Tell Codex:
-
-```
-Run this command to install the econ-writing skill globally:
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/install.sh | bash
-```
-
-### Install via npx
-
-```bash
-npx skills add hanlulong/econ-writing-skill
-```
-
-### Git Clone
-
-```bash
-git clone https://github.com/hanlulong/econ-writing-skill.git
-cd econ-writing-skill
-./install.sh              # Global install (default)
-./install.sh --local .    # Install to current project only
-```
-
-### Manual Installation
-
-The direct installer above is the simplest way to cover both clients. If you
-prefer to copy the skill yourself, use the canonical `skills/econ-write/`
-directory.
-
-#### Claude Code, global
-
-```bash
-mkdir -p ~/.claude/skills/econ-write
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/SKILL.md -o ~/.claude/skills/econ-write/SKILL.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/identification-strategies.md -o ~/.claude/skills/econ-write/identification-strategies.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/latex-tips.md -o ~/.claude/skills/econ-write/latex-tips.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/review-checklist.md -o ~/.claude/skills/econ-write/review-checklist.md
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/skills/econ-write/specialized-tasks.md -o ~/.claude/skills/econ-write/specialized-tasks.md
-```
-
-#### Codex, global
-
-```bash
-git clone https://github.com/hanlulong/econ-writing-skill.git
-mkdir -p ~/.agents/skills
-cp -R econ-writing-skill/skills/econ-write ~/.agents/skills/econ-write
-```
-
-#### Project-specific
-
-```bash
-git clone https://github.com/hanlulong/econ-writing-skill.git
-cp -R econ-writing-skill/skills/econ-write /path/to/your/project/.claude/skills/econ-write
-cp -R econ-writing-skill/skills/econ-write /path/to/your/project/.agents/skills/econ-write
-```
-
-### Install Options
-
-| Flag | Behavior |
-|------|----------|
-| `--global` | Install globally for all projects (default) |
-| `--local` | Install to current project only |
-| `--claude` | Install for Claude Code only |
-| `--codex` | Install for Codex only |
-| `--all` | Install for all supported platforms (default) |
-
-Example: `./install.sh --local --claude /path/to/project`
+See [Installation and updates](INSTALL.md) for native update, verification,
+removal, migration, and standalone installation options. Use one installation
+method at a time so the assistant does not load duplicate copies of the skill.
 
 ---
 
