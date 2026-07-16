@@ -96,7 +96,7 @@ update, an already-current installation, or an explicitly requested migration.
     Do not give the user more installation commands. A newly installed skill may
     require a new client session before it appears.
 
-## Standalone installation commands (recommended)
+## Alternative direct standalone installation
 
 The agent workflow above is preferred because it handles same-client migration
 and verification. The commands below install the standalone files directly.

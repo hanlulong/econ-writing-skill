@@ -62,59 +62,19 @@ Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that 
 
 ## Installation
 
-### Paste this into your agent (recommended)
-
-Open Codex or Claude Code in any project and paste this once:
+Open Codex or Claude Code in any project and paste this prompt:
 
 ```text
 Install or update Econ Write as a standalone skill for the client I am using. Read and follow https://github.com/hanlulong/econ-writing-skill/blob/main/INSTALL.md. Handle same-client migration, backups, and verification yourself. Do not install for or change the other client. Do not ask me to run commands. Finish with a concise result.
 ```
 
-The same prompt handles a first installation, future updates, and safe migration
-from a native plugin. It installs only for the client receiving the prompt.
+Use the same prompt for a first installation and rerun it whenever you want to
+update or safely migrate from a native plugin. It installs only for the client
+receiving the prompt.
 
-### Standalone commands
-
-On macOS or Linux, install only for Claude Code:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --claude
-```
-
-Or install only for Codex:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/hanlulong/econ-writing-skill/main/scripts/install.sh | bash -s -- --global --codex
-```
-
-Pass `--all` only when you intentionally want both clients. On Windows, or for
-project-local and manual installation, see [Installation and updates](INSTALL.md).
-If the same client already has the native plugin, use the recommended agent
-prompt or the migration instructions so only one copy remains active.
-
-### Native plugin installation (optional)
-
-Claude Code:
-
-```bash
-claude plugin marketplace add OpenEconAI/plugins
-claude plugin install econ-write@openeconai --scope user
-```
-
-Explicit plugin invocation: `/econ-write:econ-write`.
-
-Codex:
-
-```bash
-codex plugin marketplace add OpenEconAI/plugins
-codex plugin add econ-write@openeconai
-```
-
-Explicit plugin invocation: `$econ-write:econ-write`.
-
-Natural-language activation works with either installation method. Use one
-method per client; when switching methods, verify the replacement before
-deactivating only that client's old copy.
+For alternative installation methods, updates, migration, and troubleshooting,
+see [Installation and updates](INSTALL.md). Use only one installation method
+per client.
 
 ---
 

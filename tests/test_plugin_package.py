@@ -200,7 +200,7 @@ class PluginPackageTests(unittest.TestCase):
     def test_readme_leads_with_one_paste_agent_install(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         prompt_match = re.search(
-            r"### Paste this into your agent \(recommended\).*?```text\n(.*?)\n```",
+            r"## Installation.*?```text\n(.*?)\n```",
             readme,
             re.DOTALL,
         )
@@ -220,7 +220,7 @@ class PluginPackageTests(unittest.TestCase):
                 self.assertIn(text, prompt)
         self.assertLessEqual(len(prompt.split()), 60)
 
-        required_install_commands = (
+        delegated_install_commands = (
             "main/scripts/install.sh | bash -s -- --global --claude",
             "main/scripts/install.sh | bash -s -- --global --codex",
             "claude plugin marketplace add OpenEconAI/plugins",
@@ -228,25 +228,23 @@ class PluginPackageTests(unittest.TestCase):
             "codex plugin marketplace add OpenEconAI/plugins",
             "codex plugin add econ-write@openeconai",
         )
-        for command in required_install_commands:
+        for command in delegated_install_commands:
             with self.subTest(command=command):
-                self.assertIn(command, readme)
+                self.assertNotIn(command, readme)
 
         installation_section = readme.split("## Installation", 1)[1].split(
             "## Usage", 1
         )[0]
-        self.assertLess(
-            installation_section.index("### Paste this into your agent"),
-            installation_section.index("### Standalone commands"),
-        )
-        self.assertLess(
-            installation_section.index("### Standalone commands"),
-            installation_section.index("### Native plugin installation (optional)"),
-        )
+        self.assertEqual(installation_section.count("### "), 0)
+        self.assertNotIn("### Recommended installation", installation_section)
+        self.assertNotIn("### Standalone commands", installation_section)
+        self.assertNotIn("### Native plugin installation", installation_section)
         self.assertIn("[Installation and updates](INSTALL.md)", readme)
-        self.assertIn("/econ-write:econ-write", installation_section)
-        self.assertIn("$econ-write:econ-write", installation_section)
-        self.assertIn("Use one\nmethod per client", installation_section)
+        self.assertNotIn("/econ-write:econ-write", installation_section)
+        self.assertNotIn("$econ-write:econ-write", installation_section)
+        self.assertIn(
+            "Use only one installation method\nper client", installation_section
+        )
 
         usage_section = readme.split("## Usage", 1)[1].split(
             "## Common Use Cases", 1
@@ -317,7 +315,7 @@ class PluginPackageTests(unittest.TestCase):
                 self.assertNotIn(text, combined)
 
         self.assertLess(
-            guide.index("## Standalone installation commands (recommended)"),
+            guide.index("## Alternative direct standalone installation"),
             guide.index("## Native plugin installation (optional)"),
         )
 
