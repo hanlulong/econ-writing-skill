@@ -13,6 +13,8 @@
 
 Econ Writing Skill is an open-source [Agent Skill](https://agentskills.io) that gives AI coding assistants deep knowledge of how to write economics papers. It distills actionable advice from over 50 guides by John Cochrane, Deirdre McCloskey, Jesse Shapiro, Keith Head, Marc Bellemare, Claudia Goldin, Edward Glaeser, Michael Kremer, and many others into a single structured skill file. Compatible with the Agent Skills open standard, it works with Claude Code and OpenAI Codex out of the box.
 
+It is part of a suite covering the rest of the paper's life: [**econ-paper-review-skill**](https://github.com/hanlulong/econ-paper-review-skill) reviews the finished draft like a journal referee — an AI referee report with verified comments and a revision plan — and [**econ-slides-skill**](https://github.com/hanlulong/econ-slides-skill) turns the paper into a professional LaTeX/Beamer talk with a timed speaker script.
+
 ---
 
 ## Key Features
@@ -199,6 +201,17 @@ This skill synthesizes advice from **50+ authoritative sources**. The top 10 sou
 Notable authorities include **Nobel laureates** (Goldin 2023, Kremer 2019), **Clark Medal winners** (Gentzkow 2014, Finkelstein 2012), a **MacArthur Fellow** (Shapiro 2021), and editors of leading journals (Bellemare at AJAE, Beatty at AJAE, Shimshack at JEEM).
 
 The full ranked list of all 50+ sources with links, tiers, and notes is available in [`sources/SOURCES_RANKED.md`](sources/SOURCES_RANKED.md).
+
+---
+
+## Related Skills
+
+Writing is one stage of the paper's life. The same author maintains companion tools for the other stages:
+
+- [**econ-paper-review-skill**](https://github.com/hanlulong/econ-paper-review-skill) -- An AI referee report on your economics paper before a real referee sees it: verified detailed comments, editing notes, and a revision plan you can hand straight to your agents. Free for noncommercial use, built for round-after-round iteration.
+- [**econ-slides-skill**](https://github.com/hanlulong/econ-slides-skill) -- Turn the paper into a professional LaTeX/Beamer talk: conference, seminar, job-market, and discussant decks with timed speaker scripts, every deck compiled and geometry-checked before delivery (MIT).
+- [**stata-mcp**](https://github.com/hanlulong/stata-mcp) -- Run Stata from AI agents and IDEs.
+- [**awesome-ai-for-economists**](https://github.com/hanlulong/awesome-ai-for-economists) -- The broader curated toolbox of AI resources for economics research.
 
 ---
 
